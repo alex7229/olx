@@ -4,7 +4,7 @@
     "outDir": "build/dist",
     "module": "commonjs",
     "target": "es2017",
-    "sourceMap": true,
+    "sourceMap": false,
     "allowJs": false,
     "moduleResolution": "node",
     "paths": {
