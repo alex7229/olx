@@ -6,7 +6,7 @@ import {
   parseAdvertisement
 } from "../../../application/parsers/mainPageItem/parseAdvertisement";
 
-const readFile = promisify(fs.readFile);
+export const readFile = promisify(fs.readFile);
 
 it("should parse regular advertisement properly", async done => {
   const html = await readFile(
@@ -45,28 +45,5 @@ it("should show that advertisement is highlighted (promoted)", async done => {
     "utf-8"
   );
   expect(parseAdvertisement(html, cheerio).promoted).toBe(true);
-  done();
-});
-
-it("should parse advertisement from the special promoted block", async done => {
-  const html = await readFile(
-    "src/__tests__/parsers/mainPageItem/examples/PromotedBlockAdvertisement.html",
-    "utf-8"
-  );
-  const rawAdvertisement: IAdvertisementRaw = {
-    location: `
-                                        Винница, Ленинский                                    `,
-    olxDelivery: false,
-    price: "35 000 грн.",
-    promoted: true,
-    time: `
-                            21  июль                    `,
-    title:
-      "Игровой Компьютер/Ryzen 1600x 3.6GHz/x370 Taichi/16GB DDR4/1060 3GB",
-    url:
-      "https://www.olx.ua/obyavlenie/igrovoy-kompyuter-ryzen-1600x-3-6g" +
-      "hz-x370-taichi-16gb-ddr4-1060-3gb-IDB3Hpf.html#13ea0512a9;promoted"
-  };
-  expect(parseAdvertisement(html, cheerio)).toEqual(rawAdvertisement);
   done();
 });

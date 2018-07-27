@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "build/dist",
+    "outDir": "dist",
     "module": "commonjs",
     "target": "es2017",
-    "sourceMap": false,
+    "sourceMap": true,
     "allowJs": false,
     "moduleResolution": "node",
     "paths": {

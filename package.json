@@ -8,15 +8,19 @@
     "npm": "6.0.1"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "skip-babel": true
+      }
+    },
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testEnvironment": "node",
     "moduleFileExtensions": [
       "ts",
-      "tsx",
       "js",
-      "jsx",
       "json",
       "node"
     ]
@@ -24,7 +28,7 @@
   "scripts": {
     "start": "node dist/src/server.js",
     "start:debug": "nodemon --watch 'dist/' --inspect-brk build/dist/index.js",
-    "test": "jest --watch src --colors",
+    "test": "jest --watch -o src --colors",
     "test:debug": "nodemon --watch 'build/dist' --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "postinstall": "tsc"
   },
