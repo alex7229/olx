@@ -1,16 +1,17 @@
 import * as cheerio from "cheerio";
 import * as fs from "fs";
+import * as path from "path";
 import { promisify } from "util";
 import {
   IAdvertisementRaw,
   parseAdvertisement
-} from "../../../application/parsers/mainPageItem/parseAdvertisement";
+} from "../../../application/parsers/searchPageItem/parseAdvertisement";
 
 export const readFile = promisify(fs.readFile);
 
 it("should parse regular advertisement properly", async done => {
   const html = await readFile(
-    "src/__tests__/parsers/mainPageItem/examples/RegularAdvertisement.html",
+    path.join(__dirname, "./examples/RegularAdvertisement.html"),
     "utf-8"
   );
   // whitespaces are preserved
@@ -32,7 +33,7 @@ it("should parse regular advertisement properly", async done => {
 
 it("should parse olx delivery properly", async done => {
   const html = await readFile(
-    "src/__tests__/parsers/mainPageItem/examples/OlxDeliveryAdv.html",
+    path.join(__dirname, "./examples/OlxDeliveryAdv.html"),
     "utf-8"
   );
   expect(parseAdvertisement(html, cheerio).olxDelivery).toBe(true);
@@ -41,7 +42,7 @@ it("should parse olx delivery properly", async done => {
 
 it("should show that advertisement is highlighted (promoted)", async done => {
   const html = await readFile(
-    "src/__tests__/parsers/mainPageItem/examples/HighlightedAdvertisement.html",
+    path.join(__dirname, "./examples/HighlightedAdvertisement.html"),
     "utf-8"
   );
   expect(parseAdvertisement(html, cheerio).promoted).toBe(true);

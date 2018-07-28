@@ -5,7 +5,7 @@ import {
   ParseDate,
   parseDate,
   parseTime
-} from "../../../application/parsers/mainPageItem/parseTime";
+} from "../../../application/parsers/searchPageItem/parseTime";
 
 describe("parse close days function", () => {
   const format = "DO.MM.YYYY HH:mm";

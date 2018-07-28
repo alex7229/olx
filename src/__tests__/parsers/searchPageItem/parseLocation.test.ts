@@ -1,7 +1,7 @@
 import {
   ILocation,
   parseLocation
-} from "../../../application/parsers/mainPageItem/parseLocation";
+} from "../../../application/parsers/searchPageItem/parseLocation";
 
 it("should return only city if district is not specified", () => {
   const location = "    Киев     ";

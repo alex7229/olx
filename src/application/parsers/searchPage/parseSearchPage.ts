@@ -5,7 +5,7 @@ interface IMainPage {
 
 type ParseMainPage = (html: string, cheerio: CheerioAPI) => IMainPage;
 
-export const parseMainPage: ParseMainPage = (html, cheerio) => {
+export const parseSearchPage: ParseMainPage = (html, cheerio) => {
   const $ = cheerio.load(html);
   const items = $("table#offers_table tr.wrap")
     .toArray()

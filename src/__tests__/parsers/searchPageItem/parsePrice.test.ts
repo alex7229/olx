@@ -1,4 +1,4 @@
-import { parsePrice } from "../../../application/parsers/mainPageItem/parsePrice";
+import { parsePrice } from "../../../application/parsers/searchPageItem/parsePrice";
 
 it("should parse price properly", () => {
   const price = "5 000 грн.";

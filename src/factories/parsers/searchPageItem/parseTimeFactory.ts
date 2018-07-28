@@ -3,7 +3,7 @@ import {
   parseCloseDays,
   parseDate,
   parseTime
-} from "../../../application/parsers/mainPageItem/parseTime";
+} from "../../../application/parsers/searchPageItem/parseTime";
 
 export type ParseTimeFactory = (input: string) => number;
 

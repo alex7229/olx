@@ -1,4 +1,4 @@
-import { ParseTimeFactory } from "../../../factories/parsers/mainPageItem/parseTimeFactory";
+import { ParseTimeFactory } from "../../../factories/parsers/searchPageItem/parseTimeFactory";
 import { IAdvertisementRaw } from "./parseAdvertisement";
 import { ILocation, ParseLocation } from "./parseLocation";
 import { ParsePrice, Price } from "./parsePrice";

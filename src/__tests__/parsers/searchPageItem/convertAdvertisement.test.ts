@@ -1,8 +1,8 @@
 import {
   convertAdvertisement,
   IAdvertisement
-} from "../../../application/parsers/mainPageItem/convertAdvertisement";
-import { IAdvertisementRaw } from "../../../application/parsers/mainPageItem/parseAdvertisement";
+} from "../../../application/parsers/searchPageItem/convertAdvertisement";
+import { IAdvertisementRaw } from "../../../application/parsers/searchPageItem/parseAdvertisement";
 
 it("should convert advertisement properly", () => {
   const advertisement: IAdvertisementRaw = {

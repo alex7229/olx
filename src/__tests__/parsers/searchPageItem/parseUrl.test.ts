@@ -1,4 +1,4 @@
-import { parseUrl } from "../../../application/parsers/mainPageItem/parseUrl";
+import { parseUrl } from "../../../application/parsers/searchPageItem/parseUrl";
 
 it("should remove trailing symbols after #", () => {
   const url = "some long url.html#some_data";
