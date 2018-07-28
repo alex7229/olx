@@ -1,0 +1,2170 @@
+
+<!DOCTYPE html>
+<html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQUBV1BTDhACUlRWAgcAVA=="};window.NREUM||(NREUM={}),__nr_require=function(t,n,e){function r(e){if(!n[e]){var o=n[e]={exports:{}};t[e][0].call(o.exports,function(n){var o=t[e][1][n];return r(o||n)},o,o.exports)}return n[e].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<e.length;o++)r(e[o]);return r}({1:[function(t,n,e){function r(t){try{s.console&&console.log(t)}catch(n){}}var o,i=t("ee"),a=t(15),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,n,e){r(e.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,n){return t}).join(", ")))},{}],2:[function(t,n,e){function r(t,n,e,r,s){try{p?p-=1:o(s||new UncaughtException(t,n,e),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,n,e){this.message=t||"Uncaught error with no additional information",this.sourceURL=n,this.line=e}function o(t,n){var e=n?null:c.now();i("err",[t,e])}var i=t("handle"),a=t(16),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError",p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(8),t(7),"addEventListener"in window&&t(5),c.xhrWrappable&&t(9),d=!0)}s.on("fn-start",function(t,n,e){d&&(p+=1)}),s.on("fn-err",function(t,n,e){d&&!e[l]&&(f(e,l,function(){return!0}),this.thrown=!0,o(e))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})},{}],3:[function(t,n,e){t("loader").features.ins=!0},{}],4:[function(t,n,e){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var o=t("ee"),i=t("handle"),a=t(8),s=t(7),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",y="pushState",g=t("loader");g.features.stn=!0,t(6);var b=NREUM.o.EV;o.on(m,function(t,n){var e=t[0];e instanceof b&&(this.bstStart=g.now())}),o.on(w,function(t,n){var e=t[0];e instanceof b&&i("bst",[e,n,this.bstStart,g.now()])}),a.on(m,function(t,n,e){this.bstStart=g.now(),this.bstType=e}),a.on(w,function(t,n){i(v,[n,this.bstStart,g.now(),this.bstType])}),s.on(m,function(){this.bstStart=g.now()}),s.on(w,function(t,n){i(v,[n,this.bstStart,g.now(),"requestAnimationFrame"])}),o.on(y+p,function(t){this.time=g.now(),this.startPath=location.pathname+location.hash}),o.on(y+h,function(t){i("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){i(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}},{}],5:[function(t,n,e){function r(t){for(var n=t;n&&!n.hasOwnProperty(u);)n=Object.getPrototypeOf(n);n&&o(n)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,n){return t[1]}var a=t("ee").get("events"),s=t(18)(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";n.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,n){var e=t[1],r=c(e,"nr@wrapped",function(){function t(){if("function"==typeof e.handleEvent)return e.handleEvent.apply(e,arguments)}var n={object:t,"function":e}[typeof e];return n?s(n,"fn-",null,n.name||"anonymous"):e});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,n,e){var r=t("ee").get("history"),o=t(18)(r);n.exports=r,o.inPlace(window.history,["pushState","replaceState"],"-")},{}],7:[function(t,n,e){var r=t("ee").get("raf"),o=t(18)(r),i="equestAnimationFrame";n.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],8:[function(t,n,e){function r(t,n,e){t[0]=a(t[0],"fn-",null,e)}function o(t,n,e){this.method=e,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,e)}var i=t("ee").get("timer"),a=t(18)(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";n.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],9:[function(t,n,e){function r(t,n){d.inPlace(n,["onreadystatechange"],"fn-",s)}function o(){var t=this,n=u.context(t);t.readyState>3&&!n.resolved&&(n.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,y,"fn-",s)}function i(t){g.push(t),h&&(x?x.then(a):w?w(a):(E=-E,O.data=E))}function a(){for(var t=0;t<g.length;t++)r([],g[t]);g.length&&(g=[])}function s(t,n){return n}function c(t,n){for(var e in t)n[e]=t[e];return n}t(5);var f=t("ee"),u=f.get("xhr"),d=t(18)(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",y=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],g=[];n.exports=u;var b=window.XMLHttpRequest=function(t){var n=new p(t);try{u.emit("new-xhr",[n],n),n.addEventListener(v,o,!1)}catch(e){try{u.emit("internal-error",[e])}catch(r){}}return n};if(c(p,b),b.prototype=p.prototype,d.inPlace(b.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,n){r(t,n),i(n)}),u.on("open-xhr-start",r),h){var x=m&&m.resolve();if(!w&&!m){var E=1,O=document.createTextNode(E);new h(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],10:[function(t,n,e){function r(t){var n=this.params,e=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<d;r++)t.removeEventListener(u[r],this.listener,!1);if(!n.aborted){if(e.duration=a.now()-this.startTime,4===t.readyState){n.status=t.status;var i=o(t,this.lastSize);if(i&&(e.rxSize=i),this.sameOrigin){var c=t.getResponseHeader("X-NewRelic-App-Data");c&&(n.cat=c.split(", ").pop())}}else n.status=0;e.cbTime=this.cbTime,f.emit("xhr-done",[t],t),s("xhr",[n,e,this.startTime])}}}function o(t,n){var e=t.responseType;if("json"===e&&null!==n)return n;var r="arraybuffer"===e||"blob"===e||"json"===e?t.response:t.responseText;return h(r)}function i(t,n){var e=c(n),r=t.params;r.host=e.hostname+":"+e.port,r.pathname=e.pathname,t.sameOrigin=e.sameOrigin}var a=t("loader");if(a.xhrWrappable){var s=t("handle"),c=t(11),f=t("ee"),u=["load","error","abort","timeout"],d=u.length,l=t("id"),p=t(14),h=t(13),m=window.XMLHttpRequest;a.features.xhr=!0,t(9),f.on("new-xhr",function(t){var n=this;n.totalCbs=0,n.called=0,n.cbTime=0,n.end=r,n.ended=!1,n.xhrGuids={},n.lastSize=null,p&&(p>34||p<10)||window.opera||t.addEventListener("progress",function(t){n.lastSize=t.loaded},!1)}),f.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),f.on("open-xhr-end",function(t,n){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&n.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),f.on("send-xhr-start",function(t,n){var e=this.metrics,r=t[0],o=this;if(e&&r){var i=h(r);i&&(e.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"===t.type&&(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof n.onload))&&o.end(n)}catch(e){try{f.emit("internal-error",[e])}catch(r){}}};for(var s=0;s<d;s++)n.addEventListener(u[s],this.listener,!1)}),f.on("xhr-cb-time",function(t,n,e){this.cbTime+=t,n?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof e.onload||this.end(e)}),f.on("xhr-load-added",function(t,n){var e=""+l(t)+!!n;this.xhrGuids&&!this.xhrGuids[e]&&(this.xhrGuids[e]=!0,this.totalCbs+=1)}),f.on("xhr-load-removed",function(t,n){var e=""+l(t)+!!n;this.xhrGuids&&this.xhrGuids[e]&&(delete this.xhrGuids[e],this.totalCbs-=1)}),f.on("addEventListener-end",function(t,n){n instanceof m&&"load"===t[0]&&f.emit("xhr-load-added",[t[1],t[2]],n)}),f.on("removeEventListener-end",function(t,n){n instanceof m&&"load"===t[0]&&f.emit("xhr-load-removed",[t[1],t[2]],n)}),f.on("fn-start",function(t,n,e){n instanceof m&&("onload"===e&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),f.on("fn-end",function(t,n){this.xhrCbStart&&f.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,n],n)})}},{}],11:[function(t,n,e){n.exports=function(t){var n=document.createElement("a"),e=window.location,r={};n.href=t,r.port=n.port;var o=n.href.split("://");!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=n.hostname||e.hostname,r.pathname=n.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname);var i=!n.protocol||":"===n.protocol||n.protocol===e.protocol,a=n.hostname===document.domain&&n.port===e.port;return r.sameOrigin=i&&(!n.hostname||a),r}},{}],12:[function(t,n,e){function r(){}function o(t,n,e){return function(){return i(t,[f.now()].concat(s(arguments)),n?null:this,e),n?void 0:this}}var i=t("handle"),a=t(15),s=t(16),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,n){u[n]=o(l+n,!0,"api")}),u.addPageAction=o(l+"addPageAction",!0),u.setCurrentRouteName=o(l+"routeName",!0),n.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,n){var e={},r=this,o="function"==typeof n;return i(p+"tracer",[f.now(),t,e],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],e),o)try{return n.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],e),t}finally{c.emit("fn-end",[f.now()],e)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,n){h[n]=o(p+n)}),newrelic.noticeError=function(t){"string"==typeof t&&(t=new Error(t)),i("err",[t,f.now()])}},{}],13:[function(t,n,e){n.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(n){return}}}},{}],14:[function(t,n,e){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),n.exports=r},{}],15:[function(t,n,e){function r(t,n){var e=[],r="",i=0;for(r in t)o.call(t,r)&&(e[i]=n(r,t[r]),i+=1);return e}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],16:[function(t,n,e){function r(t,n,e){n||(n=0),"undefined"==typeof e&&(e=t?t.length:0);for(var r=-1,o=e-n||0,i=Array(o<0?0:o);++r<o;)i[r]=t[n+r];return i}n.exports=r},{}],17:[function(t,n,e){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],18:[function(t,n,e){function r(t){return!(t&&t instanceof Function&&t.apply&&!t[a])}var o=t("ee"),i=t(16),a="nr@original",s=Object.prototype.hasOwnProperty,c=!1;n.exports=function(t,n){function e(t,n,e,o){function nrWrapper(){var r,a,s,c;try{a=this,r=i(arguments),s="function"==typeof e?e(r,a):e||{}}catch(f){l([f,"",[r,a,o],s])}u(n+"start",[r,a,o],s);try{return c=t.apply(a,r)}catch(d){throw u(n+"err",[r,a,d],s),d}finally{u(n+"end",[r,a,c],s)}}return r(t)?t:(n||(n=""),nrWrapper[a]=t,d(t,nrWrapper),nrWrapper)}function f(t,n,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<n.length;c++)s=n[c],a=t[s],r(a)||(t[s]=e(a,f?s+o:o,i,s))}function u(e,r,o){if(!c||n){var i=c;c=!0;try{t.emit(e,r,o,n)}catch(a){l([a,e,r,o])}c=i}}function d(t,n){if(Object.defineProperty&&Object.keys)try{var e=Object.keys(t);return e.forEach(function(e){Object.defineProperty(n,e,{get:function(){return t[e]},set:function(n){return t[e]=n,n}})}),n}catch(r){l([r])}for(var o in t)s.call(t,o)&&(n[o]=t[o]);return n}function l(n){try{t.emit("internal-error",n)}catch(e){}}return t||(t=o),e.inPlace=f,e.flag=a,e}},{}],ee:[function(t,n,e){function r(){}function o(t){function n(t){return t&&t instanceof r?t:t?c(t,s,i):i()}function e(e,r,o,i){if(!l.aborted||i){t&&t(e,r,o);for(var a=n(o),s=h(e),c=s.length,f=0;f<c;f++)s[f].apply(a,r);var d=u[y[e]];return d&&d.push([g,e,r,a]),a}}function p(t,n){v[t]=h(t).concat(n)}function h(t){return v[t]||[]}function m(t){return d[t]=d[t]||o(e)}function w(t,n){f(t,function(t,e){n=n||"feature",y[e]=n,n in u||(u[n]=[])})}var v={},y={},g={on:p,emit:e,get:m,listeners:h,context:n,buffer:w,abort:a,aborted:!1};return g}function i(){return new r}function a(){(u.api||u.feature)&&(l.aborted=!0,u=l.backlog={})}var s="nr@context",c=t("gos"),f=t(15),u={},d={},l=n.exports=o();l.backlog=u},{}],gos:[function(t,n,e){function r(t,n,e){if(o.call(t,n))return t[n];var r=e();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(t,n,e){function r(t,n,e,r){o.buffer([t],r),o.emit(t,n,e)}var o=t("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(t,n,e){function r(t){var n=typeof t;return!t||"object"!==n&&"function"!==n?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");n.exports=r},{}],loader:[function(t,n,e){function r(){if(!x++){var t=b.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&n))return u.abort();f(y,function(n,e){t[n]||(t[n]=e)}),c("mark",["onload",a()+b.offset],null,"api");var e=l.createElement("script");e.src="https://"+t.agent,n.parentNode.insertBefore(e,n)}}function o(){"complete"===l.readyState&&i()}function i(){c("mark",["domContent",a()+b.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(s=Math.max((new Date).getTime(),s))-b.offset}var s=(new Date).getTime(),c=t("handle"),f=t(15),u=t("ee"),d=window,l=d.document,p="addEventListener",h="attachEvent",m=d.XMLHttpRequest,w=m&&m.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:m,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1071.min.js"},g=m&&w&&w[p]&&!/CriOS/.test(navigator.userAgent),b=n.exports={offset:s,now:a,origin:v,features:{},xhrWrappable:g};t(12),l[p]?(l[p]("DOMContentLoaded",i,!1),d[p]("load",r,!1)):(l[h]("onreadystatechange",o),d[h]("onload",r)),c("mark",["firstbyte",s],null,"api");var x=0,E=t(17)},{}]},{},["loader",2,10,4,3]);</script>
+    <title>INNO3D GTX 1050 Twin X2 2GB: 3 900 грн. - Комплектующие и аксессуары Бурштын на Olx</title>
+    <meta name="robots" content="index, follow" />		<link rel="canonical" href="https://www.olx.ua/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html" />		<link rel="alternate" href="https://www.olx.ua/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html?sd=1" hreflang="ru" />
+    <link rel="alternate" href="https://www.olx.ua/uk/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html?sd=1" hreflang="uk" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.olx.ua/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html" />		<meta http-equiv="Content-Language" content="ru" />
+    <meta name="description" content="3 900 грн.: Працює відмінно. У користуванні всього 4,5 місяці.  Всі тести можна знайти в інтернеті. Продається у зв'язку з тим, що потрібні гроші. Не гналася, не майнилася.
+Характеристики:
+Графічний чіп: GeForc..." />
+    <meta property="og:title" content="INNO3D GTX 1050 Twin X2 2GB"/>
+    <meta property="og:description" content="Миллионы частных объявлений о купле-продаже в твоем городе. Продается всё!"/>
+    <meta property="og:type" content="other"/>
+    <meta property="og:url" content="https://www.olx.ua/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html"/>
+    <meta property="og:site_name" content="Сайт бесплатных объявлений OLX.ua"/>
+    <meta property="fb:app_id" content="1535830993316424"/>
+    <meta property="og:image" content="https://img01-olxua.akamaized.net/img-olxua/632783354_1_644x461_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg"/>
+    <meta property="og:locale" content="ru_RU"/>
+    <meta property="yandex-verification" content="67284585bff59a69"/>
+    <link rel="icon" type="image/x-icon" href="https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web-olxua/static/img/favicon.ico?v=4">
+
+
+    <script type="text/javascript" src="https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/tracking/ninja.js?v=82004c2"></script><script type="text/javascript">
+  try{
+    var trackingData = JSON.parse('{"$config":{"siteUrl":"www.olx.ua","region":"cee","environment":"production","setup":{"gtm":{"siteCode":"GTM-W9GJCL"},"mixpanel":{"siteCode":"1799dc4067be971353b85127f766a0a4"}}},"pageView":{"ad_id":"518940926","ad_photo":"3","ad_price":"3900","price_currency":"UAH","item_condition":"used","adpage_type":"standard","poster_type":"private","seller_id":"124745602","cat_l1_id":"37","cat_l1_name":"elektronika","cat_l2_id":"38","cat_l2_name":"kompyutery-i-komplektuyuschie","cat_l3_id":"458","cat_l3_name":"komplektuyuschie-i-aksesuary","category_id":"458","region_id":"13","region_name":"if","city_id":"98","city_name":"burshtyn","trackPage":"ad_page","action_type":"ad_page","platform":"desktop","language":"ru","url":"\/obyavlenie\/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.ht","event_type":"pv"}}');
+  } catch(e) {
+    throw 'error3'+ '{"$config":{"siteUrl":"www.olx.ua","region":"cee","environment":"production","setup":{"gtm":{"siteCode":"GTM-W9GJCL"},"mixpanel":{"siteCode":"1799dc4067be971353b85127f766a0a4"}}},"pageView":{"ad_id":"518940926","ad_photo":"3","ad_price":"3900","price_currency":"UAH","item_condition":"used","adpage_type":"standard","poster_type":"private","seller_id":"124745602","cat_l1_id":"37","cat_l1_name":"elektronika","cat_l2_id":"38","cat_l2_name":"kompyutery-i-komplektuyuschie","cat_l3_id":"458","cat_l3_name":"komplektuyuschie-i-aksesuary","category_id":"458","region_id":"13","region_name":"if","city_id":"98","city_name":"burshtyn","trackPage":"ad_page","action_type":"ad_page","platform":"desktop","language":"ru","url":"\/obyavlenie\/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.ht","event_type":"pv"}}';
+  }
+</script>
+    <script type="text/javascript">
+      (function(document, window) {
+        var DOMContentLoaded=function(a){var b=function(){return document.attachEvent&&"undefined"!=typeof document.attachEvent?"ie":"not-ie"};return a=function(a){a&&"function"==typeof a?"ie"!==b()?document.addEventListener("DOMContentLoaded",function(){return a()}):document.attachEvent("onreadystatechange",function(){if("complete"===document.readyState)return a()}):console.error("The callback is not a function!")}}(DOMContentLoaded||{});
+        DOMContentLoaded(function() {
+          if (typeof NinjaTracker !== "undefined") {
+            NinjaTracker.initEvents();
+            if (typeof PaymentHandler === "function") { PaymentHandler(); }
+          } else {
+            console.log("NinjaTracker Events is undefined, initialization failed!");
+          }
+        });
+      })(document, window);
+    </script>
+    <script type="text/javascript">
+      var newrelicLicenseKey = "f1ebd821a6";
+      var newrelicApplicationID = "26545672";
+      var newrelicRandomMax = "25";
+    </script>
+    <script src="https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/newrelic.js?v=82004c2" type="text/javascript"></script>
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <script type="text/javascript" charset="utf-8">
+      (function(G,o,O,g,L,e){G[g]=G[g]||function(){(G[g]['q']=G[g]['q']||[]).push(
+        arguments)},G[g]['t']=1*new Date;L=o.createElement(O),e=o.getElementsByTagName(
+        O)[0];L.async=1;L.src='//www.google.com/adsense/search/async-ads.js';
+        e.parentNode.insertBefore(L,e)})(window,document,'script','_googCsa');
+    </script>    <script type="text/javascript">var abp = 0;</script>
+    <script type="text/javascript" src="//static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/px.js?ch=1"></script>
+    <script type="text/javascript" src="//static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/px.js?ch=2"></script>
+
+    <!-- HEAD CONTRIB -->
+
+    <script type="text/javascript">
+      var trackingData = trackingData || {};
+      try{
+        trackingData.$data = JSON.parse('{"pageView":{"user_status":"unlogged","traffic_source":"direct","safe_deal_visibility":"other_source","reserved_visibility":"not_visible"},"delayedEvents":[]}');
+      } catch(e) {
+        throw 'error4' + '{"pageView":{"user_status":"unlogged","traffic_source":"direct","safe_deal_visibility":"other_source","reserved_visibility":"not_visible"},"delayedEvents":[]}';
+      }
+
+      if (typeof NinjaTracker !== "undefined") {
+
+        NinjaTracker.init();
+      } else {
+        console.log("NinjaTracker is undefined, initialization failed!");
+      }
+    </script><noscript><img width="1" height="1" src="https://tracking.olx-st.com/h/v2/it-cee?cou=UA&cisoid=804&cid=220&pid=8&trackPage=ad_page&iid=518940926&imagesCount=3&extra=%7B%22ad_price%22%3A%223900%22%2C%22price_currency%22%3A%22UAH%22%2C%22item_condition%22%3A%22used%22%2C%22adpage_type%22%3A%22standard%22%2C%22category_id%22%3A%22458%22%2C%22action_type%22%3A%22ad_page%22%2C%22url%22%3A%22%5C%2Fobyavlenie%5C%2Finno3d-gtx-1050-twin-x2-2gb-IDz7qeV.ht%22%2C%22event_type%22%3A%22pv%22%2C%22user_status%22%3A%22unlogged%22%2C%22traffic_source%22%3A%22direct%22%2C%22safe_deal_visibility%22%3A%22other_source%22%2C%22reserved_visibility%22%3A%22not_visible%22%7D&sellerType=private&sellerId=124745602&categoryLevel1Id=37&categoryLevel1Name=elektronika&categoryLevel2Id=38&categoryLevel2Name=kompyutery-i-komplektuyuschie&categoryLevel3Id=458&categoryLevel3Name=komplektuyuschie-i-aksesuary&provinceId=13&provinceName=if&cityId=98&cityName=burshtyn&platformType=desktop&lang=ru&pageName=obyavlenie%2Finno3d-gtx-1050-twin-x2-2gb-IDz7qeV&t=1532751386&host=www.olx.ua&ivd=olx-ua_organic&source=noscript"/>
+    <img width="1" height="1" src="https://api.mixpanel.com/track/?data=eyJldmVudCI6ImFkX3BhZ2UiLCJwcm9wZXJ0aWVzIjp7InRva2VuIjoiMTc5OWRjNDA2N2JlOTcxMzUzYjg1MTI3Zjc2NmEwYTQiLCJhZF9pZCI6IjUxODk0MDkyNiIsImFkX3Bob3RvIjoiMyIsImFkX3ByaWNlIjoiMzkwMCIsInByaWNlX2N1cnJlbmN5IjoiVUFIIiwiaXRlbV9jb25kaXRpb24iOiJ1c2VkIiwiYWRwYWdlX3R5cGUiOiJzdGFuZGFyZCIsInBvc3Rlcl90eXBlIjoicHJpdmF0ZSIsInNlbGxlcl9pZCI6IjEyNDc0NTYwMiIsImNhdF9sMV9pZCI6IjM3IiwiY2F0X2wxX25hbWUiOiJlbGVrdHJvbmlrYSIsImNhdF9sMl9pZCI6IjM4IiwiY2F0X2wyX25hbWUiOiJrb21weXV0ZXJ5LWkta29tcGxla3R1eXVzY2hpZSIsImNhdF9sM19pZCI6IjQ1OCIsImNhdF9sM19uYW1lIjoia29tcGxla3R1eXVzY2hpZS1pLWFrc2VzdWFyeSIsImNhdGVnb3J5X2lkIjoiNDU4IiwicmVnaW9uX2lkIjoiMTMiLCJyZWdpb25fbmFtZSI6ImlmIiwiY2l0eV9pZCI6Ijk4IiwiY2l0eV9uYW1lIjoiYnVyc2h0eW4iLCJhY3Rpb25fdHlwZSI6ImFkX3BhZ2UiLCJwbGF0Zm9ybSI6ImRlc2t0b3AiLCJsYW5ndWFnZSI6InJ1IiwidXJsIjoiXC9vYnlhdmxlbmllXC9pbm5vM2QtZ3R4LTEwNTAtdHdpbi14Mi0yZ2ItSUR6N3FlVi5odCIsImV2ZW50X3R5cGUiOiJwdiIsInVzZXJfc3RhdHVzIjoidW5sb2dnZWQiLCJ0cmFmZmljX3NvdXJjZSI6ImRpcmVjdCIsInNhZmVfZGVhbF92aXNpYmlsaXR5Ijoib3RoZXJfc291cmNlIiwicmVzZXJ2ZWRfdmlzaWJpbGl0eSI6Im5vdF92aXNpYmxlIn19&ip=1&img=1"/>
+</noscript>
+    <script type="text/javascript">
+      var _adblock = true;
+    </script>
+    <script type="text/javascript" src="https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/advertising.js?v=82004c2"></script>
+    <link rel="stylesheet" type="text/css" href="https://static-olxeu.akamaized.net/static/olxua/packed/swd096b31be3b712241c79a0ae7d451239.css">
+    <link rel="stylesheet" type="text/css" href="https://static-olxeu.akamaized.net/static/olxua/packed/sw7bc67ab726a2f1b4587786fa176e433c.css">
+    <!--[if lte IE 8]>						<link rel="stylesheet" type="text/css" href="https://static-olxeu.akamaized.net/static/olxua/packed/swc63c95add6e0445e53016b1bd27edf58.css">
+    <![endif]-->
+
+    <script type="text/javascript">
+      window.suggestmeyes_loaded = true;
+      var action='ad';
+      var method='index';
+      var user_logged=0;
+      var www_base='https://www.olx.ua';
+      var www_base_no_namespace='https://www.olx.ua';
+      var www_base_ajax='https://www.olx.ua/ajax';
+      var static_files_www_base='https://static-olxeu.akamaized.net/static/olxua/';
+      var external_static_files_www_base='https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web-olxua/static/';
+      var external_static_files_www_base_main='https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/';
+      var session_domain='olx.ua';
+      var site_domain='www.olx.ua';
+      var decimal_separator='.';
+      var thousands_separator=' ';
+      var sitecode='olxua';
+      var defaultCurrency='UAH';
+      var config_currency='грн.';
+      var useExternalScripts=1;
+      var lang='ru';
+      var hasRwd=0;
+      var module_landing_homegarden_ua=1;
+      var module_landing_jobs_ua=1;
+      var module_safedeal_always_active=1;
+      var module_store_image_sizes_db=1;
+      var module_store_image_sizes=1;
+      var module_police_bank_info=1;
+      var module_paidads=1;
+      var module_facebook_login=1;
+      var module_new_emails=1;
+      var module_newmoderation=1;
+      var module_payu=1;
+      var module_districts=1;
+      var module_new_search_filters=1;
+      var module_new_myaccount=1;
+      var module_currencies=1;
+      var module_currencies_new=1;
+      var module_sms_notification=1;
+      var module_metro=1;
+      var module_superdeal=1;
+      var module_phone_login=1;
+      var module_contact_as_image=1;
+      var module_mobile_app=1;
+      var module_unfinished_payments=1;
+      var module_new_sms_notification=1;
+      var module_trusted_changes=1;
+      var module_stock_photos_info=1;
+      var module_refugees=1;
+      var module_refugees_adding=1;
+      var module_multiacc=1;
+      var module_olx6=1;
+      var module_gpt_banners=1;
+      var module_i2_payment=1;
+      var module_paid_subscriptions=1;
+      var module_topupaccount=1;
+      var module_old_payment_tables=1;
+      var module_portmone=1;
+      var module_redis_hash=1;
+      var module_rest_api=1;
+      var module_phone_in_desc=1;
+      var module_anonymous_chat_app=1;
+      var module_ads_no_results=1;
+      var module_new_at=1;
+      var module_bonus_credits=1;
+      var module_geo6_multiple_langs=1;
+      var module_crm=1;
+      var module_gpt_banners_i2=1;
+      var module_new_tracking=1;
+      var module_new_tracking_i2=1;
+      var module_ninja_m_legacy=1;
+      var module_clm=1;
+      var module_paid_subscriptions_single=1;
+      var module_user_online_status=1;
+      var module_pushup_new=1;
+      var module_topupaccount_newemail=1;
+      var module_afc_to_dfp=1;
+      var module_no_old_subdomains=1;
+      var module_observed_new=1;
+      var module_ap_ldap_login=1;
+      var module_ads_homepage=1;
+      var module_disable_free_refresh_categories=1;
+      var module_observed_anonymous=1;
+      var module_new_controllers=1;
+      var module_vas_config_wallet=1;
+      var module_vas_config_wallet_before=1;
+      var module_vas_config_nnl_limits=1;
+      var module_vas_config_nnl_business_limits=1;
+      var module_vas_config_topads=1;
+      var module_topupaccount_wallet=1;
+      var module_new_dfp=1;
+      var module_afs_on_empty_search_i2=1;
+      var module_vkontakte_login=1;
+      var module_landing_action=1;
+      var module_split_item_content=1;
+      var module_open_api=1;
+      var module_user_sms_verification=1;
+      var module_user_photo=1;
+      var module_show_limits_price_on_posting_form=1;
+      var module_enable_premium_account=1;
+      var module_bulk_ads_upload=1;
+      var module_flagged_ads=1;
+      var module_shop_filters=1;
+      var module_mandatory_login=1;
+      var module_gemius=1;
+      var module_remove_emailanswers_on_posting=1;
+      var module_multipay_ati_new_report=1;
+      var module_paid_feature_expires=1;
+      var module_nps_survey=1;
+      var module_vas_config_tariff_bonus_points=1;
+      var module_treatments=1;
+      var module_accept_arranged_salary=1;
+      var module_recaptcha=1;
+      var module_app_homescreen_tiles=1;
+      var module_disable_adblock_afs=1;
+      var module_log_sent_emails=1;
+      var module_users_extra_data=1;
+      var module_safedeal=1;
+      var module_safedeal_buyer=1;
+      var module_ad_recommendations_clm=1;
+      var module_phone_views_logs=1;
+      var module_ad_closed_notifications=1;
+      var module_track_features=1;
+      var module_atlasorm=1;
+      var module_discount_tool=1;
+      var module_jobs_free_seek=1;
+      var module_messages_spammers=1;
+      var module_topads_promotions=1;
+      var module_payment_click_tracking=1;
+      var module_pricing_test_group_assignment=1;
+      var module_user_settings_recaptcha=1;
+      var module_vas_valid_to_date=1;
+      var module_change_localisation_label=1;
+      var module_require_register_token=1;
+      var module_ad_paid_features=1;
+      var module_new_jobs=1;
+      var module_tradus=1;
+      var module_mass_tests=1;
+      var module_nps_jobs_survey_db_tables=1;
+      var module_tariff_basket=1;
+      var module_bundles=1;
+      var module_bundles_frontend=1;
+      var module_bundles_vas=1;
+      var module_bundles_infolayer=1;
+      var module_bundles_packet=1;
+      var module_ab_tests=1;
+      var module_tracking_fix=1;
+      var module_new_autocomplete=1;
+      var module_last_messages_in_conversations=1;
+      var module_query_spell_checker=1;
+      var module_cv_upload=1;
+      var module_jobs_message_prefill=1;
+      var module_ad_cache_reload_schedule=1;
+      var module_afs_refactor=1;
+      var module_test_afc_afs_slots_listing=1;
+      var module_disable_verification_targeting=1;
+      var module_adblock_targeting=1;
+      var module_log_ad_limited=1;
+      var module_disable_ads_output_cache=1;
+      var module_disable_ad_output_cache=1;
+      var module_sms_verification_phone_search=1;
+      var module_race_test_prediction=1;
+      var module_b2c_business_page=1;
+      var module_b2c_ad_page=1;
+      var module_b2c_business_banner=1;
+      var module_vas_config_refresh_for_packages=1;
+      var module_packages_new_design=1;
+      var module_vas_logo_link=1;
+      var module_new_category_suggester=1;
+      var module_payment_providers_configurable=1;
+      var module_entry_points_logger=1;
+      var module_buy_package_always_available=1;
+      var module_rabbit_mq=1;
+      var module_register_restrict_email=1;
+      var module_async_event_bus=1;
+      var module_store_image_update_sizes=1;
+      var module_solr_cloud=1;
+      var module_solr_improvement=1;
+      var module_fraud_detection=1;
+      var module_fraud_detector_queue=1;
+      var module_accurate_location=1;
+      var module_password_hashing=1;
+      var module_hermes_new_api=1;
+      var module_ad_discount=1;
+      var module_ad_discount_push=1;
+      var module_ab_force_login_posting=1;
+      var module_history_extra_info=1;
+      var module_delete_secure=1;
+      var module_appleAllowLongPushes=1;
+      var module_observed_push=1;
+      var module_hide_adverts_slots=1;
+      var module_app_homescreen=1;
+      var module_ads_efficiency=1;
+      var module_mobile_slot_manager=1;
+      var module_wp_nativemode=1;
+      var module_apps_disable_alog=1;
+      var module_app_homescreen_last=1;
+      var module_app_homescreen_clm=1;
+      var module_app_homescreen_category=1;
+      var module_app_homescreen_covisitation=1;
+      var module_app_homescreen_latlon=1;
+      var module_app_homescreen_curated=1;
+      var module_app_homescreen_test=1;
+      var module_app_homescreen_nearby_newest=1;
+      var module_force_login_posting=1;
+      var module_flagged_ads_alter=1;
+      var module_use_www_subdomain=1;
+      var module_group_activation_of_limited_ads=1;
+      var module_ssl_only=1;
+      var module_BaseCRM=1;
+      var module_newrelic_api_app=1;
+      var module_hide_disabled_parameters=1;
+      var module_show_photo_setting=1;
+      var module_new_sidebar=1;
+      var module_vas_treatments_thresholds_test_log=1;
+      var module_xml_remote=1;
+      var module_expire_ads_mailing_queue=1;
+      var module_hermes_messages=1;
+      var module_new_hermes_executor=1;
+      var module_check_nnl_ads=1;
+      var module_legacy_cities=1;
+      var module_mcrouter=1;
+      var module_statistics_i2=1;
+      var module_ignore_sub_region_in_searches=1;
+      var module_multipay_touchpoints=1;
+      var module_fair_expiration=1;
+      var module_fair_expiration_moderated_end=1;
+      var module_users_without_password_detector=1;
+      var module_mandatory_login_for_chat=1;
+      var module_log_erec_emails=1;
+      var module_new_conversation_limiter=1;
+      var module_standarize_username=1;
+      var module_eventbus_publisher=1;
+      var module_hide_promotions_on_posting=1;
+      var module_pushup_automatic=1;
+      var module_phone_views_block_scammers=1;
+      var module_targeting_ru_email=1;
+      var module_remove_old_ati=1;
+      var module_vas_logo=1;
+      var module_user_login_recaptcha=1;
+      var module_olx_delivery=1;
+      var module_safedeal_queues=1;
+      var module_register_recaptcha=1;
+      var module_register_recaptcha_mobile=1;
+      var module_safedeal_mobile_posting=1;
+      var module_S3FileStorage=1;
+      var module_avoid_payment_abandonment=1;
+      var module_disable_banned_ips=1;
+      var module_mweb_ad=1;
+      var module_mweb_listing=1;
+      var module_mweb_home=1;
+      var module_mweb_alternate_links=1;
+      var module_mweb_recaptcha=1;
+      var module_use_tokens_for_login=1;
+      var module_ua_discounts_promo=1;
+      var module_redis_split_db=1;
+      var module_datadog=1;
+      var module_safedeal_push=1;
+      var module_tariff_tester_prerequisite=1;
+      var module_tariff_tester=1;
+      var module_price_project_data_service=1;
+      var module_delivery_request_reserved=1;
+      var module_delivery_request_sent=1;
+      var module_delivery_request=1;
+      var module_delivery_request_popup=1;
+      var module_safedeal_transactions_tooltip=1;
+      var module_safedeal_async_history=1;
+      var module_nnl_category_migration=1;
+      var module_atlas_message_antispam=1;
+      var module_atlas_message_antispam_mute=1;
+      var module_dfp_refactor=1;
+      var module_register_confirm_token=1;
+      var module_ads_efficiency_mysql=1;
+      var module_rabbit_mq_db_proxy=1;
+      var module_new_dfp_segment=1;
+      var module_dfp_segment_mysql=1;
+      var module_control_engine=1;
+      var module_wallet_as_a_service=1;
+      var module_exchange_rate=1;
+      var module_messages_recaptcha=1;
+      var module_user_activity_tracker=1;
+      var isTestServer=0;
+      var sms_verified=0;
+      var user_sms_verified=0;
+      var mobileNumberPatternJs='^(?:(?:\\+?(380))|(0))?((?:39|50|66|95|99|63|93|67|68|96|97|98|91|92|94|73{1})[0-9]{5,7})$|^(?:\+?(?<code_ru>7))?(?<phone_ru>(?:900|901|902|903|904|905|906|908|909|910|911|912|913|914|915|916|917|918|919|920|921|922|923|924|925|926|927|928|929|930|931|932|933|934|936|937|938|939|941|950|951|952|953|955|956|958|960|961|962|963|964|965|966|967|968|969|970|971|977|978|980|981|982|983|984|985|986|987|988|989|991|992|993|994|995|996|997|999)[0-9]{7})$';
+      var mapclient='gme-olxglobalbv';
+      var mapchannel='olx-eu-ua-prod';
+      var fb_connect_url='https://connect.facebook.net/ru_UA/all.js#xfbml=1&amp;appId=1535830993316424';
+      var fb_app_id='1535830993316424';
+      var ad_title='INNO3D GTX 1050 Twin X2 2GB';
+      var region_id='13';
+      var subregion_id='98';
+      var city_id='98';
+      var cat_path='elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary';
+      var saveFavLink="https://www.olx.ua/account/?origin=observepopup&ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index";
+      var marker_default='https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/img/maps/marker_default.png';
+      var marker_zone='https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/img/maps/marker_zone.png';
+      var adID='518940926';
+      var equal_address_provided='0';
+      var messageSent='';
+      var map_show_detailed='';
+      var regionName="\u0418\u0432\u0430\u043d\u043e-\u0424\u0440\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c";
+      var subregionName="\u0411\u0443\u0440\u0448\u0442\u044b\u043d";
+      var category_id='458';
+      var categoryName="\u041a\u043e\u043c\u043f\u043b\u0435\u043a\u0442\u0443\u044e\u0449\u0438\u0435 \u0438 \u0430\u043a\u0441\u0435\u0441\u0441\u0443\u0430\u0440\u044b";
+      var categoryCode="komplektuyuschie-i-aksesuary";
+      var categoryAdsenseText=null;
+      var root_category_id='37';
+      var rootCategoryName="\u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043d\u0438\u043a\u0430";
+      var rootCategoryCode="elektronika";
+      var rootCategoryAdsenseText=null;
+      var setSeoPageName="OLX.ua - \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u0438\u044f \u21161 \u0432 \u0423\u043a\u0440\u0430\u0438\u043d\u0435";
+      var subregion_possessive='Бурштына';
+      var subregion_locative='в Бурштыне';
+      var liveinternet_id='Slando_Ukraine';
+      var events_break=false;
+      var N=15;
+      var ar_duo1=Math.floor(Math.random()*N+1);
+      var pp_gemius_identifier=new String('0nHqv6tj9z5nRfsmP697J6RuLbo6IEODmOw0yRKw6PX.67');
+      var gemius_script_src='https://static-olxeu.akamaized.net/static/olxua/naspersclassifieds-regional/olxeu-atlas-web/static/js/xgemius.js';
+      function __(txt) {
+        if (typeof translations == 'object') {
+          if (translations[txt] == undefined) {
+            return txt;
+          } else {
+            return translations[txt];
+          }
+        }
+        return txt;
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="https://static-olxeu.akamaized.net/static/olxua/js/scripts/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+<body class="detailpage t-new_sidebar">
+<!-- Google Tag Manager -->
+<!-- End Google Tag Manager -->	    	            <div id="div-gpt-ad-test"></div>
+<script type="text/javascript">
+  var checkDivElement = true;
+</script>
+<!-- Start: GPT -->
+<script type='text/javascript'>
+  var campaignAllowedIds = [];
+  var campaignProhibitedIds = [];
+  var initGptScript = function () {
+    (function () {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  };
+</script>
+<script type="text/javascript">
+  var gptadslots = [];
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+
+  initGptScript();
+</script>
+<script type="text/javascript">
+  var GPT = GPT || {};
+  GPT.targeting = {"cat_l0":"elektronika","cat_l1":"kompyutery-i-komplektuyuschie","cat_l2":"komplektuyuschie-i-aksesuary","cat_l0_id":"37","cat_l1_id":"38","cat_l2_id":"458","ad_title":"inno3d-gtx-1050-twin-x2-2gb","ad_img":"https:\/\/img01-olxua.akamaized.net\/img-olxua\/632783354_1_644x461_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg","offer_seek":"offer","private_business":"private","region":"if","subregion":"burshtyn","city":"burshtyn","price":["3001-5000"],"ad_price":"3900","currency":"UAH","subcategory":["videokarty"],"state":["used"],"safedealads":"1","premium_ad":"0","ad_type_view":"normal","dfp_user_id":"bfbf47ea-7185-5a52-8003-426e09225f34-ver2","segment":[],"dfp_segment_test":"35","dfp_segment_test_v2":"1","dfp_segment_test_v3":"1","adx":[""],"comp":[""],"lister_lifecycle":"0","last_pv_imps":"0","user-ad-fq":"0","ses_pv_seq":"0","user-ad-dens":"0","listingview_test":"1","env":"production","url_action":"ad","lang":"ru","con_inf":"elektronikaxxkompyutery-i-komplektuyuschiexx1"};
+  GPT.slots = [{"divId":"div-gpt-ad-item-sidebar","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/vr_rgt1_ap","adUnitSizes":"[[300,400],[300,600],[300,250],[240,400],[250,400],[160,600],[336,280],[240,350],[250,250]]","outOfPage":"0","targeting":{"pos":"Item_Sidebar","Admixer":"1"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"},{"divId":"div-gpt-ad-item-top","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/hrz_top_ap","adUnitSizes":"[[728,90],[750,100],[750,200],[890,130],[930,180],[970,90],[970,250],[980,120]]","outOfPage":"0","targeting":{"pos":"Item_Top","Admixer":"1"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"},{"divId":"div-gpt-ad-item-branding","adUnitPath":"olx.ua\/elektronika\/kompyutery-i-komplektuyuschie\/komplektuyuschie-i-aksesuary","adUnitSizes":"[[1,1]]","outOfPage":"0","targeting":{"pos":"Item_Branding","Admixer":"1"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"},{"divId":"div-gpt-ad-item-content1","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/infeed_btm1_ap","adUnitSizes":"[[617,120],[617,100],\"fluid\"]","outOfPage":"0","targeting":{"pos":"Item_content1"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"},{"divId":"div-gpt-ad-item-content2","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/infeed_btm2_ap","adUnitSizes":"[[617,120],[617,100]]","outOfPage":"0","targeting":{"pos":"Item_content2"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"},{"divId":"div-gpt-ad-item-content3","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/infeed_btm3_ap","adUnitSizes":"[[617,120],[617,100],[580,400]]","outOfPage":"0","targeting":{"pos":"Item_content3"},"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":"[]","order":"1"}];
+  GPT.slotsShowOnlyWhenUserSee = [{"slot_id":"div-gpt-ad-rectangle_gallery","action":"showGallery","show":false,"setClass":"0","data":{"divId":"div-gpt-ad-rectangle_gallery","adUnitPath":"olxua_dsk\/elektronika\/kompyutery-i-komplektuyuschie\/ad\/vr_gv_ap","adUnitSizes":[[300,250],[250,250]],"outOfPage":false,"targeting":[],"isCollapsing":false,"exclusion":false,"openxBidder":false,"criteoZoneId":"","showActionAdblock":"1","sticky":false,"setClass":"0","isRefreshed":false,"secondDivId":"","secondAdUnitPath":"","secondAdUnitSizes":[],"order":"1"}}];
+  var networkId = 55937117;
+  var hasCriteoSlot = false;
+  var hasPrebidSlot = false;
+  var advertsViewPerPageView = 0;
+  var advertsViewPerSession = 0;
+  var pageViewPerSession = 0;
+  var advertsAreEnabled = true;
+
+  if (GPT.targeting['ad_type_view'] !== undefined && GPT.targeting['ad_type_view'] === 'preview') {
+    advertsAreEnabled = false;
+    GPT.targeting = {};
+    GPT.slots = {};
+    GPT.slotsShowOnlyWhenUserSee = {};
+  }
+
+  if (advertsAreEnabled) {
+    if (window.sitecode === 'olxpt') {
+      var adscatmain = typeof(root_category_id) !== 'undefined' && root_category_id != '' ? root_category_id : 0;
+      var adscatsub = typeof(category_id) !== 'undefined' && category_id != '' && adscatmain != '' ? category_id : 0;
+      for (var i = 0; i < GPT.slots.length; i++) {
+        GPT.slots[i].adUnitPath = GPT.slots[i].adUnitPath.replace("'+adscatmain+'", adscatmain);
+        GPT.slots[i].adUnitPath = GPT.slots[i].adUnitPath.replace("'+adscatsub+'", adscatsub);
+      }
+    }
+    if (window.dmp_sati_enabled !== undefined) {
+      var cxSendEvent = function () {
+        cX.callQueue.push(['setSiteId', '1140743130060527813']);
+        cX.callQueue.push(['invoke', function () {
+          var extid = $.cookie('dfp_user_id');
+          if (extid) {
+            cX.addExternalId({type: 'b16', id: extid});
+          }
+        }]);
+        if (GPT.dmpSatiParam !== undefined) {
+          cX.callQueue.push(['sendPageViewEvent', GPT.dmpSatiParam]);
+        } else {
+          cX.callQueue.push(['sendPageViewEvent']);
+        }
+      };
+      cxSendEvent();
+    }
+    if (setDfpCookie === undefined) {
+      function setDfpCookie(cname, cvalue, minutes) {
+        var d = new Date();
+        d.setTime(d.getTime() + minutes * 60 * 1000);
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+    }
+    if (trackerFactory === undefined) {
+      var trackerFactory = function () {
+        this.renderEventResult = {};
+        this.renderEventResultByIframeId = {};
+        this.iframeIds = [];
+        this.renderEvent = {
+          'trackEvent': ['advert_show'],
+          'action_type': 'advert_show',
+          'event_type': 'advert_show',
+          'advertiserId' : [],
+          'campaignId' : [],
+          'creativeId' : [],
+          'isEmpty' : [],
+          'lineItemId' : [],
+          'serviceName' : [],
+          'sourceAgnosticCreativeId' : [],
+          'sourceAgnosticLineItemId' : [],
+          'size' :[],
+          'slot' : []
+        };
+        this.showEvent = {
+          'trackEvent': ['advert_viewable'],
+          'action_type': 'advert_viewable',
+          'event_type': 'advert_viewable',
+          'advertiserId' : [],
+          'campaignId' : [],
+          'creativeId' : [],
+          'isEmpty' : [],
+          'lineItemId' : [],
+          'serviceName' : [],
+          'sourceAgnosticCreativeId' : [],
+          'sourceAgnosticLineItemId' : [],
+          'size' :[],
+          'slot' : []
+        };
+        this.applyTrackDataObjectByImpressionViewableEvent = function (event) {
+          var response = event.slot.getResponseInformation();
+
+          this.showEvent.advertiserId.push(response.advertiserId);
+          this.showEvent.campaignId.push(response.campaignId);
+          this.showEvent.creativeId.push(response.creativeId);
+          this.showEvent.isEmpty.push(false);
+          this.showEvent.lineItemId.push(response.lineItemId);
+          this.showEvent.serviceName.push(this.renderEventResult[event.slot.getSlotElementId()].serviceName);
+          this.showEvent.sourceAgnosticCreativeId.push(response.sourceAgnosticCreativeId);
+          this.showEvent.sourceAgnosticLineItemId.push(response.sourceAgnosticLineItemId);
+          this.showEvent.size.push(this.renderEventResult[event.slot.getSlotElementId()].size);
+          this.showEvent.slot.push(event.slot.getAdUnitPath());
+        };
+        this.getShowEvents = function () {
+          return JSON.parse(JSON.stringify(this.showEvent));
+        };
+        this.clearShowEvents = function () {
+          this.showEvent.advertiserId = [];
+          this.showEvent.campaignId = [];
+          this.showEvent.creativeId = [];
+          this.showEvent.isEmpty = [];
+          this.showEvent.lineItemId = [];
+          this.showEvent.serviceName = [];
+          this.showEvent.sourceAgnosticCreativeId = [];
+          this.showEvent.sourceAgnosticLineItemId = [];
+          this.showEvent.size = [];
+          this.showEvent.slot = [];
+        };
+        this.applyTrackDataObjectBySlotRenderEndedEvent = function (event) {
+
+          this.renderEvent.advertiserId.push(event.advertiserId);
+          this.renderEvent.campaignId.push(event.campaignId);
+          this.renderEvent.creativeId.push(event.creativeId);
+          this.renderEvent.isEmpty.push(event.isEmpty);
+          this.renderEvent.lineItemId.push(event.lineItemId);
+          this.renderEvent.serviceName.push(event.serviceName);
+          this.renderEvent.sourceAgnosticCreativeId.push(event.sourceAgnosticCreativeId);
+          this.renderEvent.sourceAgnosticLineItemId.push(event.sourceAgnosticLineItemId);
+          this.renderEvent.size.push(event.size);
+          this.renderEvent.slot.push(event.slot.getAdUnitPath());
+
+
+          this.renderEventResult[event.slot.getSlotElementId()] = event;
+
+          if (event.isEmpty === false) {
+            var element = document.getElementById(event.slot.getSlotElementId());
+            if (element !== null) {
+              var iframes = element.getElementsByTagName('iframe');
+              if (iframes[0] !== undefined) {
+                this.iframeIds.push(iframes[0].id);
+                this.renderEventResultByIframeId[iframes[0].id] = event;
+              }
+            }
+          }
+        };
+        this.getRenderEvents = function () {
+          return JSON.parse(JSON.stringify(this.renderEvent));
+        };
+        this.clearRenderEvents = function () {
+          this.renderEvent.advertiserId = [];
+          this.renderEvent.campaignId = [];
+          this.renderEvent.creativeId = [];
+          this.renderEvent.isEmpty = [];
+          this.renderEvent.lineItemId = [];
+          this.renderEvent.serviceName = [];
+          this.renderEvent.sourceAgnosticCreativeId = [];
+          this.renderEvent.sourceAgnosticLineItemId = [];
+          this.renderEvent.size = [];
+          this.renderEvent.slot = [];
+        };
+        this.buildtrackDataObjectByClickAdvertEvent = function (id) {
+          var event = this.renderEventResultByIframeId[id];
+          return {
+            'trackEvent': ['advert_click'],
+            'action_type': 'advert_click',
+            'event_type': 'advert_click',
+            'advertiserId' : [event.advertiserId],
+            'campaignId' : [event.campaignId],
+            'creativeId' : [event.creativeId],
+            'lineItemId' : [event.lineItemId],
+            'size' : [event.size],
+            'slot' : [event.slot.getAdUnitPath()],
+            'sourceAgnosticCreativeId' : [event.sourceAgnosticCreativeId],
+            'sourceAgnosticLineItemId' : [event.sourceAgnosticLineItemId]
+          };
+        };
+        this.isAdvertIframe = function(id) {
+          return this.iframeIds.indexOf(document.activeElement.id) > -1
+        }
+        this.getRenderEventResult = function (id) {
+          return this.renderEventResult;
+        }
+      };
+    }
+
+    if (refreshViewabilitySlot === undefined) {
+      var refreshViewabilitySlot = function (slotId, slot, element) {
+        var rect = element.getBoundingClientRect();
+        var sizes = JSON.parse(slot.adUnitSizes);
+        var height = sizes[0][1] * 0.2;
+        var position = rect.top - window.innerHeight + height;
+
+        var isOfferedOnPrebidAuctions = function (id) {
+          for (var index in window.adUnits) {
+            if (window.adUnits[index].code === id) {
+              return true;
+            }
+          }
+          return false;
+        };
+
+        if (position <= 0 && rect.top - height > 0) {
+          googletag.cmd.push(function () {
+            googletag.destroySlots([gptadslots[slotId]]);
+            gptadslots[slot.secondDivId] = googletag.defineSlot('/' + networkId + '/' + slot.secondAdUnitPath, JSON.parse(slot.secondAdUnitSizes), slot.secondDivId)
+            gptadslots[slot.secondDivId].setTargeting("view", "1");
+            gptadslots[slot.secondDivId].addService(googletag.pubads());
+            googletag.display(slot.secondDivId);
+
+            if (hasPrebidSlot) {
+              if (isOfferedOnPrebidAuctions(slot.secondDivId) && window.pbjsAdserverRequestIsSent === false) {
+                slotToBid = [slot.secondDivId];
+                window.pbjsSlotToRefresh = gptadslots[slot.secondDivId];
+                window.pbjs.adserverRequestSent = false;
+                window.setPrebidSetting(adUnits, window.getPrebidConfigObject(), slotToBid);
+              } else {
+                googletag.pubads().refresh([gptadslots[slot.secondDivId]]);
+              }
+            }
+          });
+        }
+      }
+    }
+
+    if (canShowSlot === undefined) {
+      var canShowSlot = function (slotId, targeting) {
+        var slots = [
+          'div-gpt-ad-1488791057523-0',
+          'div-gpt-ad-item-top',
+          'div-gpt-ad-1449145277489-0',
+          'div-gpt-ad-1455815526709-0'
+        ];
+
+        if (slots.indexOf(slotId) > - 1 && targeting['premium_ad'] !== undefined && targeting['premium_ad'] === "1") {
+          return false;
+        }
+
+        return true;
+      }
+    }
+    var trackerFactoryInstance = new trackerFactory();
+    if (dfpSetup === undefined) {
+      var dfpSetup = function () {
+        googletag.cmd.push(function () {
+          for (i = 0; i < GPT.slots.length; i++) {
+            var slotGPT = GPT.slots[i];
+            if (!canShowSlot(slotGPT.divId, GPT.targeting)) {
+              continue
+            }
+            var createSlot = false;
+            if (window.module_adblock_targeting_new !== undefined && (abp && slotGPT.showActionAdblock == 2 || !abp && slotGPT.showActionAdblock == 1)) {
+              createSlot = true;
+            } else if (window.module_adblock_targeting_new === undefined) {
+              createSlot = true;
+            }
+            if (createSlot) {
+              if (slotGPT.outOfPage != '0') {
+                gptadslots[slotGPT.divId] = googletag.defineOutOfPageSlot('/' + networkId + '/' + slotGPT.adUnitPath, slotGPT.divId)
+              } else {
+                gptadslots[slotGPT.divId] = googletag.defineSlot('/' + networkId + '/' + slotGPT.adUnitPath, JSON.parse(slotGPT.adUnitSizes), slotGPT.divId)
+              }
+              for (var index in slotGPT.targeting) {
+                gptadslots[slotGPT.divId].setTargeting(index, slotGPT.targeting[index]);
+              }
+              if (slotGPT.isCollapsing) {
+                gptadslots[slotGPT.divId].setCollapseEmptyDiv(true);
+              }
+              if (slotGPT.exclusion !== false) {
+                slotGPT.exclusion = slotGPT.exclusion.replace('[', '');
+                slotGPT.exclusion = slotGPT.exclusion.replace("'", '');
+                slotGPT.exclusion = slotGPT.exclusion.replace("'", '');
+                slotGPT.exclusion = slotGPT.exclusion.replace(']', '');
+                gptadslots[slotGPT.divId].setCategoryExclusion(slotGPT.exclusion);
+              }
+              gptadslots[slotGPT.divId].addService(googletag.pubads());
+            }
+          }
+          googletag.pubads().enableSingleRequest();
+          if (window.module_adblock_targeting !== undefined) {
+            googletag.pubads().setTargeting('used_adblock', abp ? 'adblock_enabled' : 'adblock_disabled');
+          }
+          for (var index in GPT.targeting) {
+            googletag.pubads().setTargeting(index, GPT.targeting[index]);
+          }
+
+          if (window.dmp_sati !== undefined && window.dmp_sati === 1) {
+            googletag.pubads().setTargeting('CxSegments', cX.getUserSegmentIds({persistedQueryId: 'abbd15d14a6bbfadc6fa4d7c4a3fde1461a62659'}));
+          }
+
+          googletag.pubads().enableAsyncRendering();
+          googletag.pubads().collapseEmptyDivs(true);
+          pageViewPerSession += 1;
+          setDfpCookie('pvps', pageViewPerSession, 15);
+          googletag.pubads().addEventListener('impressionViewable', function (event) {
+            advertsViewPerPageView += 1;
+            advertsViewPerSession += 1;
+            setDfpCookie('avppv', advertsViewPerPageView, 15);
+            setDfpCookie('avps', advertsViewPerSession, 15);
+
+            trackerFactoryInstance.applyTrackDataObjectByImpressionViewableEvent(event);
+          });
+          googletag.pubads().addEventListener('slotRenderEnded', function (event) {
+            trackerFactoryInstance.applyTrackDataObjectBySlotRenderEndedEvent(event);
+            if (event.isEmpty && event.slot.getSlotElementId() === 'div-gpt-ad-1528887221616-0') {
+              if (window.slotToRefresWhenVisible === undefined) {
+                window.slotToRefresWhenVisible = {};
+              }
+              var slotId = event.slot.getSlotElementId();
+              var element = document.getElementById(slotId + "-after");
+              var slotToRefresh = {};
+              for (var i = 0; i < GPT.slots.length; i++) {
+                if (GPT.slots[i].divId === slotId) {
+                  slotToRefresh = GPT.slots[i];
+                  break;
+                }
+              }
+
+              if (typeof window.slotToRefresWhenVisible[slotId] === "undefined") {
+                window.slotToRefresWhenVisible[slotId] = window.setInterval(
+                  function () {
+                    refreshViewabilitySlot(slotId, slotToRefresh, element)
+                  },
+                  500
+                );
+              } else {
+                clearInterval(window.slotToRefresWhenVisible[slotId]);
+              }
+            }
+          });
+
+          googletag.enableServices();
+          window.dfpEndTime = Date.now();
+          window.dfpTimeResult = window.dfpEndTime - window.dfpStartTime;
+        })
+      }
+    }
+    if (googletag !== undefined) {
+      window.dfpStartTime = Date.now();
+      if (window.dmp_sati_enabled !== undefined) {
+        cX.callQueue.push(['invoke', function () {
+          dfpSetup()
+        }]);
+      } else {
+        dfpSetup();
+      }
+    }
+    window.onload = function (ev) {
+      var clickIframe = window.setInterval(checkFocus, 100);
+
+      function checkFocus() {
+        var id = document.activeElement.id;
+        if(trackerFactoryInstance.isAdvertIframe(id)) {
+          document.activeElement.blur();
+
+          NinjaTracker.push(NinjaTracker.mergeValidOptionalParams(
+            NinjaTracker.getDataFrom(trackingData.pageView),
+            trackerFactoryInstance.buildtrackDataObjectByClickAdvertEvent(id)
+          ));
+        }
+      }
+    };
+
+    window.onbeforeunload = function (event) {
+      NinjaTracker.push(NinjaTracker.mergeValidOptionalParams(
+        NinjaTracker.getDataFrom(trackingData.pageView),
+        trackerFactoryInstance.getRenderEvents()
+      ));
+      NinjaTracker.push(NinjaTracker.mergeValidOptionalParams(
+        NinjaTracker.getDataFrom(trackingData.pageView),
+        trackerFactoryInstance.getShowEvents()
+      ));
+    }
+
+  }
+</script>
+<!-- End: GPT -->
+
+
+<div id="innerLayout">
+    <div id="admixer_async_478676499"></div>
+    <div id="div-gpt-ad-item-branding"  ></div><div id="div-gpt-ad-item-branding-after"></div>    <script type="text/javascript">
+  setTimeout(function(){
+    typeof window.IndexObj == 'object'
+    && typeof window.IndexObj.initScreening == 'function'
+    && window.IndexObj.initScreening();
+  }, 2500);
+</script>
+    <div id="div-gpt-layout-topover"  ></div><div id="div-gpt-layout-topover-after"></div>
+
+
+    <header id="header-container">
+        <div class="navi">
+            <div class="wrapper clr rel">
+                <a href="https://www.olx.ua" id="headerLogo" class="abs icon website big" title="На главную OLX - бесплатные объявления">На главную OLX - бесплатные объявления</a>
+                <a href="https://www.olx.ua/slando-landing/" class="icon prevpagelanding"></a>
+
+                <a id="postNewAdLink" data-cy="common_link_header_postnewad"
+                   class="postnewlink fbold tdnone" href="https://www.olx.ua/post-new-ad/?bs=adpage_adding">
+                    <span>Подать объявление</span>
+                </a>
+                <div class="lang-selector small">
+                    <ul class="breaklist inlblk">
+                        <li class="inlblk">
+                            <span class="x-normal">язык</span>
+                        </li>
+                        <li class="inlblk">
+                            <a class="x-normal" id="changeLang" href="https://www.olx.ua/changelang/?lang=uk&l=https%3A%2F%2Fwww.olx.ua%2Fuk%2Fobyavlenie%2Finno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html%3Fsd%3D1" data-baselink="https://www.olx.ua/changelang/?lang=uk">мова</a>
+                        </li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                  observedNC = [];
+                  observedNC['ads'] = [];
+                  observedNC['searches'] = [];
+                  observedNC['toSynchronize'] = '';
+                  var loggedUserId="";
+                  var showPasswordBlock=0;
+                  var showPasswordBlockLevel=2;
+                </script>
+                <ul class="userbox fright marginleft10"  >
+                    <li class="hidden inlblk nowrap rel vtop" id="observed-counter">
+                        <a href="https://www.olx.ua/favorites/" class="tdnone inlblk hidden" id="observed-ads-link" title="Избранные">
+                            <i data-icon="star"></i>
+                            <strong class="counter" data-cy="common_text_header_observed_ads_counter"></strong>
+                        </a>
+                        <a href="https://www.olx.ua/favorites/search/" class="tdnone inlblk "
+                           id="observed-search-link" title="Избранные"
+                           data-cy="common_button_observed_searches">
+                            <i data-icon="star"></i>
+                            <strong class="counter"></strong>
+                        </a>
+                    </li>
+                    <li class="inlblk nowrap vtop noslash " id="my-account-link">
+                        <div class="inlblk rel">
+                            <a href="https://www.olx.ua/myaccount/" class="userbox-login tdnone" id="topLoginLink">
+                                <div class="user-box__photo"  >
+                                    <i data-icon="account"></i>
+                                </div>
+                                <span class="link inlblk" data-cy="common_link_header_myaccount">
+                    <strong>Мой профиль</strong>
+                                    </span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </header>
+
+
+    <section id="body-container" class="offer-section">
+        <script>
+          var phoneToken = '3787dee20bcb4eedb9da7d8c22f37d';
+        </script>
+
+        <div class="rel breadcrumbbox">
+            <div class="wrapper">
+                <table width="100%" cellpadding="0" cellspacing="0" class="breadcrumb small" id="breadcrumbTop">
+                    <tr>
+                        <td width="20" class="nowrap hidden left" valign="middle">
+                            <a href="https://www.olx.ua/list/prev/" class="inlblk hidden nowrap prev-link mini tdnone small small back arrowsup" rel="nofollow">
+                                <i data-icon="laquo"></i>
+                                <span class="inlblk link">
+						<span> Назад</span>
+					</span>
+                            </a>
+                        </td>
+                        <td valign="top" class="middle">
+                            <ul>
+                                <li class="inline nowrap">
+                                    <a class="link" href="https://www.olx.ua/burshtyn/"><span>Объявление Бурштын</span></a>
+                                </li>
+                                <li class="inline">
+                                    <span class="slash"></span>
+                                    <a href="https://www.olx.ua/elektronika/burshtyn/" title="Электроника Бурштын" class="link nowrap"><span>Электроника Бурштын</span></a>
+                                </li>
+                                <li class="inline">
+                                    <span class="slash"></span>
+                                    <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/burshtyn/" title="Компьютеры и комплектующие Бурштын" class="link nowrap"><span>Компьютеры и комплектующие Бурштын</span></a>
+                                </li>
+                                <li class="inline">
+                                    <span class="slash"></span>
+                                    <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary/burshtyn/" title="Комплектующие и аксессуары Бурштын" class="link nowrap"><span>Комплектующие и аксессуары Бурштын</span></a>
+                                </li>
+                            </ul>
+                        </td>
+                        <td width="20" class="nowrap hidden right" valign="middle">
+                            <a href="https://www.olx.ua/list/next/" class="inlblk hidden nowrap next-link mini tdnone small next arrowsup" rel="nofollow">
+                    <span class="inlblk link">
+						<span>Следующее объявление</span>
+					</span>
+                                <i data-icon="raquo"></i>
+                                <span class="cloud br5 hidden">
+						<img class="hidden">
+						<span class="title-label"></span>
+						<span class="link overh hn"><span></span></span>
+					</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="marginbott15 tcenter rel inlblk">
+            <div id="div-gpt-ad-item-top"  ></div><div id="div-gpt-ad-item-top-after"></div>                <div></div>                    </div>
+
+        <div class="wrapper">
+            <div class="content" id="offer_active">
+
+                <div class="clr offerbody">
+                    <div class="offercontent fleft rel ">
+                        <div class="offercontentinner offer__innerbox">
+
+                            <div class="offerdescription clr" id="offerdescription">
+
+                                <div class="clr">
+                                    <div class="rel zi2 marginbott10 gallery firstimage">
+                                        <a href="#" class="{id:518940926} observe-link abs zi3 block tdnone tcenter cfff layerlink br5 offerobserve"
+                                           data-cy="adpage_observe_star"
+                                           data-statkey="ad.observed.bigstar">
+                                            <span class="inlblk icon observe4 observed-518940926" data-icon="star"></span>
+                                            <span class="observed-txt block pdingtop10 normal">В избранные</span>
+                                        </a>
+                                        <div class="gallery_img tcenter img-item">
+                                            <div class="photo-glow">
+                                                <div id="photo-gallery-opener" class="photo-handler rel inlblk">
+                                                    <img src="https://img01-olxua.akamaized.net/img-olxua/632783354_1_644x461_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg" class="vtop bigImage {nr:1}"
+                                                         alt="INNO3D GTX 1050 Twin X2 2GB Бурштын - изображение 1">
+                                                    <a id="enlargephoto" class="layerlink br5 abs tcenter tdnone hidden" href="#">
+                                                        <span class="icon enlargephoto inlblk">&nbsp;</span> <span class="block xx-large cfff margintop10">Галерея</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="offer-titlebox">
+                                    <h1>
+                                        INNO3D GTX 1050 Twin X2 2GB    </h1>
+                                    <div class="offer-titlebox__details">
+                                        <a class="show-map-link" href=""><strong>Бурштын, Ивано-Франковская область, Ивано-Франковская область</strong></a>
+                                        <em>
+                                            Добавлено:                                        в 11:41, 27 июля 2018, <small>Номер объявления: 518940926</small>
+                                        </em>
+
+                                    </div>
+
+                                    <div class="offer-titlebox__buttons">
+                                        <a rel="nofollow"
+                                           href="https://www.olx.ua/bundles/promote/?id=518940926&bs=adpage_promote"
+                                           class="olx-vas-button olx-vas-button--promote">
+                                            Рекламировать объявление    </a>
+                                        <a rel="nofollow"
+                                           id="pushUpPromoteAd"
+                                           href="https://www.olx.ua/bundles/refresh/?id=518940926&bs=adpage_pushup"
+                                           class="olx-vas-button olx-vas-button--refresh">
+                                            Поднять в верх списка    </a>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="clr descriptioncontent marginbott20">
+
+                                    <table class="details fixed marginbott20 margintop5 full" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td width="50%" class="col">
+                                                <table class="item" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <th>Объявление от</th>
+                                                        <td class="value">
+                                                            <strong>
+                                                                <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary/burshtyn/?search%5Bprivate_business%5D=private" title="Частного лица - Бурштын">
+                                                                    Частного лица																</a>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td width="50%" class="col">
+                                                <table class="item" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <th>Вид товара</th>
+                                                        <td class="value">
+                                                            <strong>
+                                                                <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary/burshtyn/" title="Комплектующие и аксессуары - Бурштын">
+                                                                    Комплектующие и аксессуары																</a>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50%" class="col">
+                                                <table class="item" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <th>Типы комплектующих</th>
+                                                        <td class="value">
+                                                            <strong>
+                                                                <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary/videokarty/burshtyn/" title="Видеокарты - Бурштын">
+                                                                    Видеокарты																</a>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td width="50%" class="col">
+                                                <table class="item" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <th>Состояние</th>
+                                                        <td class="value">
+                                                            <strong>
+                                                                <a href="https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary/burshtyn/?t=%D0%B1%2F%D1%83" title="Б/у - Бурштын">
+                                                                    Б/у																</a>
+                                                            </strong>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <div class="clr" id="textContent">
+                                        <p class="pding10 lheight20 large">
+                                            Працює відмінно. У користуванні всього 4,5 місяці.  Всі тести можна знайти в інтернеті. Продається у зв'язку з тим, що потрібні гроші. Не гналася, не майнилася.<br />
+                                            Характеристики:<br />
+                                            Графічний чіп: GeForce GTX 1050 <br />
+                                            Частота пам'яті: 7000 МГц <br />
+                                            Частота ядра: базова: 1354 МГц<br />
+                                            У режимі розгону: 1455 МГц <br />
+                                            Обсяг пам'яті: 2 ГБ <br />
+                                            Система охолодження: Twin X2 (дуже тиха система охолодження, і більше 50 градусів у мене не піднімалася температура)<br />
+                                            Розрядність шини пам'яті: 128 біт <br />
+                                            Тип пам'яті: GDDR5 <br />
+                                            Виходи DVI: 1 <br />
+                                            Максимально підтримувана роздільна здатність: 7680x4320 <br />
+                                            Підтримувані 3D API<br />
+                                            DirectX 12, OpenGL 4.5 <br />
+                                            Мінімально необхідна потужність БЖ: 400 Вт <br />
+                                            Інтерфейс: PCI-Express x16 3.0 <br />
+                                            Роз'єми: DVI, DisplayPort, HDMI (якщо у вас VGA, то потрібний буде активний перехідник VGA- HDMI, як у моєму випадку) <br />
+                                            Розміри: 195 x 99.8 мм <br />
+                                            Додаткове живлення: Немає <br />
+                                            Форм-фактор: Стандартна <br />
+                                            Тип системи охолодження: Активна <br />
+                                            Під'єднання моста Nvidia SLI: Немає <br />
+                                            Гарантія: 24 місяці (залишилося 19,5 місяці)<br />
+                                            <br />
+                                            Фото взяті з інтернету, так як зараз вона у мене в робочому пк, а знімати її заради фото немає сенсу. Реальному покупцеві можу все сфотографувати в робочому режимі. +плівка з неї ще досі не знята.<br />
+                                            <br />
+                                            (по всім питанням спочатку пишіть сюди)                                        </p>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="tcenter img-item">
+                                    <div class="photo-glow">
+                                        <img src="https://img01-olxua.akamaized.net/img-olxua/632783354_2_644x461_inno3d-gtx-1050-twin-x2-2gb-fotografii.jpg" class="vtop bigImage {nr:2}" alt="INNO3D GTX 1050 Twin X2 2GB Бурштын - изображение 2">
+                                    </div>
+                                </div>
+                                <div class="tcenter img-item">
+                                    <div class="photo-glow">
+                                        <img src="https://img01-olxua.akamaized.net/img-olxua/632783354_3_644x461_inno3d-gtx-1050-twin-x2-2gb-komplektuyuschie-i-aksessuary.jpg" class="vtop bigImage {nr:3}" alt="INNO3D GTX 1050 Twin X2 2GB Бурштын - изображение 3">
+                                    </div>
+                                </div>
+
+                                <div id="offerbottombar" class="pding15">
+                                    <div class="clr pdingbott10 small">
+                                        <a href="https://www.olx.ua/list/next/" id="next-link" class="next-link fright tdnone hidden">
+                                            <span class="link inlblk"><span>Следующее объявление</span></span>
+                                            <i data-icon="raquo" class="vmiddle large marginleft5 lheight14"></i>
+                                        </a>
+                                        <a href="https://www.olx.ua/list/prev/" id="prev-link" class="prev-link fleft tdnone hidden">
+                                            <i data-icon="laquo" class="vmiddle large marginright5 lheight14"></i>
+                                            <span class="link inlblk"><span>Назад</span></span>
+                                        </a>
+                                    </div>
+                                    <div class="clr pdingtop10 brtop-1 rel zi5">
+
+                                        <div class="fleft ad-share marginright15">
+
+                                            <div class="fleft marginright10">
+                                                <div id="fb-root" class="{id:  518940926} "></div>
+                                                <div class="fb_detailpage" id="fb_offerLikeButton">
+                                                    <iframe src="//www.facebook.com/plugins/like.php?locale=ru_RU&amp;href=https%3A%2F%2Fwww.olx.ua%2Fobyavlenie%2Finno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&amp;width=195&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:195px; height:21px;" allowTransparency="true"></iframe>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                    <div class="pdingtop10">
+                                        Просмотры:<strong>253</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="offercontentinner margintop7 offer__innerbox">
+                            <form enctype="multipart/form-data" class="default quickcontact" id="contact-form"
+                                  data-cy="adpage_contact_form"
+                                  method="post" action="https://www.olx.ua/obyavlenie/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html?bs=adpage_chat_login_bottom">
+                                <fieldset>
+                                    <h3 class="x-large fbold">Свяжитесь с автором объявления</h3>
+                                    <div class="inner rel">
+                                        <div class="fblock clr">
+                                            <ul id="contact_methods_below" class="form">
+                                                <li class="link-phone clr rel margintop10 {'path':'phone', 'id':'z7qeV', 'id_raw': '518940926'} atClickTracking contact-a cpointer" data-rel="phone">
+                                                    <div class="fleft">
+                                                        <span class="icon vtop inlblk mobile2">&nbsp;</span>
+                                                    </div>
+                                                    <div class="overh fleft marginleft10 brkword contactitem">
+                                                        <strong class="fnormal xx-large">09x xxx xxxx</strong>
+                                                        <span class="link spoiler small nowrap">
+										<span>Показать</span>
+									</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="fblock clr marginbott15">
+                                            <div class="focusbox fleft rel smallshadow">
+                                                <input type="text" title="Ваш email-адрес..." value="" class="defval light br3 xx-long x-normal" id="ask-email" name="contact[email]">
+                                                <p class="desc errorboxContainer">
+                                                    <small class="ca6 lheight24" id="se_emailError"></small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="fblock clr">
+                                            <div class="focusbox fleft rel smallshadow textarea-wrapper">
+                                                <label>Текст сообщения</label>
+                                                <textarea title="Текст сообщения..." id="ask-text"
+                                                          data-cy="input_message_text"
+                                                          class="defval light lheight18 br3 x-normal js-ad-message"
+                                                          name="contact[txt]"></textarea>
+                                                <p class="desc errorboxContainer">
+                                                    <small class="ca6 lheight24" id="se_messageError"></small>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="g-recaptcha" data-sitekey="6LfF4loUAAAAAL7rrF2kG6E_deGIeh_kHFPUYk-r"></div>
+                                        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=ru">
+                                        </script>
+                                        <div class="fblock clr">
+                                            <div class="clr">
+                                                <div class="fleft">
+                                                    <span class="tdnone lheight28 cpointer" id="upload-a" title="Прикрепить файл"><i class="vmiddle inlblk color-3" data-icon="clip"></i> <span class="link"><span>Прикрепить файл</span></span></span>
+                                                    <p class="x-small color-1 lheight14 attachmentinfo marginleft14">
+                                                        Типы файлов, которые принимаются: jpg, jpeg, png, doc, pdf, gif, zip, rar, tar, txt, xls, docx, xlsx, odt									<span class="block">Максимальный размер файла 2 МБ</span>
+                                                    </p>
+                                                </div>
+                                                <span class="button br3 large fright send3">
+								<i data-icon="message"></i>
+                                								<input type="submit" value="Отправить" class="cfff ">
+							</span>
+                                            </div>
+                                        </div>
+                                        <div id="upload-div" style="display: none" class="fblock clr">
+                                            <div class="fblock" id="safariWarning" style="display: none;">
+                                                Похоже, вы используете браузер "Mobile safari", который не поддерживает отправку файлов. К сожалению, добавление изображений невозможно.					</div>
+                                            <p class="clr marginbott5">
+                                                <input type="file" id="attachment0" name="attachment[0]" size="39" class="attachment fleft">
+                                                <input type="button" class="removeAtachment fright" value="Удалить">
+                                                <input type="hidden" name="attachment[0]" value="file">
+                                            </p>
+                                            <p class="clr marginbott5">
+                                                <input type="file" id="attachment1" name="attachment[1]" size="39" class="attachment fleft">
+                                                <input type="button" class="removeAtachment fright" value="Удалить">
+                                                <input type="hidden" name="attachment[1]" value="file">
+                                            </p>
+                                            <p class="clr marginbott5">
+                                                <input type="file" id="attachment2" name="attachment[2]" size="39" class="attachment fleft">
+                                                <input type="button" class="removeAtachment fright" value="Удалить">
+                                                <input type="hidden" name="attachment[2]" value="file">
+                                            </p>
+                                            <p class="clr marginbott5">
+                                                <input type="file" id="attachment3" name="attachment[3]" size="39" class="attachment fleft">
+                                                <input type="button" class="removeAtachment fright" value="Удалить">
+                                                <input type="hidden" name="attachment[3]" value="file">
+                                            </p>
+                                            <p class="clr marginbott5">
+                                                <input type="file" id="attachment4" name="attachment[4]" size="39" class="attachment fleft">
+                                                <input type="button" class="removeAtachment fright" value="Удалить">
+                                                <input type="hidden" name="attachment[4]" value="file">
+                                            </p>
+                                        </div>
+                                        <input type="hidden" id="token" name="contact[token]" value="30e85d43yqhYPUy1ZP3ml+EqNQS9M0qwb5Dm858Ky0ij7dlvlYs=" /> <input type="hidden" id="token2" name="contact[debug]" value="7" />
+                                    </div>
+                                </fieldset>
+                                <a class="safety-label" href="https://www.olx.ua/safetyuser/" target="_blank">
+                                    <i data-icon="safety-warning"></i>
+                                    Покупайте безопасно					<small>Узнать подробнее &raquo;</small>
+                                </a>
+                            </form>
+                        </div>
+
+                        <div class="clm-samurai" data-module="suggestion" data-group="2" data-country="olxua" data-item="518940926" data-title="Recommended for you" data-quantity="5"></div>
+                        <div class="offercontentinner margintop7 offer__innerbox">
+                            <div class="similarads js-user-similar-ads" id="similarads">
+                                <h2 class="normal lheight16 pding7 bgfff">
+                                    Другие объявления автора Віталій		</h2>
+                                <div>
+                                    <table width="100%" cellpadding="0" cellspacing="0" class="marginbott10 fixed">
+                                        <tr>
+                                            <td class="offer ">
+                                                <table width="100%" cellspacing="0" cellpadding="0" summary="Объявление" class="fixed breakword">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td width="112">
+                                                            <a title="Оперативна пам'ять Team Group DDR3 4GB 1333MHz" href="https://www.olx.ua/obyavlenie/operativna-pamyat-team-group-ddr3-4gb-1333mhz-IDz7mOE.html" class="thumb vtop inlblk rel tdnone scale4 ">
+                                                                <img class="fleft" alt="Оперативна пам'ять Team Group DDR3 4GB 1333MHz" src="https://img01-olxua.akamaized.net/img-olxua/632766898_1_261x203_operativna-pamyat-team-group-ddr3-4gb-1333mhz-burshtyn.jpg" >
+                                                            </a>
+                                                        </td>
+                                                        <td valign="top">
+                                                            <div class="space rel">
+                                                                <h3 class="large lheight18 clr">
+                                                                    <a class="link" title="Оперативна пам'ять Team Group DDR3 4GB 1333MHz Бурштын" href="https://www.olx.ua/obyavlenie/operativna-pamyat-team-group-ddr3-4gb-1333mhz-IDz7mOE.html">
+                                                                        <span>Оперативна пам'ять Team Group DDR3 4GB 1333MHz</span>
+                                                                    </a>
+
+                                                                </h3>
+                                                                <p class="color-9 lheight16 margintop3">
+                                                                    <small class="breadcrumb normal">
+                                                                        Комплектующие и аксессуары                                        </small>
+                                                                </p>
+                                                                <p class="color-9 lheight16 margintop3 normal">
+                                                                    Вчера<br/>11:41                                    </p>
+                                                            </div>
+                                                        </td>
+                                                        <td valign="top" width="170" class="wwnormal tright">
+                                                            <div class="space">
+                                                                <p class="price large marginright10">
+                                                                    <span class="c000 ">750 грн.</span>
+                                                                </p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table width="100%" cellpadding="0" cellspacing="0" class="marginbott10">
+                                        <tr>
+                                            <td>
+
+                                                <div id="div-gpt-ad-item-content1"  ></div><div id="div-gpt-ad-item-content1-after"></div><div id="div-gpt-ad-item-content2"  ></div><div id="div-gpt-ad-item-content2-after"></div><div id="div-gpt-ad-item-content3"  ></div><div id="div-gpt-ad-item-content3-after"></div>    					                </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="offerbox" class="offer-sidebar">
+                        <div id="offeractions" class="offer-sidebar__inner offeractions">
+                            <div class="price-label">
+                                <strong class="xxxx-large not-arranged">3 900 грн.</strong>
+                            </div>
+
+
+                            <div></div>
+
+
+                            <!--BUY NOW BUTTON-->
+                            <div class="olx-delivery-box">
+                                <a href="https://www.olx.ua/safedeal/payment/518940926/" class="button-safedeal button-olx-delivery js-button-safedeal js-mandatory-login">
+                                    <i data-icon="olx-delivery"></i>
+                                    <span class="contactbox-indent rel brkword">Купить с  доставкой</span>
+                                </a>
+                                <ul class="olx-delivery-box__description">
+                                    <li class="olx-delivery-advantage olx-delivery-advantage--pickup">
+                                        <span>удобно</span>доставка <br>с "Нова пошта"    </li>
+                                    <li class="olx-delivery-advantage olx-delivery-advantage--delivery">
+                                        <span>надежно</span>оплата после осмотра товара    </li>
+                                    <li class="olx-delivery-advantage olx-delivery-advantage--safe">
+                                        <span>безопасно</span>покупка без передачи персональных данных    </li>
+                                </ul>
+                            </div>
+
+
+
+                            <!--CODE FROM HERE WAS REMOVED AND NEW LOGIC IS IN THE CODE ABOVE-->
+                            <!--CODE BELOW IS UNKNOWN, AS IS THE REASON FOR IT, AND WAS NOT DELETED FOR THAT REASON -->
+
+                            <ul id="contact_methods" class="offer-sidebar__buttons contact_methods">
+                                <li  >
+                                    <a href="https://www.olx.ua/obyavlenie/contact/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html?bs=adpage_chat_login_top"
+                                       class="contact-button button-email {'id_raw': '518940926'} atClickTracking" >
+                                        <i data-icon="message"></i>
+                                        <span class="contactbox-indent rel brkword">
+                            Написать автору                    </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="contact-button link-phone {'path':'phone', 'id':'z7qeV', 'id_raw': '518940926'} atClickTracking contact-a" data-rel="phone">
+                                        <i data-icon="phone"></i>
+                                        <strong class="xx-large">09x xxx xxxx</strong>
+                                        <span class="spoiler">
+					Показать				</span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="offer-sidebar__box ">
+
+                                <div class="offer-user__location">
+                                    <div class="offer-user__address">
+                                        <i data-icon="location"></i>
+                                        <address>
+                                            <p>Бурштын, Ивано-Франковская область, Ивано-Франковская область</p>
+                                            <a class="show-map-link" id="showMap">
+                                                Показать на карте                        </a>
+                                        </address>
+                                    </div>
+                                    <a href="https://www.olx.ua/list/user/8rq1Q/" class="offer-user__image-link">
+                                        <div class="offer-user__image">
+                                            <img src="https://img01-olxua.akamaized.net/img-olxua/590862186_1_1200x1200.jpg" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="offer-user__details ">
+
+
+                                    <h4>
+                                        <a href="https://www.olx.ua/list/user/8rq1Q/">
+                                            Віталій                                    </a>
+                                    </h4>
+
+
+
+                                    <span class="user-since">на OLX с янв. 2018</span>
+
+                                    <a class="user-offers" href="https://www.olx.ua/list/user/8rq1Q/">
+                                        Другие объявления автора            </a>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <ul class="offer-sidebar__links">
+                                <li class="">
+                                    <a id="reportMe" class="report report-links" title="Жалоба">Жалоба</a>
+                                    <noindex>
+                                        <div id="report-data">
+                                            <div id="report-form" style="display: none;">
+                                                <div id="reportInnerHeight">
+                                                    <form action="" method="post" class="rel default report" id="report-form-fill" autocomplete="off">
+                                                        <fieldset class="pding0_20 margintop10 marginbott10 overh">
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="spam" id="reason-spam" autocomplete="off"> <label class="inlblk vmiddle" for="reason-spam"><strong
+                                                                    class="inlblk ">Спам</strong></label>
+                                                            </div>
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="badCategory" id="reason-badCategory" autocomplete="off"> <label class="inlblk vmiddle" for="reason-badCategory"><strong
+                                                                    class="inlblk ">Неверная рубрика</strong></label>
+                                                            </div>
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="violation" id="reason-violation" autocomplete="off"> <label class="inlblk vmiddle" for="reason-violation"><strong
+                                                                    class="inlblk ">Запрещенный товар/услуга</strong></label>
+                                                            </div>
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="outofdate" id="reason-outofdate" autocomplete="off"> <label class="inlblk vmiddle" for="reason-outofdate"><strong
+                                                                    class="inlblk ">Объявление не актуально</strong></label>
+                                                            </div>
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="agency" id="reason-agency" autocomplete="off"> <label class="inlblk vmiddle" for="reason-agency"><strong
+                                                                    class="inlblk ">Агентство в рубрике от частных лиц</strong></label>
+                                                            </div>
+                                                            <div class="fblock clr">
+                                                                <input type="radio" class="radio vmiddle inlblk" name="report[reason]" value="fraud" id="reason-fraud" autocomplete="off"> <label class="inlblk vmiddle" for="reason-fraud"><strong
+                                                                    class="inlblk ">Мошенник</strong></label>
+                                                            </div>
+                                                            <div id="report_form_description_field" class="hidden">
+                                                                <div class="fblock clr margin10_0">
+                                                                    Report info                                    </div>
+
+                                                                <div class="fblock clr margin10_0">
+                                                                    <div class="fleft">
+                                                                        <div class="focusbox">
+                                                                            <textarea class="x-normal light required c73 br4 do-not-validate" id="report-textarea" name="report[content]" autocomplete="off" defaultval="<напишите всю важную для проверки информацию. Если вы хотите, чтобы мы вам ответили, укажите тут ваш email-адрес>"></textarea>
+                                                                        </div>
+                                                                        <p class="small margintop10">Знаков осталось: <b class="report-countdown">1000</b>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        <div class="fblock brtop-1 clr pding20">
+                                                            <span class="button br3 fright"><input type="submit" class="submit cfff {id: 'z7qeV'}" value="Отправить" id="report-submit"></span>
+                                                        </div>
+                                                        <input type="hidden" name="report[token]" id="reportToken" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZF9pZCI6NTE4OTQwOTI2LCJleHAiOjE1MzI3NTMxODYsInRpbWUiOjE1MzI3NTEzODZ9.yybtgZXOtZBJ_OXiQ6E2wOvkLyGnLJaX4hOyZ1o6GFw" />
+                                                    </form>
+                                                    <div id="report-form-confirmation" style="display: none">
+
+                                                        <h4>Спасибо вам за заполнение этой формы.</h4>
+                                                        <div class="pding30_10">
+                                                            <p>Мы ценим ваш отзыв. Скорее всего, мы рассмотрим его в течение нескольких часов. Если объявление нарушает наши правила, модераторы удалят его. В связи с большим количеством обращений, мы не всегда отвечаем на каждое из них лично.</p>
+                                                            <p>&nbsp;</p>
+                                                            <p style="font-weight: bold;">Полезные ссылки</p>
+                                                            <p>Если вы хотите связаться с нашей службой поддержки, заполните <a href="https://www.olx.ua/contact/">форму обратной связи</a>.</p>
+                                                        </div>
+                                                        <div class="tcenter brtop-1 pding20_0">
+                                                            <a href="#" class="link close"><span>Понятно, закройте это окно</span></a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </noindex>
+                                </li>
+                                <li>
+                                    <a href="https://www.olx.ua/print/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html" id="printOffer" title="Печать" class="printOffer" rel="nofollow" target="_blank">
+                                        Печать        </a>
+                                </li>
+                            </ul>
+
+                            <div class="margintop10 gpt">
+                                <div id="div-gpt-ad-item-sidebar"  ></div><div id="div-gpt-ad-item-sidebar-after"></div>                    </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="mapcontainer"
+                     class="bgfff hidden br-1 vtop mapcontainer" data-zoom="12" data-lat="49.26306" data-lon="24.62931" data-rad="1">
+                    <div class="googlemap" id="googlemap" style="height: 564px; width: 874px;"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <div class="overgallery fix normal hidden" id="bigImageContent">
+        <div class="layermax">
+            <div class="horizontal">
+                <div class="vertical">
+                    <div class="tleft">
+                        <div class="layertitle cfff">
+                            <div class="pding5 clr">
+                                <a href="#" class="icon layerclose fright marginright5" id="overgalleryclose">&nbsp;</a>
+                                <p class="xx-large fbold lheight26 pdingtop10">INNO3D GTX 1050 Twin X2 2GB</p>
+                                <p class="small">
+								<span class="fleft block clr pdingright10">
+									<span class="icon markerloc gray vmiddle inlblk"></span>
+									<strong class="marginleft5 lheight24">
+										Бурштын			        														</strong>
+								</span>
+                                    <span class="pdingleft10 lheight24 brlefte5">
+			        							        					Добавлено: в			        								        			11:41, 27 июля 2018, <span class="nowrap">Номер объявления: 518940926</span>
+								</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clr">
+                            <div class="fright optionsbar">
+                                <div class="pricelabel tcenter">
+                                    <strong class="xxxx-large margintop7 block not-arranged">3 900 грн.</strong>
+                                </div>
+                                <h3 class="margintop10 cfff tcenter x-large">Свяжитесь со мной:</h3>
+                                <div class="optionsbarinner">
+                                    <div class="tcenter">
+                                        <a href="https://www.olx.ua/obyavlenie/contact/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html" class="full button send2 big br3 cfff large marginleft-1 rel button-email {'id_raw': '518940926'} atClickTracking" >
+                                            <span class="icon inlblk vtop b_send4">&nbsp;</span> <span class="inlblk message rel">Написать автору</span> <span class="shadow pding0 abs"></span>
+                                        </a>
+                                    </div>
+                                    <div class="contactbox">
+                                        <div class="rel">
+                                            <ul id="contact_methodsBigImage"
+                                                class="margintop20">
+                                                <li class="clr rel link-phone {'path':'phone', 'id':'z7qeV', 'id_raw': '518940926'} atClickTracking contact-a cpointer" data-rel="phone">
+                                                    <div class="fleft">
+                                                        <span class="icon vmiddle inlblk mobile2 gray">&nbsp;</span>
+                                                    </div>
+                                                    <div class="clr fleft marginleft10 contactitem brkword">
+                                                        <strong class="xx-large lheight20 fnormal">09x xxx xxxx</strong>
+                                                        <span class="link spoiler small nowrap">
+									<span>Показать</span>
+								</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <a class="locationbox innerbox br3 block tdnone bgfff clr margintop7 " id="showMapLayer">
+        <span class="block clr">
+            <i data-icon="location"></i>
+            <span class="block address fleft marginleft10">
+                <span class="block normal brkword">
+                    Бурштын, Ивано-Франковская область, Ивано-Франковская область                </span>
+                <span class="link lheight22 cpointer"><span class="">Показать на карте</span></span>
+            </span>
+        </span>
+                                    </a>
+
+                                    <div class="userbox clr">
+                                        <span class="icon user gray fleft"></span>
+                                        <p class="userdetails fleft marginleft10">
+                                            <span class="block brkword xx-large">Віталій</span>
+                                            <span class="block normal margintop5">
+					    на OLX с янв. 2018				        </span>
+                                            <span class="block">
+                                                            <a href="https://www.olx.ua/list/user/8rq1Q/" class="link lheight22 normal" id="linkUserAds">
+                                                            <span>Другие объявления автора</span>
+                                </a>
+					    </span>
+                                        </p>
+                                    </div>
+                                    <div id="div-gpt-ad-rectangle_gallery"  ></div><div id="div-gpt-ad-rectangle_gallery-after"></div>                                                        </div>
+                            </div>
+
+                            <div class="viewspace">
+                                <div class="photospace rel" id="bigImage">
+                                    <a href="#"
+                                       class="{id:518940926} observe-link abs zi3 block tdnone tcenter cfff layerlink br5 offerobserve"
+                                       data-statkey="ad.observed.overgallery">
+                                        <span class="inlblk icon observe4 observed-518940926" data-icon="star"></span>
+                                        <span class="observed-txt block pdingtop10 normal">В избранные</span>
+                                    </a>
+                                    <div class="lshowprev abs cpointer bigImagePrev">
+                                        <a href="#" class="lprev block br5 abs">
+                                            <span class="icon block">&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <div class="lshownext abs cpointer bigImageNext">
+                                        <a href="#" class="lnext block br5 abs">
+                                            <span class="icon block">&nbsp;</span>
+                                        </a>
+                                    </div>
+                                    <a href="#" class="lbutton abs type2 tdnone br5" id="showOnlyImage" target="_blank">
+                                        <span class="block icon">&nbsp;</span> <span class="suggesttitle small top abs zi2 br3 c000 hidden">
+										Просмотреть фотографию										<span class="target abs icon">&nbsp;</span>
+									</span>
+                                    </a>
+                                    <div class="loadinginfo icon hidden abs br5"></div>
+                                </div>
+                                <div class="photosbar">
+                                    <ul class="overh" id="bigGallery">
+                                        <li class="fleft">
+                                            <a href="https://img01-olxua.akamaized.net/img-olxua/632783354_1_1000x700_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg" rel="https://img01-olxua.akamaized.net/img-olxua/632783354_1_94x72_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg" class="block br5 {nr:1}"></a>
+                                        </li>
+                                        <li class="fleft">
+                                            <a href="https://img01-olxua.akamaized.net/img-olxua/632783354_2_1000x700_inno3d-gtx-1050-twin-x2-2gb-fotografii.jpg" rel="https://img01-olxua.akamaized.net/img-olxua/632783354_2_94x72_inno3d-gtx-1050-twin-x2-2gb-fotografii.jpg" class="block br5 {nr:2}"></a>
+                                        </li>
+                                        <li class="fleft">
+                                            <a href="https://img01-olxua.akamaized.net/img-olxua/632783354_3_1000x700_inno3d-gtx-1050-twin-x2-2gb-komplektuyuschie-i-aksessuary.jpg" rel="https://img01-olxua.akamaized.net/img-olxua/632783354_3_94x72_inno3d-gtx-1050-twin-x2-2gb-komplektuyuschie-i-aksessuary.jpg" class="block br5 {nr:3}"></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="printOfferDiv" class="hidden">
+        <div id="printCaption" style="display: none;">
+            <p class="block clr large lheight22 marginleft10">Печать</p>
+        </div>
+        <form class="default" action="https://www.olx.ua/print/inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html" method="post" target="_blank">
+            <div class="inner tcenter">
+                <div class="large lheight18">
+                    <fieldset class="tleft margintop10">
+                        <p class="marginbott15">
+                            <input checked="checked" type="radio" name="print-option" id="print-opt-1" value="print-opt-1"><label for="print-opt-1" class="marginleft10">Печатать все объявление</label>
+                        </p>
+                        <p class="marginbott15">
+                            <input type="radio" name="print-option" id="print-opt-2" value="print-opt-2"><label for="print-opt-2" class="marginleft10">Печатать объявление с выбранными фотографиями</label>
+                        </p>
+                        <div class="hidden" id="printOfferPhotos">
+                            <ul class="clr printphotoselect">
+                                <li class="fleft rel tcenter">
+                                    <label class="block br4" for="photoprint-0"><img src="https://img01-olxua.akamaized.net/img-olxua/632783354_1_261x203_inno3d-gtx-1050-twin-x2-2gb-burshtyn.jpg" class="vmiddle"></label><input type="checkbox" checked="checked"
+                                                                                                                                                                                                                                   name="selectedImages[]" value="0" class="abs {renderformClass: 'abs'}" id="photoprint-0">
+                                </li>
+                                <li class="fleft rel tcenter">
+                                    <label class="block br4" for="photoprint-1"><img src="https://img01-olxua.akamaized.net/img-olxua/632783354_2_261x203_inno3d-gtx-1050-twin-x2-2gb-fotografii.jpg" class="vmiddle"></label><input type="checkbox" checked="checked"
+                                                                                                                                                                                                                                     name="selectedImages[]" value="1" class="abs {renderformClass: 'abs'}" id="photoprint-1">
+                                </li>
+                                <li class="fleft rel tcenter">
+                                    <label class="block br4" for="photoprint-2"><img src="https://img01-olxua.akamaized.net/img-olxua/632783354_3_261x203_inno3d-gtx-1050-twin-x2-2gb-komplektuyuschie-i-aksessuary.jpg" class="vmiddle"></label><input type="checkbox" checked="checked"
+                                                                                                                                                                                                                                                        name="selectedImages[]" value="2" class="abs {renderformClass: 'abs'}" id="photoprint-2">
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="tcenter brtop-1 clr pding10">
+                <p class="margin15_0">
+                    <span class="button big3 br3 circleshadow large"><input id="printButton" type="submit" class="cfff" value="Печать"></span>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div id="div-gpt-ad-item-floor-ad-container" class="hidden">
+        <div></div>            </div>
+
+
+
+
+
+    <script>
+      var showJobHypothesis = false;
+      var jobsProfileTestConfig = {
+        jobsProfileTestEnabled: false,
+        employerTestEnabled: false,
+        employerCandidateTestEnabled: false,
+        userId: null	};
+    </script>
+    <footer id="footer-container">
+        <div class="wrapper small" id="lastwrapper">
+            <div class="margintop15 clr rel">
+                <div class="fleft">
+                    <p>
+                        <a href="https://www.olx.ua" class="tdnone" title="OLX.ua">
+                            <span class="icon websitegray inlblk vtop">&nbsp;</span>
+                        </a>
+                    </p>
+                </div>
+                <div class="boxindent">
+                    <div class="clr">
+
+                        <div class="static box fleft">
+                            <ul class="small lheight16">
+
+                                <li class="block">
+                                    <a id="footerLinkMobileApps" class="link gray" title="Мобильные приложения" href="https://www.olx.ua/mobileapps/">
+                                        <span>Мобильные приложения</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="http://help.olx.ua/hc/ru" class="link gray" title="Помощь и Обратная связь">
+                                        <span>Помощь и Обратная связь</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a class="link gray" title="Платные услуги" href="https://www.olx.ua/payment/features/">
+                                        <span>Платные услуги</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="http://blog.olx.ua/o-nas/dlya-pressyi/" class="link gray" title="Для прессы" target="_blank">
+                                        <span>Для прессы</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="http://blog.olx.ua/o-nas/reklama-na-olx-ua/" class="link gray" title="Реклама на сайте" target="_blank">
+                                        <span>Реклама на сайте</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="http://blog.olx.ua" class="link gray" title="Blog OLX.ua" target="_blank">
+                                        <span>Блог OLX</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="https://www.olx.ua/terms/" class="link gray inlblk rel" title="Условия использования" data-cy="terms-and-conditions">
+                                        <span>Условия использования</span>
+                                    </a>
+                                </li>
+
+                                <li class="block">
+                                    <a href="#" class="tdnone link spoiler graydot footer-partners" id="footerPartners">
+                                        <span class="inlblk">Партнёры</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="static box fleft">
+                            <ul class="small lheight16">
+
+                                <li class="block">
+                                    <a href="https://www.olx.ua/howitworks/" class="link gray nowrap" title="Как продавать и покупать?">
+                                        <span>Как продавать и покупать?</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="https://www.olx.ua/safetyuser/" title="Правила безопасности" class="link gray">
+                                        <span>Правила безопасности</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="https://www.olx.ua/sitemap/" class="link gray" title="Карта сайта">
+                                        <span>Карта сайта</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="https://www.olx.ua/sitemap/regions/" class="link gray" title="Карта регионов">
+                                        <span>Карта регионов</span>
+                                    </a>
+                                </li>
+                                <li class="block">
+                                    <a href="https://www.olx.ua/popular/" class="link gray" title="Популярные запросы">
+                                        <span>Популярные запросы</span>
+                                    </a>
+                                </li>
+
+                                <li class="block">
+                                    <a href="https://www.olxgroup.com/careers" class="link gray" title="Работа в OLX" target="_blank">
+                                        <span>Работа в OLX</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="footerapps fright rel tcenter">
+                            <a href="https://play.google.com/store/apps/details?id=ua.slando&referrer=utm_source%3Dolx.ua%26utm_medium%3Dcpc%26utm_campaign%3Dandroid-app-footer" id="footerAppAndroid" target="_blank" class="inlblk">
+                                <span class="icon block googleplay"> в Google Play</span>
+                                <span class="tag-line tleft hidden">
+			Скачайте в			<strong class="block">Google Play</strong>
+		</span>
+                            </a>
+                            <a href="https://itunes.apple.com/ua/app/slando.ua-besplatnye-ob-avlenia/id663217552?l=pl&ls=1&mt=8" id="footerAppIphone" target="_blank" class="inlblk">
+                                <span class="icon block appstore"> в AppStore</span>
+                                <span class="tag-line hidden">
+			Скачайте в			<strong class="block">AppStore</strong>
+		</span>
+                            </a>
+                            <a href="http://www.windowsphone.com/ru-ru/store/app/olx-ua/e5324a28-1546-454e-a3b3-51e7fac930b1" id="footerAppWin" target="_blank" class="inlblk">
+                                <span class="icon block windowsstore"> в WindowsStore</span>
+                                <span class="tag-line tright hidden">
+				Доступно для				<strong class="block">Windows Phone</strong>
+			</span>
+                            </a>
+                            <p class="tag-line">Бесплатное приложение для твоего телефона</p>
+                        </div>
+                    </div>
+                    <div class="partners box margin10_0 hidden" id="footerPartnersContainer">
+                        <ul class="clr">
+                            <li class="part25 fleft">
+                                <a href="https://www.olx.bg" target="_blank" class="link gray">
+                                    <span class="icon fleft flag olxbg"></span><span>OLX.bg</span>
+                                </a>
+                            </li>
+                            <li class="part25 fleft">
+                                <a href="https://www.olx.pl" target="_blank" class="link gray">
+                                    <span class="icon fleft flag olxpl"></span><span>OLX.pl</span>
+                                </a>
+                            </li>
+                            <li class="part25 fleft">
+                                <a href="https://www.olx.ro" target="_blank" class="link gray">
+                                    <span class="icon fleft flag olxro"></span><span>OLX.ro</span>
+                                </a>
+                            </li>
+                            <li class="part25 fleft">
+                                <a href="https://www.tradus.com/ru" target="_blank" class="link gray">
+                                    <span class="icon fleft flag tradus"></span><span>tradus.com</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+                <div id="mobileAppsbadge" class="fix hidden">
+                    <a href="https://www.olx.ua/mobileapps/" class="icon tdnone abs"></a>
+                    <a href="#" id="mobileAppsbadgeClose" class="tdnone abs" title="Закрыть"></a>
+                </div>
+                <ul id="mobile_change" class="breaklist version tcenter margintop15" style="display: none">
+                    <li class="inline">
+                        <a href="https://www.olx.ua/disable/m/" rel="nofollow">Мобильная версия</a>
+                    </li>
+                    <li class="inline">
+                        <a href="https://www.olx.ua/disable/i/" rel="nofollow">Версия для смартфонов</a>
+                    </li>
+                    <li class="inline">
+                        <span>Десктоп версия</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <div id="message_system" style="display: none">
+        <div class="inner">
+            <div class="tleft x-normal lheight20 rel messagesystem ">
+                <p>
+                    <i class="fleft status"></i>
+                    <span class="msg block overh"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="dialogMessage" class="hidden">
+        <div class="inner"></div>
+    </div>
+    <div id="saveFavDiv" class="hidden">
+        <div class="inner tcenter">
+            <div class="large lheight18">
+                <p class="marginbott15 margintop10 typeSearch hidden">
+                    <strong>Результаты поиска были добавлены в Избранные</strong>
+                </p>
+                <p class="marginbott15 margintop10 typeOffer hidden">
+                    <strong>Объявление было добавлено в Избранные</strong>
+                </p>
+                <p class="margin5_0"> Войдите, чтобы сохранить Наблюдаемые в своей учетной записи</p>
+                <p class="margintop25 marginbott25">
+                    <a class="button big3 br3 circleshadow" href="https://www.olx.ua/account/?origin=observepopup"
+                       data-cy="common_button_save_favourites">
+                        <span class="cfff large">Войти</span>
+                    </a>
+                </p>
+                <p class="margin5_0">или <a href="https://www.olx.ua/account/register/" class="link">
+                    <span>Создать учетную запись</span>
+                </a>
+                </p>
+            </div>
+        </div>
+        <div class="tcenter brtop-1 clr pding10">
+            <p class="margin20_0 large lheight18">
+                <a href="#" class="link" data-cy="search_results_button_close_observed_search_info_message"
+                   onclick="$.fancybox.close(); return false;">
+                    <span>Нет, спасибо</span>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div id="synchroFavDiv" class="hidden">
+        <div class="inner"></div>
+        <div class="tcenter brtop-1 clr pding10">
+            <p class="margin10_0">
+                <a class="button big br3" href="#" id="synchronizeObservedConfirm"
+                   data-cy="common_button_synchronize_observed">
+                    <span class="cfff large">Сохранить в Избранные</span>
+                </a>
+            </p>
+            <p class="margin5_0">
+                <a href="#" class="link" id="synchronizeObservedCancel">
+                    <span>Нет, спасибо</span>
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="topinfo rel hidden" id="cookiesBar">
+        <a href="javascript:void(0);" class="cookiesBarClose abs close" data-icon="close"></a>
+        <p class="normal cfff">
+            Этот сайт использует cookies. Вы можете изменить настройки cookies в своём браузере.         <a href="https://www.olx.ua/cookies/" target="_blank" class="link tdnone cookiesBarClose">Узнать больше</a>.
+        </p>
+    </div>
+    <div id="createPasswordPopup" class="create-password__overlay hidden">
+        <div class="create-password__inner">
+            <h4>Установите пароль для вашей учетной записи</h4>
+            <p>Какие преимущества создания учетной записи на OLX? </p>
+            <ul>
+                <li>Размещение объявлений без подтверждения</li>
+                <li>Доступ к пользователям OLX в любое время</li>
+                <li>Легкость настройки учетной записи</li>
+            </ul>
+
+            <a class="login-button login-button--facebook" href="https://www.olx.ua/account/facebookmerge/">Вход с Facebook</a>
+            <a class="login-button" href="https://www.olx.ua/myaccount/settings/#password">Установить пароль</a>
+        </div>
+    </div>
+
+
+    <input type="hidden" id="googlePlusState" value="">
+    <div id="mandatoryLoginDiv" class="hidden">
+        <div class="mandatory-login clr">
+            <div class="mandatory-login__why">
+                <h3 class="create-password__title">Авторизуйтесь в свою учётную запись OLX!</h3>
+                <ul class="create-password__list">
+                    <li>Быстрее получайте ответы на объявления</li>
+                    <li>Получите доступ к истории всех ответов</li>
+                    <li>Пользуйтесь всеми функциями вашей учётной записи</li>
+                </ul>
+            </div>
+            <div class="mandatory-login__login">
+                <div class="login-box">
+                    <div class="login-tabs">
+                        <nav class="login-tabs__navigation">
+                            <ul>
+                                <li><a id="login_tab" class="active" href="" data-content="login">Войти</a></li>
+                                <li><a id="register_tab" href="" data-content="register">Регистрация</a></li>
+                            </ul>
+                        </nav>
+                        <ul class="login-tabs__content">
+                            <li class="active" data-content="login">
+                                <div class="login-form">
+                                    <form id="loginForm" class="default" action="https://www.olx.ua/account/?ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index#login" method="post">
+                                        <a id="fblogin" class="login-button login-button--facebook" href="https://www.olx.ua/account/facebooklogin/?ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index">Вход с Facebook</a>
+                                        <fieldset class="standard-login-box">
+                                            <span class="login-form__or">или</span>
+                                            <div class="fblock">
+                                                <div class="focusbox">
+                                                    <input id="userEmail" class="light required" type="text" name="login[email_phone]"
+                                                           value="" placeholder="Email или номер телефона"
+                                                           title="Email или номер телефона">
+                                                </div>
+                                            </div>
+                                            <div class="fblock ">
+                                                <div class="focusbox">
+                                                    <input id="userPass" class="light required" type="password" name="login[password]"
+                                                           value=""
+                                                           placeholder="Ваш текущий пароль от OLX"
+                                                           title="Ваш текущий пароль от OLX"
+                                                           data-cy="login_input_password"
+                                                           autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="login-form__bottom">
+                                                <div class="login-form__rememberme">
+                                                    <input id="checkbox_user-remember" type="checkbox" name="login[remember-me]"
+                                                           checked="checked">
+                                                    <label for="checkbox_user-remember">Запомнить меня</label>
+                                                </div>
+                                                <a class="login-form__lostpassword" href="https://www.olx.ua/account/password/">Не можете войти?</a>
+                                            </div>
+                                            <button id="se_userLogin" class="login-button">Войти</button>
+                                            <a class="login-form__othermethods" href="">Другие способы входа</a>
+                                        </fieldset>
+                                    </form>
+                                    <div class="other-methods-box hidden">
+                                        <a id="vkontakteLogin" class="login-button login-button--vkontakte"
+                                           href="https://www.olx.ua/account/vkontaktelogin/?ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index">Вход с Vkontakte</a>
+                                        <a href="" class="login-button login-button--email">Вход с email-адресом</a>
+                                    </div>
+                                    <p class="login-form__terms">
+                                        Входя в раздел Мой профиль, вы принимаете <a href="https://www.olx.ua/terms/" target="_blank">Условия использования</a> сайта    </p>
+
+                                </div>
+
+                            </li>
+                            <li data-content="register">
+                                <form id="registerForm" class="login-form default" action="https://www.olx.ua/account/?ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index#register" method="post">
+                                    <input type='hidden' name='register[token]' value='b9fe4485yqhYPUy1ZP0yzh2nOyxUKkqwb5Dm858Ky0ij7dlvlYs='/>
+
+                                    <a class="login-button login-button--facebook" href="https://www.olx.ua/account/facebooklogin/?ref%5B0%5D%5Bparams%5D%5Bsd%5D=1&ref%5B0%5D%5Bdocument%5D=inno3d-gtx-1050-twin-x2-2gb-IDz7qeV.html&ref%5B0%5D%5Baction%5D=ad&ref%5B0%5D%5Bmethod%5D=index" data-ref="register">Вход с Facebook</a>
+                                    <span class="login-form__or">или</span>
+                                    <input type="hidden" value="both" name="register[login]" >
+                                    <div class="fblock" id="smsDiv">
+                                        <div class="focusbox">
+                                            <input id="userEmailPhoneRegister" class="light required" type="text" value=""
+                                                   name="register[email_phone]" placeholder="Укажите ваш email или номер телефона" title="Укажите ваш email или номер телефона">
+                                        </div>
+                                    </div>
+                                    <div class="fblock" id="pass1Div" style="display: none;">
+                                        <div class="focusbox">
+                                            <input id="userPassRegister" class="light required" type="password" value=""
+                                                   name="register[password]" placeholder="Введите свой пароль"
+                                                   title="Введите свой пароль" autocomplete="off">
+                                            <i data-icon="eye" class="hidden"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="login-form__checkbox">
+                                        <div class="fblock">
+                                            <div class="focusbox">
+                                                <input id="checkbox_accept-terms" type="checkbox" name="register[rules]"  >
+                                                <label for="checkbox_accept-terms">
+                                                    <strong>*</strong>
+                                                    Я соглашаюсь с <a href="https://www.olx.ua/terms/" title="Правила использования OLX.ua"
+                                                                      target="_blank">правилами использования
+                                                    сервиса</a>, а также с передачей и обработкой моих данных в OLX.ua.
+                                                    Я подтверждаю своё совершеннолетие и ответственность за размещение
+                                                    объявления
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fblock">
+                                        <div class="focusbox">
+                                        </div>
+                                    </div>
+                                    <button id="button_register" class="login-button">Регистрация</button>
+                                </form>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>		<!-- BODY CONTRIB -->
+
+
+<script type="text/javascript">
+  window.admixZArr = (window.admixZArr || []);
+  window.admixZArr.push({ z: 'a5fc560e-925f-4054-a18e-56227d0f62e3', ph: 'admixer_async_478676499'});
+</script>
+
+
+<script type="text/javascript">
+  <!--
+  xtcustom = {"platform":"desktop","page_name":"adpage","action_type":"loaded","posting_to_action":2730,"ad_id":"518940926","poster_id":"124745602","ad_photo":3,"poster_type":"private","category":"37","subcategory":"38","subsubcategory":"458","provinces":"13","cities":"98"};
+  //-->
+</script>
+<!-- TRACKING CONTRIB --><script type="text/javascript">
+  <!--
+  if (typeof xtcustom !== 'undefined') {
+    xtcustom["user_status"] = "unlogged";
+  }
+  //-->
+</script>
+
+<script type="text/javascript" src="https://static-olxeu.akamaized.net/static/olxua/packed/sw506ff69c93ac4999dcd28b05e0a23db0.js"></script>
+<script type="text/javascript" src="https://static-olxeu.akamaized.net/static/olxua/packed/swb8c1eac088a19958a493cb29217f2674.js"></script>
+<script type="text/javascript">
+  $LAB
+    .script('https://cdn.optimizely.com/js/1032155592.js?v=1')
+</script>
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-23987051-2']);
+  _gaq.push(['_setDomainName', '.olx.ua']);
+  _gaq.push(['_addOrganic', 'go.mail.ru', 'q']);
+  _gaq.push(['_addOrganic', 'search.ukr.net', 'q']);
+  _gaq.push(['_addOrganic', 'search.ukr.net', 'search_query']);
+  _gaq.push(['_addOrganic', 'meta.ua', 'q']);
+  _gaq.push(['_addOrganic', 'nigma.ru', 's']);
+  _gaq.push(['_addOrganic', 'search.qip.ru', 'query']);
+  _gaq.push(['_addOrganic', 'search.livetool.ru', 'text']);
+  _gaq.push(['_addOrganic', 'bpes.com.ua', 'q']);
+  _gaq.push(['_addOrganic', 'webalta.ru', 'q']);
+  _gaq.push(['_addOrganic', 'search.i.ua', 'q']);
+  _gaq.push(['_addOrganic', 'search.icq.com', 'q']);
+  _gaq.push(['_trackPageview']);
+
+  if(typeof gaTransaction != 'undefined' && typeof gaTransactionItem != 'undefined') {
+    _gaq.push(gaTransaction);
+    _gaq.push(gaTransactionItem);
+    _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+  }
+
+  (function(){
+    var ga, s;
+    if ( !_adblock ) {
+      ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    } else {
+      ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')+ '.google-analytics.com/ga.js';
+      s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    }})();
+</script>
+
+
+
+<script type="text/javascript">
+  $(function(){
+    if(typeof GoogleObj != 'undefined') {
+      setTimeout(function() {
+        var conversions = GoogleObj.getConversions();
+        for(k in conversions) {
+          var data = conversions[k];
+          window['google_conversion_id'] = data.id;
+          window['google_conversion_language'] = data.language;
+          window['google_conversion_format'] = data.format;
+          window['google_conversion_color'] = data.color;
+          window['google_conversion_label'] = data.label;
+          window['google_conversion_value'] = data.value;
+          oldWrite = document.write;
+          document.write = (function(params)
+          {
+            $(document.body).append(params);
+          });
+          $.getScript(document.location.protocol + "//www.googleadservices.com/pagead/conversion.js", function(){
+            document.write = oldWrite;
+          });
+        }
+      }, 10);
+    };
+
+    if(typeof GoogleObj != 'undefined') {
+      setTimeout(function() {
+        var adsDetails = GoogleObj.getAdsDetails();
+        if(typeof adsDetails[0] != 'undefined') {
+          GoogleObj.loadGoogleAds(adsDetails[0]);
+        }
+      }, 100);
+    }
+  });
+</script>
+<script type="text/javascript" charset="utf-8">
+  (function(G,o,O,g,L,e){G[g]=G[g]||function(){(G[g]['q']=G[g]['q']||[]).push(
+    arguments)},G[g]['t']=1*new Date;L=o.createElement(O),e=o.getElementsByTagName(
+    O)[0];L.async=1;L.src='//www.google.com/adsense/search/async-ads.js';
+    e.parentNode.insertBefore(L,e)})(window,document,'script','_googCsa');
+</script>
+<!--APP R3NDR www.olx.ua--><!--B4CK3ND OK-->
+<!-- BOTTOM CONTRIB --><script type="text/javascript">window.dataLayer = window.dataLayer || [];window.dataLayer.push({"call": "samurai"});</script>
+
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"f1ebd821a6","applicationID":"26545672","transactionName":"b1BRYREDXRBQV0RdVlYacEAQFlwOHlBVR1JMWkMaAgYcCl9QVUw=","queueTime":0,"applicationTime":96,"atts":"QxdSF1kZTh4=","errorBeacon":"bam.nr-data.net","agent":""}</script><script type="text/javascript">var _cf = _cf || [];  _cf.push(['_setBm', true]);</script><script type="text/javascript" src="/_bm/bd-1-30"></script></body>
+</html>
+<!-- 43a5602ffdbb -->
