@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node dist/index.js",
-    "start:debug": "nodemon --watch 'dist/' --inspect-brk build/dist/index.js",
+    "start:debug": "nodemon --watch 'dist/' --inspect-brk dist/index.js",
     "test": "jest --watch -o src --colors",
     "test:debug": "nodemon --watch 'build/dist' --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "postinstall": "tsc"

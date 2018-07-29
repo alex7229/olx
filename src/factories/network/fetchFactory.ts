@@ -8,4 +8,6 @@ export type FetchFactory = (url: string) => Promise<IResponse>;
 
 const networkDelayer = new NetworkDelayer(axios);
 
-export const fetchFactory: FetchFactory = networkDelayer.fetch;
+export const fetchFactory: FetchFactory = networkDelayer.fetch.bind(
+  networkDelayer
+);
