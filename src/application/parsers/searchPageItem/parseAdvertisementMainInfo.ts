@@ -4,9 +4,12 @@ import { ILocation, ParseLocation } from "./parseLocation";
 import { ParsePrice, Price } from "./parsePrice";
 import { ParseUrl } from "./parseUrl";
 
-export interface IAdvertisement {
+export interface IAdvertisementMainInfo {
   title: string;
-  url: string;
+  url: {
+    fullUrl: string;
+    uniqueName: string;
+  };
   location: ILocation;
   time: number;
   promoted: boolean;
@@ -14,15 +17,15 @@ export interface IAdvertisement {
   price: Price;
 }
 
-type ConvertAdvertisement = (
+type ParseAdvertisementMainInfo = (
   advertisement: IAdvertisementRaw,
   parsePrice: ParsePrice,
   parseUrl: ParseUrl,
   parseTime: ParseTimeFactory,
   parseLocation: ParseLocation
-) => IAdvertisement;
+) => IAdvertisementMainInfo;
 
-export const convertAdvertisement: ConvertAdvertisement = (
+export const parseAdvertisementMainInfo: ParseAdvertisementMainInfo = (
   advertisement,
   parsePrice,
   parseUrl,

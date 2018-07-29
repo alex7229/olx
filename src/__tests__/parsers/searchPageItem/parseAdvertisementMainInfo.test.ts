@@ -1,8 +1,8 @@
-import {
-  convertAdvertisement,
-  IAdvertisement
-} from "../../../application/parsers/searchPageItem/convertAdvertisement";
 import { IAdvertisementRaw } from "../../../application/parsers/searchPageItem/parseAdvertisement";
+import {
+  IAdvertisementMainInfo,
+  parseAdvertisementMainInfo
+} from "../../../application/parsers/searchPageItem/parseAdvertisementMainInfo";
 
 it("should convert advertisement properly", () => {
   const advertisement: IAdvertisementRaw = {
@@ -14,11 +14,15 @@ it("should convert advertisement properly", () => {
     title: "video card",
     url: "some url"
   };
+  const parsedUrl = {
+    fullUrl: "long url",
+    uniqueName: "some name"
+  };
   const parsePrice = jest.fn().mockReturnValue(23);
-  const parseUrl = jest.fn().mockReturnValue("proper url");
+  const parseUrl = jest.fn().mockReturnValue(parsedUrl);
   const parseTime = jest.fn().mockReturnValue(14231256456);
   const parseLocation = jest.fn().mockReturnValue({ city: "banga" });
-  const convertedAdv: IAdvertisement = {
+  const convertedAdv: IAdvertisementMainInfo = {
     location: {
       city: "banga"
     },
@@ -27,10 +31,10 @@ it("should convert advertisement properly", () => {
     promoted: advertisement.promoted,
     time: 14231256456,
     title: advertisement.title,
-    url: "proper url"
+    url: parsedUrl
   };
   expect(
-    convertAdvertisement(
+    parseAdvertisementMainInfo(
       advertisement,
       parsePrice,
       parseUrl,

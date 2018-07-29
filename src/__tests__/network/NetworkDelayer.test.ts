@@ -29,6 +29,6 @@ it("should fetch urls not more often than once in 10 secs", async done => {
   expect(axios.get.mock.calls.length).toBe(3);
 
   expect(axios.get.mock.calls[2][0]).toBe(urls[2]);
-  await expect(lastResponse).resolves.toBe({ data: "", status: 200 });
+  await expect(lastResponse).resolves.toEqual({ data: "", status: 200 });
   done();
 });
