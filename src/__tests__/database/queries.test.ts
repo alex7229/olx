@@ -1,6 +1,7 @@
-import * as dotenv from "dotenv";
-import { Db, MongoClient } from "mongodb";
+import * as dotenv from 'dotenv'
+import { Db, MongoClient } from 'mongodb'
 import { connect } from "../../application/database/databaseWrappers";
+import { generateQueryOptions } from "../../application/database/generateQueryOptions";
 import { getConnectionInfo } from "../../application/database/getConnectionInfo";
 import {
   fetchAdvertisements,
@@ -8,7 +9,6 @@ import {
   removeAdvertisements,
   saveAdvertisements
 } from "../../application/database/queries";
-import { generateQueryOptions } from "../../application/database/generateQueryOptions";
 
 describe("database queries", () => {
   let client: MongoClient;

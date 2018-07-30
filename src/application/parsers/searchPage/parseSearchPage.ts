@@ -21,3 +21,5 @@ export const parseSearchPage: ParseMainPage = (html, cheerio) => {
     totalPages
   };
 };
+
+

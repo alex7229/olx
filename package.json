@@ -8,28 +8,35 @@
     "npm": "6.0.1"
   },
   "jest": {
-    "globals": {
-      "ts-jest": {
-        "skip-babel": true
-      }
-    },
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.(j|t)s?(x)",
+      "<rootDir>/src/**/?(*.)(spec|test).(j|t)s?(x)"
+    ],
     "testEnvironment": "node",
+    "transform": {
+      "^.+\\.ts$": "<rootDir>/config/jest/typescriptTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
     "moduleFileExtensions": [
       "ts",
-      "js",
-      "json",
-      "node"
-    ]
+      "js"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "C:\\Users\\nator_9pvstgn\\Desktop\\Projects\\olx\\tsconfig.json"
+      }
+    }
   },
   "scripts": {
     "start": "node dist/index.js",
     "start:debug": "nodemon --watch 'dist/' --inspect-brk dist/index.js",
-    "test": "jest --watch -o src --colors",
-    "test:debug": "nodemon --watch 'build/dist' --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+    "test": "node scripts/test.js --env=node --colors",
+    "test:debug": "nodemon --watch src --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "postinstall": "tsc"
   },
   "repository": {

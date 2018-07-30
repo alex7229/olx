@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import * as path from "path";
 import {
   IAdvertisementPageRaw,
   parseAdvertisementPage
@@ -9,7 +8,7 @@ import { readFile } from "../searchPageItem/parseAdvertisement.test";
 describe("real page tests", () => {
   it("should parse page properly", async done => {
     const file = await readFile(
-      path.join(__dirname, "./examples/advPage.html"),
+      "src/__tests__/parsers/advertisementPage/examples/advPage.html",
       "utf-8"
     );
     const pageData: IAdvertisementPageRaw = {

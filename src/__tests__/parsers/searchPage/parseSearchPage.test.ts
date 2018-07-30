@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import * as path from "path";
 import { parseSearchPage } from "../../../application/parsers/searchPage/parseSearchPage";
 import { readFile } from "../searchPageItem/parseAdvertisement.test";
 
@@ -7,8 +6,10 @@ let regularFile: string;
 let emptyFile: string;
 
 beforeAll(async done => {
-  const regularFilePath = path.join(__dirname, "./examples/3items21pages.html");
-  const emptyFilePath = path.join(__dirname, "./examples/noItemsOnePage.html");
+  const regularFilePath =
+    "src/__tests__/parsers/searchPage/examples/3items21pages.html";
+  const emptyFilePath =
+    "src/__tests__/parsers/searchPage/examples/noItemsOnePage.html";
   regularFile = await readFile(regularFilePath, "utf-8");
   emptyFile = await readFile(emptyFilePath, "utf-8");
   done();
