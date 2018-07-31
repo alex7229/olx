@@ -1,11 +1,11 @@
-interface IMainPage {
+export interface ISearchPage {
   items: Array<string | null>;
   totalPages: number;
 }
 
-type ParseMainPage = (html: string, cheerio: CheerioAPI) => IMainPage;
+type ParseSearchPage = (html: string, cheerio: CheerioAPI) => ISearchPage;
 
-export const parseSearchPage: ParseMainPage = (html, cheerio) => {
+export const parseSearchPage: ParseSearchPage = (html, cheerio) => {
   const $ = cheerio.load(html);
   const items = $("table#offers_table tr.wrap")
     .toArray()
@@ -21,5 +21,3 @@ export const parseSearchPage: ParseMainPage = (html, cheerio) => {
     totalPages
   };
 };
-
-
