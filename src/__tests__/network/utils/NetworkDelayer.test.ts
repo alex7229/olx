@@ -1,4 +1,4 @@
-import { NetworkDelayer } from "../../application/network/NetworkDelayer";
+import { NetworkDelayer } from "../../../application/network/utils/NetworkDelayer";
 
 jest.useFakeTimers();
 

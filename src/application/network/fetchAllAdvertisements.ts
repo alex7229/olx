@@ -1,7 +1,7 @@
-import { FetchFactory } from "../factories/network/fetchFactory";
-import { ParseSearchPageFactory } from "../factories/parsers/searchPage/parseSearchPageFactory";
-import { ParseAdvertisementMainInfoFactory } from "../factories/parsers/searchPageItem/parseAdvertisementMainInfoFactory";
-import { IAdvertisementMainInfo } from "./parsers/searchPageItem/parseAdvertisementMainInfo";
+import { FetchFactory } from "../../factories/network/utils/fetchFactory";
+import { ParseSearchPageFactory } from "../../factories/parsers/searchPage/parseSearchPageFactory";
+import { ParseAdvertisementMainInfoFactory } from "../../factories/parsers/searchPageItem/parseAdvertisementMainInfoFactory";
+import { IAdvertisementMainInfo } from "../parsers/searchPageItem/parseAdvertisementMainInfo";
 
 type FetchAllAdvertisements = (
   links: string[],

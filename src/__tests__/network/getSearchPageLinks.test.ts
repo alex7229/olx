@@ -1,4 +1,4 @@
-import { getSearchPageLinks } from "../application/getSearchPageLinks";
+import { getSearchPageLinks } from "../../application/network/getSearchPageLinks";
 
 const fetchResult = { status: 200, data: "some html" };
 const fetch = jest.fn().mockResolvedValue(fetchResult);

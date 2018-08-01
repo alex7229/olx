@@ -1,5 +1,5 @@
-import { FetchFactory } from "../factories/network/fetchFactory";
-import { ParseSearchPageFactory } from "../factories/parsers/searchPage/parseSearchPageFactory";
+import { FetchFactory } from "../../factories/network/utils/fetchFactory";
+import { ParseSearchPageFactory } from "../../factories/parsers/searchPage/parseSearchPageFactory";
 
 type GetSearchPageLinks = (
   link: string,

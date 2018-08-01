@@ -2,11 +2,11 @@ import axios from "axios";
 import {
   handleRedirect,
   IResponse
-} from "../../application/network/handleRedirect";
+} from "../../../application/network/utils/handleRedirect";
 import {
   IAxios,
   NetworkDelayer
-} from "../../application/network/NetworkDelayer";
+} from "../../../application/network/utils/NetworkDelayer";
 
 export type FetchFactory = (url: string) => Promise<IResponse>;
 

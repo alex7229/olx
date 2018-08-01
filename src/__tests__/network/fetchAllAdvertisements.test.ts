@@ -1,5 +1,5 @@
-import { fetchAllAdvertisements } from "../application/fetchAllAdvertisements";
-import { IResponse } from "../application/network/handleRedirect";
+import { fetchAllAdvertisements } from "../../application/network/fetchAllAdvertisements";
+import { IResponse } from "../../application/network/utils/handleRedirect";
 
 const firstPageAdvertisements = [
   {

@@ -1,7 +1,7 @@
 import {
   handleRedirect,
   IResponse
-} from "../../application/network/handleRedirect";
+} from "../../../application/network/utils/handleRedirect";
 
 it("should return 301 if url was changed", () => {
   const response: IResponse = {
