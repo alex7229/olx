@@ -7,7 +7,9 @@ import { parseAdvertisementId } from "../../../application/parsers/advertisement
 import { parseAdvertisementPage } from "../../../application/parsers/advertisementPage/parseAdvertisementPage";
 import { parseUserLink } from "../../../application/parsers/advertisementPage/parseUserLink";
 
-type ParseAdvertisementDetailsFactory = (html: string) => IAdvertisementDetails;
+export type ParseAdvertisementDetailsFactory = (
+  html: string
+) => IAdvertisementDetails;
 
 export const parseAdvertisementDetailsFactory: ParseAdvertisementDetailsFactory = html =>
   parseAdvertisementDetails(

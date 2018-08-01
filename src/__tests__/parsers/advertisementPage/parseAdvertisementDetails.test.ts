@@ -18,7 +18,7 @@ it("should parse data properly", () => {
     }
   };
   const advDetails: IAdvertisementDetails = {
-    advertisementId: 3232,
+    id: 3232,
     user: {
       id: "8rq1Q",
       name: "Віталій",

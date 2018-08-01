@@ -5,16 +5,16 @@ import { ParsePrice, Price } from "./parsePrice";
 import { ParseUrl } from "./parseUrl";
 
 export interface IAdvertisementMainInfo {
+  location: ILocation;
+  olxDelivery: boolean;
+  price: Price;
+  promoted: boolean;
+  time: number;
   title: string;
   url: {
     fullUrl: string;
     uniqueName: string;
   };
-  location: ILocation;
-  time: number;
-  promoted: boolean;
-  olxDelivery: boolean;
-  price: Price;
 }
 
 type ParseAdvertisementMainInfo = (

@@ -3,15 +3,15 @@ import { IAdvertisementPageRaw } from "./parseAdvertisementPage";
 import { ParseUserLink } from "./parseUserLink";
 
 export interface IAdvertisementDetails {
+  id: number;
   user: {
     id: string;
     name: string;
     phoneToken: string;
   };
-  advertisementId: number;
 }
 
-type ParseAdvertisementDetails = (
+export type ParseAdvertisementDetails = (
   adv: IAdvertisementPageRaw,
   parseAdvertisementId: ParseAdvertisementId,
   parseUserLink: ParseUserLink
@@ -24,7 +24,7 @@ export const parseAdvertisementDetails: ParseAdvertisementDetails = (
 ) => {
   const name = advertisement.user.name.replace(/[\n ]/g, "");
   return {
-    advertisementId: parseAdvertisementId(advertisement.advertisementIdText),
+    id: parseAdvertisementId(advertisement.advertisementIdText),
     user: {
       id: parseUserLink(advertisement.user.link),
       name,
