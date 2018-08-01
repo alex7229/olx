@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 import { parseAdvertisement } from "../../../application/parsers/searchPageItem/parseAdvertisement";
 import {
-  IAdvertisement,
+  IAdvertisementMainInfo,
   parseAdvertisementMainInfo
 } from "../../../application/parsers/searchPageItem/parseAdvertisementMainInfo";
 import { parseLocation } from "../../../application/parsers/searchPageItem/parseLocation";
@@ -9,7 +9,9 @@ import { parsePrice } from "../../../application/parsers/searchPageItem/parsePri
 import { parseUrl } from "../../../application/parsers/searchPageItem/parseUrl";
 import { parseTimeFactory } from "./parseTimeFactory";
 
-type ParseAdvertisementMainInfoFactory = (html: string) => IAdvertisement;
+export type ParseAdvertisementMainInfoFactory = (
+  html: string
+) => IAdvertisementMainInfo;
 
 export const parseAdvertisementMainInfoFactory: ParseAdvertisementMainInfoFactory = html =>
   parseAdvertisementMainInfo(

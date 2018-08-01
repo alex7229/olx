@@ -1,9 +1,6 @@
-export interface IResponse {
-  data: any;
-  status: number;
-}
+import { IResponse } from "./handleRedirect";
 
-interface IAxios {
+export interface IAxios {
   get(url: string): Promise<IResponse>;
 }
 
@@ -16,14 +13,15 @@ export class NetworkDelayer {
   }
 
   public async fetch(url: string): Promise<IResponse> {
+    const request = this.axios.get.bind(this, url);
     const currentTime = new Date().getTime();
     if (currentTime > this.nextNetworkCallTimestamp) {
       this.nextNetworkCallTimestamp = currentTime + 10000;
-      return this.axios.get(url);
+      return request();
     }
     const result: Promise<IResponse> = new Promise(resolve => {
       setTimeout(
-        () => resolve(this.axios.get(url)),
+        () => resolve(request()),
         this.nextNetworkCallTimestamp - currentTime
       );
       this.nextNetworkCallTimestamp += 10000;
