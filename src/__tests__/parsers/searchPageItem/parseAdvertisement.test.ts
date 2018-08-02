@@ -16,15 +16,15 @@ it("should parse regular advertisement properly", async done => {
   // whitespaces are preserved
   const rawAdvertisement: IAdvertisementRaw = {
     location: `
-                                        Одесса, Киевский                                    `,
+										Тернополь                                    `,
     olxDelivery: false,
-    price: "7 200 грн.",
+    price: "9 000 грн.",
     promoted: false,
     time: `
-                            Вчера 23:33                    `,
-    title: "Gigabyte GeForce GTX 1060 Windforce OC 6GB",
+										Сегодня 12:11									`,
+    title: "видеокарта Palit GeForce GTX 1060 6gb гарантия разетки 23месяца",
     url:
-      "https://www.olx.ua/obyavlenie/gigabyte-geforce-gtx-1060-windforce-oc-6gb-IDABvV8.html#86402a11fc"
+      "https://www.olx.ua/obyavlenie/videokarta-palit-geforce-gtx-1060-6gb-garantiya-razetki-23mesyatsa-IDBd3DN.html#a3e3b8c752"
   };
   expect(parseAdvertisement(html, cheerio)).toEqual(rawAdvertisement);
   done();
@@ -45,5 +45,26 @@ it("should show that advertisement is highlighted (promoted)", async done => {
     "utf-8"
   );
   expect(parseAdvertisement(html, cheerio).promoted).toBe(true);
+  done();
+});
+
+it("should parse html encoded advertisement properly", async done => {
+  const html = await readFile(
+    "src/__tests__/parsers/searchPageItem/examples/HtmlEncodedAdv.html",
+    "utf-8"
+  );
+  const decodedAdvertisement: IAdvertisementRaw = {
+    location: `
+                      Днепр, Амур-Нижнеднепровский                                    `,
+    olxDelivery: true,
+    price: "1 900 грн.",
+    promoted: false,
+    time: `
+                      Сегодня 11:32									`,
+    title: 'Велосипед ARDIS CLASSIC 20" Белый',
+    url:
+      "https://www.olx.ua/obyavlenie/velosiped-ardis-classic-20-belyy-IDBd1TX.html?sd=1#d1647b0506"
+  };
+  expect(parseAdvertisement(html, cheerio)).toEqual(decodedAdvertisement);
   done();
 });
