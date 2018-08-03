@@ -1,6 +1,7 @@
 export interface IAdvertisementPageRaw {
   advertisementIdText: string;
-  user: {
+  active: boolean;
+  user?: {
     link: string;
     name: string;
     phoneToken: string;
@@ -21,22 +22,28 @@ export const parseAdvertisementPage: ParseAdvertisementPage = (
   if (match === null) {
     throw new Error("page data is corrupted. Cannot find phone token");
   }
+
+  const isActive = !/Объявление не активно/.test(html);
+
   const $ = cheerio.load(html);
   const advertisementIdText = $("div.offer-titlebox__details small").text();
   if (advertisementIdText === "") {
     throw new Error("page data is corrupted. Cannot find adv block");
   }
+
   const userBlock = $("div.offer-user__details h4 a");
   const user = {
     link: userBlock.attr("href"),
     name: userBlock.text(),
     phoneToken: match[1]
   };
-  if (user.link === "" || user.name === "") {
-    throw new Error("user data is corrupted");
-  }
-  return {
-    advertisementIdText,
-    user
+
+  const advertisement: IAdvertisementPageRaw = {
+    active: isActive,
+    advertisementIdText
   };
+  if (isActive) {
+    advertisement.user = user;
+  }
+  return advertisement;
 };

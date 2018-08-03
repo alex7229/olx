@@ -7,7 +7,8 @@ it(
   "should download and parse search page and first adv. details",
   async done => {
     const response = await fetchFactory(
-      "https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/q-1060/"
+      "https://www.olx.ua/elektronika/kompyutery-i-komplektuyuschie/komplektuyuschie-i-aksesuary" +
+        "/videokarty/q-1060/?search%5Bprivate_business%5D=private"
     );
     const searchPage = parseSearchPageFactory(response.data);
     const items = searchPage.items.map(itemHtml =>

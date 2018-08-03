@@ -1,5 +1,5 @@
 export interface ISearchPage {
-  items: Array<string | null>;
+  items: string[];
   totalPages: number;
 }
 
@@ -9,7 +9,10 @@ export const parseSearchPage: ParseSearchPage = (html, cheerio) => {
   const $ = cheerio.load(html);
   const items = $("table#offers_table tr.wrap")
     .toArray()
-    .map(elem => $(elem).html());
+    .map(elem => $(elem).html())
+    // as string[] is used here because typescript cannot infer type after
+    // array filter properly
+    .filter(elemHtml => elemHtml !== null) as string[];
   const totalPagesString = $("span.item.fleft")
     .last()
     .find("span")
