@@ -32,3 +32,18 @@ it("should fetch urls not more often than once in 10 secs", async done => {
   await expect(lastResponse).resolves.toEqual({ data: "", status: 200 });
   done();
 });
+
+it("should fetch immediately with immediate flag", async done => {
+  const urls = ["first", "second", "third"];
+  const axios = {
+    get: jest.fn().mockResolvedValue({ data: "", status: 200 })
+  };
+  const networkDelayer = new NetworkDelayer(axios);
+  networkDelayer.fetch(urls[0]);
+  networkDelayer.fetch(urls[1]);
+  networkDelayer.fetch(urls[2], true);
+  expect(axios.get.mock.calls.length).toBe(2);
+  jest.advanceTimersByTime(12000);
+  expect(axios.get.mock.calls.length).toBe(3);
+  done();
+});

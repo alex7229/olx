@@ -12,8 +12,11 @@ export class NetworkDelayer {
     this.axios = axios;
   }
 
-  public async fetch(url: string): Promise<IResponse> {
+  public async fetch(url: string, immediate = false): Promise<IResponse> {
     const request = this.axios.get.bind(this, url);
+    if (immediate) {
+      return request();
+    }
     const currentTime = new Date().getTime();
     if (currentTime > this.nextNetworkCallTimestamp) {
       this.nextNetworkCallTimestamp = currentTime + 10000;
