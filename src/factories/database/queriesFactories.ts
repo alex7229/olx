@@ -1,9 +1,9 @@
 import { DeleteWriteOpResultObject, InsertWriteOpResult } from "mongodb";
 import { runQuery } from "../../application/database/databaseWrappers";
 import {
-  generateQueryOptions,
-  IQueryOptions
-} from "../../application/database/generateQueryOptions";
+  generateAdvertisementsQueryOptions,
+  IAdvertisementsQueryOptions
+} from "../../application/database/generateAdvertisementsQueryOptions";
 import { getConnectionInfo } from "../../application/database/getConnectionInfo";
 import {
   fetchAdvertisements,
@@ -17,11 +17,11 @@ type SaveAdvertisementsFactory = (
 ) => Promise<InsertWriteOpResult>;
 
 type FetchAdvertisementsFactory = (
-  options: IQueryOptions
+  options: IAdvertisementsQueryOptions
 ) => Promise<IAdvertisement[]>;
 
 type RemoveAdvertisementsFactory = (
-  options: IQueryOptions
+  options: IAdvertisementsQueryOptions
 ) => Promise<DeleteWriteOpResultObject>;
 
 const advertisementsCollectionName = "advertisements";
@@ -39,7 +39,7 @@ export const fetchAdvertisementsFactory: FetchAdvertisementsFactory = async opti
   const connectionInfo = getConnectionInfo(process.env);
   const query = fetchAdvertisements(
     advertisementsCollectionName,
-    generateQueryOptions(options)
+    generateAdvertisementsQueryOptions(options)
   );
   return runQuery(connectionInfo.uri, connectionInfo.dbName, query);
 };
@@ -48,7 +48,7 @@ export const removeAdvertisementsFactory: RemoveAdvertisementsFactory = async op
   const connectionInfo = getConnectionInfo(process.env);
   const query = removeAdvertisements(
     advertisementsCollectionName,
-    generateQueryOptions(options)
+    generateAdvertisementsQueryOptions(options)
   );
   return runQuery(connectionInfo.uri, connectionInfo.dbName, query);
 };

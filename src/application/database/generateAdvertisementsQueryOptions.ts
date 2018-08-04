@@ -1,15 +1,17 @@
 import { FilterQuery } from "mongodb";
 
-export interface IQueryOptions {
+export interface IAdvertisementsQueryOptions {
   type?: string;
   fromTime?: number;
   toTime?: number;
   ids?: number[];
 }
 
-export type GenerateQueryOptions = (options: IQueryOptions) => FilterQuery<any>;
+export type GenerateAdvertisementsQueryOptions = (
+  options: IAdvertisementsQueryOptions
+) => FilterQuery<any>;
 
-export const generateQueryOptions: GenerateQueryOptions = options => {
+export const generateAdvertisementsQueryOptions: GenerateAdvertisementsQueryOptions = options => {
   const query: FilterQuery<any> = {};
   if (options.type) {
     query.type = { $eq: options.type };

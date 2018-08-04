@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv'
-import { Db, MongoClient } from 'mongodb'
+import * as dotenv from "dotenv";
+import { Db, MongoClient } from "mongodb";
 import { connect } from "../../application/database/databaseWrappers";
-import { generateQueryOptions } from "../../application/database/generateQueryOptions";
+import { generateAdvertisementsQueryOptions } from "../../application/database/generateAdvertisementsQueryOptions";
 import { getConnectionInfo } from "../../application/database/getConnectionInfo";
 import {
   fetchAdvertisements,
@@ -118,7 +118,7 @@ describe("database queries", () => {
 
   it("should fetch advertisements with options object", async done => {
     await saveAdvertisements(collectionName, advertisements)(db);
-    const options = generateQueryOptions({
+    const options = generateAdvertisementsQueryOptions({
       fromTime: 500000,
       type: "real estate"
     });
@@ -138,7 +138,7 @@ describe("database queries", () => {
 
   it("should remove advertisements properly", async done => {
     await saveAdvertisements(collectionName, advertisements)(db);
-    const options = generateQueryOptions({ toTime: 500000 });
+    const options = generateAdvertisementsQueryOptions({ toTime: 500000 });
     const deleteQuery = removeAdvertisements(collectionName, options);
     await deleteQuery(db);
     const cursor = await db.collection(collectionName).find();
