@@ -4,7 +4,7 @@ it("should parse url properly", () => {
   const url = "https://www.olx.ua/obyavlenie/profik-81-IDB7Z3U.html#promoted";
   expect(parseUrl(url)).toEqual({
     fullUrl: "https://www.olx.ua/obyavlenie/profik-81-IDB7Z3U.html",
-    uniqueName: "profik-81-IDB7Z3U"
+    uniqueName: "IDB7Z3U"
   });
 });
 

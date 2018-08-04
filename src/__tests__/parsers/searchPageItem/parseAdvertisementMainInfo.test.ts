@@ -4,16 +4,17 @@ import {
   parseAdvertisementMainInfo
 } from "../../../application/parsers/searchPageItem/parseAdvertisementMainInfo";
 
+const advertisement: IAdvertisementRaw = {
+  location: "city",
+  olxDelivery: true,
+  price: "23",
+  promoted: false,
+  time: "23:17",
+  title: "video card",
+  url: "some url"
+};
+
 it("should convert advertisement properly", () => {
-  const advertisement: IAdvertisementRaw = {
-    location: "city",
-    olxDelivery: true,
-    price: "23",
-    promoted: false,
-    time: "23:17",
-    title: "video card",
-    url: "some url"
-  };
   const parsedUrl = {
     fullUrl: "long url",
     uniqueName: "some name"
@@ -54,4 +55,52 @@ it("should convert advertisement properly", () => {
 
   expect(parsePrice.mock.calls.length).toBe(1);
   expect(parsePrice.mock.calls[0][0]).toBe(advertisement.price);
+});
+
+it("should throw if location was not found", () => {
+  const advertisementCopy = {
+    ...advertisement,
+    location: ""
+  };
+  expect(() =>
+    parseAdvertisementMainInfo(
+      advertisementCopy,
+      jest.fn(),
+      jest.fn(),
+      jest.fn(),
+      jest.fn()
+    )
+  ).toThrow();
+});
+
+it("should throw if title was not found", () => {
+  const advertisementCopy = {
+    ...advertisement,
+    title: ""
+  };
+  expect(() =>
+    parseAdvertisementMainInfo(
+      advertisementCopy,
+      jest.fn(),
+      jest.fn(),
+      jest.fn(),
+      jest.fn()
+    )
+  ).toThrow();
+});
+
+it("should throw if time was not found", () => {
+  const advertisementCopy = {
+    ...advertisement,
+    time: ""
+  };
+  expect(() =>
+    parseAdvertisementMainInfo(
+      advertisementCopy,
+      jest.fn(),
+      jest.fn(),
+      jest.fn(),
+      jest.fn()
+    )
+  ).toThrow();
 });

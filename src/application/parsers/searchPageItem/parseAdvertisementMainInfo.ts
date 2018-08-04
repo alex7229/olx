@@ -31,10 +31,19 @@ export const parseAdvertisementMainInfo: ParseAdvertisementMainInfo = (
   parseUrl,
   parseTime,
   parseLocation
-) => ({
-  ...advertisement,
-  location: parseLocation(advertisement.location),
-  price: parsePrice(advertisement.price),
-  time: parseTime(advertisement.time),
-  url: parseUrl(advertisement.url)
-});
+) => {
+  if (
+    advertisement.location === "" ||
+    advertisement.title === "" ||
+    advertisement.time === ""
+  ) {
+    throw new Error("location, title or time is incorrect");
+  }
+  return {
+    ...advertisement,
+    location: parseLocation(advertisement.location),
+    price: parsePrice(advertisement.price),
+    time: parseTime(advertisement.time),
+    url: parseUrl(advertisement.url)
+  };
+};
