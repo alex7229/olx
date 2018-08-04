@@ -1,6 +1,6 @@
 import { FilterQuery } from "mongodb";
 
-interface IQueryOptions {
+export interface IQueryOptions {
   type?: string;
   fromTime?: number;
   toTime?: number;
