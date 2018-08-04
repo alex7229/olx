@@ -1,0 +1,44 @@
+Test advertisement uploaded to olx.ua and parsed afterwards
+
+const mainInfo = {
+  location: {
+    city: "Днепр",
+    cityDistrict: "Амур-Нижнеднепровский"
+  },
+  olxDelivery: false,
+  price: 3100,
+  promoted: false,
+  time: 1502398800000,
+  title: "Велосипед горный",
+  url: {
+    fullUrl: "https://www.olx.ua/obyavlenie/velosiped-gornyy-IDBd1RI.html",
+    uniqueName: "IDBd1RI"
+  }
+};
+
+const details = {
+  id: 549829870,
+  user: {
+    id: "1jqTn",
+    name: "Александр",
+    phoneToken: "b2681c0352d698b556a6e8b20229a0d9fe05e"
+  }
+};
+
+It is possible to change location, price, advertisement name, phone number and other
+unimportant stuff
+
+On each update change nothing but changed value is changed. For example,
+price was changed, but other stuff was unchanged, even time.
+
+On advertisement name change url part was partially changed too.
+Previous "velosiped-gornyy-IDBd1RI", next: "velosiped-gornyy-skyland-IDBd1RI"
+
+On deactivation advertisement is not shown in general search (update takes some time)
+Advertisement is still accessible directly via url. Html is a little bit different
+
+On reactivation advertisement time is not changed
+It seems like the only way of changing adv. time is paying money
+
+On adv. deletion trying to access the advertisement redirects to the page which looks like
+"https://www.olx.ua/hobbi-otdyh-i-sport/sport-otdyh/velo/dnepr/#from404"
