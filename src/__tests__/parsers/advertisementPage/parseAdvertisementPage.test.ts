@@ -67,12 +67,18 @@ describe("mock page tests", () => {
     expect(parseAdvertisementPage(page, cheerio)).toEqual(pageData);
   });
 
-  it("should throw if page does not have phone token", () => {
+  it("should throw if adv is active and user block is corrupted", () => {
+    const page =
+      phoneBlock + advBlock + '<div class="offer-user-details"></div>';
+    expect(() => parseAdvertisementPage(page, cheerio)).toThrow();
+  });
+
+  it("should throw if adv is active and page does not have phone token", () => {
     const page = advBlock + userBlock;
     expect(() => parseAdvertisementPage(page, cheerio)).toThrow();
   });
 
-  it("should throw if adv block is corrupted", () => {
+  it("should throw if advertisement id block is corrupted", () => {
     const corruptedBlock = '<div class="offer-titlebox__details"></div>';
     const page = phoneBlock + corruptedBlock + userBlock;
     expect(() => parseAdvertisementPage(page, cheerio)).toThrow();

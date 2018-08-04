@@ -17,18 +17,25 @@ export const parseAdvertisementPage: ParseAdvertisementPage = (
   html,
   cheerio
 ) => {
-  const phoneRegExp = /phoneToken = '([^']+)'/;
-  const match = html.match(phoneRegExp);
-  if (match === null) {
-    throw new Error("page data is corrupted. Cannot find phone token");
-  }
-
   const isActive = !/Объявление не активно/.test(html);
 
   const $ = cheerio.load(html);
   const advertisementIdText = $("div.offer-titlebox__details small").text();
   if (advertisementIdText === "") {
-    throw new Error("page data is corrupted. Cannot find adv block");
+    throw new Error("page data is corrupted. Cannot find adv id block");
+  }
+
+  if (!isActive) {
+    return {
+      active: false,
+      advertisementIdText
+    };
+  }
+
+  const phoneRegExp = /phoneToken = '([^']+)'/;
+  const match = html.match(phoneRegExp);
+  if (match === null) {
+    throw new Error("page data is corrupted. Cannot find phone token");
   }
 
   const userBlock = $("div.offer-user__details h4 a");
@@ -37,13 +44,13 @@ export const parseAdvertisementPage: ParseAdvertisementPage = (
     name: userBlock.text(),
     phoneToken: match[1]
   };
-
-  const advertisement: IAdvertisementPageRaw = {
-    active: isActive,
-    advertisementIdText
-  };
-  if (isActive) {
-    advertisement.user = user;
+  if (user.link === "" || user.name === "") {
+    throw new Error("advertisement is active but user data is incorrect");
   }
-  return advertisement;
+
+  return {
+    active: true,
+    advertisementIdText,
+    user
+  };
 };

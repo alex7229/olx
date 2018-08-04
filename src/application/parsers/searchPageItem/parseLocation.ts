@@ -5,7 +5,7 @@ export interface ILocation {
 export type ParseLocation = (location: string) => ILocation;
 
 export const parseLocation: ParseLocation = location => {
-  const withoutWhitespace = location.replace(/[ \n]/g, "");
+  const withoutWhitespace = location.replace(/[ \n\t]/g, "");
   const [city, cityDistrict] = withoutWhitespace.split(",");
   if (!cityDistrict) {
     return { city };
