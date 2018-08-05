@@ -13,7 +13,7 @@
     "start": "node dist/index.js",
     "start:debug": "nodemon --watch 'dist/' --inspect-brk dist/index.js",
     "test:unit": "node scripts/test.js -c config/jest/unit.js --colors --watch",
-    "test:unit:debug": "node --inspect-brk scripts/test.js --runInBand -c config/jest/unit.js --watch",
+    "test:unit:debug": "node --inspect-brk scripts/test.js --runInBand -c config/jest/unit.js",
     "test:integration": "node scripts/test.js -c config/jest/integration.js --colors",
     "test:integration:debug": "node --inspect-brk scripts/test.js --runInBand -c config/jest/integration.js --watch",
     "postinstall": "tsc"

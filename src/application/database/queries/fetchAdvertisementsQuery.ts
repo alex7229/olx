@@ -17,7 +17,7 @@ export interface IAdvertisement {
     uniqueName: string;
   };
   user: {
-    id: string;
+    id?: string;
     name: string;
   };
 }

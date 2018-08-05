@@ -18,7 +18,9 @@ describe("real page tests", () => {
         link: "https://www.olx.ua/list/user/8rq1Q/",
         name:
           "\n" +
-          "                                            Віталій                                    ",
+          "                                        \n" +
+          "                                            Віталій                                    \n" +
+          "                                    ",
         phoneToken: "3787dee20bcb4eedb9da7d8c22f37d"
       }
     };
@@ -48,9 +50,7 @@ describe("mock page tests", () => {
   </div>`;
   const userBlock = `
   <div class="offer-user__details">
-    <h4>
-      <a href="link.html">Alex</a> 
-    </h4>  
+    <h4><a href="link.html">Alex</a></h4>  
   </div>`;
 
   it("should parse mock page properly", () => {
@@ -65,6 +65,18 @@ describe("mock page tests", () => {
       }
     };
     expect(parseAdvertisementPage(page, cheerio)).toEqual(pageData);
+  });
+
+  it("should parse private user block", () => {
+    const privateUserBlock = `
+  <div class="offer-user__details">
+    <h4>Alex</h4>  
+  </div>`;
+    const page = phoneBlock + advBlock + privateUserBlock;
+    expect(parseAdvertisementPage(page, cheerio).user).toEqual({
+      name: "Alex",
+      phoneToken: "fdsfdf"
+    });
   });
 
   it("should throw if adv is active and user block is corrupted", () => {

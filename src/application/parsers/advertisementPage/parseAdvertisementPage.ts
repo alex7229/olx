@@ -1,8 +1,10 @@
+// user is undefined if advertisement is inactive
+// userId is undefined if user profile is private
 export interface IAdvertisementPageRaw {
   advertisementIdText: string;
   active: boolean;
   user?: {
-    link: string;
+    link?: string;
     name: string;
     phoneToken: string;
   };
@@ -38,19 +40,24 @@ export const parseAdvertisementPage: ParseAdvertisementPage = (
     throw new Error("page data is corrupted. Cannot find phone token");
   }
 
-  const userBlock = $("div.offer-user__details h4 a");
+  const userBlock = $("div.offer-user__details h4");
   const user = {
-    link: userBlock.attr("href"),
     name: userBlock.text(),
     phoneToken: match[1]
   };
-  if (user.link === "" || user.name === "") {
+  if (user.name === "") {
     throw new Error("advertisement is active but user data is incorrect");
   }
 
-  return {
+  const advertisement: IAdvertisementPageRaw = {
     active: true,
     advertisementIdText,
     user
   };
+  const userLink = userBlock.find("a").attr("href");
+  if (userLink && advertisement.user) {
+    advertisement.user.link = userLink;
+  }
+
+  return advertisement;
 };
