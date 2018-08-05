@@ -4,7 +4,7 @@ import {
   DeleteWriteOpResultObject,
   FilterQuery
 } from "mongodb";
-import { Query } from "../databaseWrappers";
+import { Query } from "../../databaseWrappers";
 
 type RemoveAdvertisementsQuery = (
   collectionName: string,

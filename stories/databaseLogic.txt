@@ -1,0 +1,40 @@
+There are at least three collections.
+1) All active advertisements
+2) Sold items from advertisements
+3) Advertisement types
+
+------------- advertisements -----------------
+
+Pretty self-explanatory.
+It should contain every accessible data from the web advertisement.
+
+1) Every advertisement which is fetched from the web should be saved.
+2) Advertisements which are more than 30 days old should be removed completely.
+3) If advertisement is no longer available through the web (deleted by adv. owner) ->
+   delete from the collection
+4) On activation toggle (adv. owner set active adv. as 'inactive' or vice versa) ->
+   toggle it's state in the collection as well
+5) Should be updated on web adv. update.
+
+-------------- sold items ---------------------
+
+Should contain advertisement id, price, type.
+
+1) If advertisement was deleted by adv. owner -> put it in the collection
+2) If advertisement was set as inactive -> put it in the collection as well.
+   But it should be removed from the collection if advertisement is active again.
+3) If for some reason item price was changed in adv. collection -> change it in this collection.
+
+---------------- advertisement types -----------
+
+Should contain type (e.g., '1060 6 gigs'), olx url search page.
+
+1) Can contain regExp (e.g., 1060 gpu are different by memory size, but are contained
+   in the same search page).
+   If there is a regExp, there should be unknown type
+   (adv, which weren't parsed properly by any regExp).
+   For example: 1) 1060 3 gigs; 2) 1060 6 gigs; 3) 1060 unknown.
+2) On new type addition with regExp for new url (brand new type), unknown type
+   should be added automatically
+3) It should be impossible to add document with the name that is already in the collection.
+4) Every collection field should be updatable

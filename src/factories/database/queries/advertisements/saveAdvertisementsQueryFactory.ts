@@ -1,8 +1,8 @@
 import { InsertWriteOpResult } from "mongodb";
-import { runQuery } from "../../../application/database/databaseWrappers";
-import { getConnectionInfo } from "../../../application/database/getConnectionInfo";
-import { IAdvertisement } from "../../../application/database/queries/fetchAdvertisementsQuery";
-import { saveAdvertisementsQuery } from "../../../application/database/queries/saveAdvertisementsQuery";
+import { runQuery } from "../../../../application/database/databaseWrappers";
+import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
+import { IAdvertisement } from "../../../../application/database/queries/advertisements/fetchAdvertisementsQuery";
+import { saveAdvertisementsQuery } from "../../../../application/database/queries/advertisements/saveAdvertisementsQuery";
 import { advertisementsCollectionName } from "./fetchAdvertisementQueryFactory";
 
 type SaveAdvertisementsQueryFactory = (

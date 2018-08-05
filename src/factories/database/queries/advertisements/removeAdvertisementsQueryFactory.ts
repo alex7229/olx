@@ -1,11 +1,11 @@
 import { DeleteWriteOpResultObject } from "mongodb";
-import { runQuery } from "../../../application/database/databaseWrappers";
+import { runQuery } from "../../../../application/database/databaseWrappers";
 import {
   generateAdvertisementsQueryOptions,
   IAdvertisementsQueryOptions
-} from "../../../application/database/generateAdvertisementsQueryOptions";
-import { getConnectionInfo } from "../../../application/database/getConnectionInfo";
-import { removeAdvertisementsQuery } from "../../../application/database/queries/removeAdvertisementsQuery";
+} from "../../../../application/database/generateAdvertisementsQueryOptions";
+import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
+import { removeAdvertisementsQuery } from "../../../../application/database/queries/advertisements/removeAdvertisementsQuery";
 import { advertisementsCollectionName } from "./fetchAdvertisementQueryFactory";
 
 type RemoveAdvertisementsQueryFactory = (

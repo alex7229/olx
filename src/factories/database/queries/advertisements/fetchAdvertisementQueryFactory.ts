@@ -1,13 +1,13 @@
-import { runQuery } from "../../../application/database/databaseWrappers";
+import { runQuery } from "../../../../application/database/databaseWrappers";
 import {
   generateAdvertisementsQueryOptions,
   IAdvertisementsQueryOptions
-} from "../../../application/database/generateAdvertisementsQueryOptions";
-import { getConnectionInfo } from "../../../application/database/getConnectionInfo";
+} from "../../../../application/database/generateAdvertisementsQueryOptions";
+import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
 import {
   fetchAdvertisementsQuery,
   IAdvertisement
-} from "../../../application/database/queries/fetchAdvertisementsQuery";
+} from "../../../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 
 export const advertisementsCollectionName = "advertisements";
 

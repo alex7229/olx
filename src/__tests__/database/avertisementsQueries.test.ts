@@ -6,9 +6,9 @@ import { getConnectionInfo } from "../../application/database/getConnectionInfo"
 import {
   fetchAdvertisementsQuery,
   IAdvertisement
-} from "../../application/database/queries/fetchAdvertisementsQuery";
-import { removeAdvertisementsQuery } from "../../application/database/queries/removeAdvertisementsQuery";
-import { saveAdvertisementsQuery } from "../../application/database/queries/saveAdvertisementsQuery";
+} from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
+import { removeAdvertisementsQuery } from "../../application/database/queries/advertisements/removeAdvertisementsQuery";
+import { saveAdvertisementsQuery } from "../../application/database/queries/advertisements/saveAdvertisementsQuery";
 
 let client: MongoClient;
 let db: Db;
