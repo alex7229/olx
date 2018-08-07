@@ -7,7 +7,7 @@ export interface IAdvertisementType {
   url: string;
 }
 
-type SaveNewTypeQuery = (
+export type SaveNewTypeQuery = (
   collectionName: string,
   advertisementType: IAdvertisementType
 ) => Query<InsertOneWriteOpResult>;

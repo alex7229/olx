@@ -3,11 +3,12 @@ import { Db, MongoClient, MongoError } from "mongodb";
 import { connect } from "../../application/database/databaseWrappers";
 import { getConnectionInfo } from "../../application/database/getConnectionInfo";
 import { fetchTypesQuery } from "../../application/database/queries/types/fetchTypesQuery";
+import { removeTypeQuery } from "../../application/database/queries/types/removeTypeQuery";
+import { replaceTypeQuery } from "../../application/database/queries/types/replaceTypeQuery";
 import {
   IAdvertisementType,
   saveNewTypeQuery
 } from "../../application/database/queries/types/saveNewTypeQuery";
-import { removeTypeQuery } from "../../application/database/queries/types/removeTypeQuery";
 
 let client: MongoClient;
 let db: Db;
@@ -179,6 +180,75 @@ describe("remove type query", () => {
 
     const sameDeletion = await deleteQuery(db);
     expect(sameDeletion.deletedCount).toBe(0);
+    done();
+  });
+});
+
+describe("replace type query", () => {
+  it("should update properly", async done => {
+    const collectionName = "replace_success";
+    const carType: IAdvertisementType = {
+      regExp: ".*",
+      type: "car",
+      url: "car url"
+    };
+    const bikeType = {
+      _id: "172",
+      regExp: ".*",
+      type: "bike",
+      url: "bike url"
+    };
+    const newBikeType: IAdvertisementType = {
+      regExp: ".+",
+      type: "bike new",
+      url: "new bike url"
+    };
+    await saveNewTypeQuery(collectionName, carType)(db);
+    await saveNewTypeQuery(collectionName, bikeType)(db);
+
+    const replaceQuery = replaceTypeQuery(
+      collectionName,
+      bikeType._id,
+      newBikeType
+    );
+    const result = await replaceQuery(db);
+    expect(result.modifiedCount).toBe(1);
+
+    const docsAfterReplacement = await fetchTypesQuery(collectionName)(db);
+    expect(docsAfterReplacement).toEqual([
+      carType,
+      { _id: bikeType._id, ...newBikeType }
+    ]);
+    done();
+  });
+
+  it("should fail if insert is impossible", async done => {
+    const collectionName = "replace_fail";
+    const carType: IAdvertisementType = {
+      regExp: ".*",
+      type: "car",
+      url: "car url"
+    };
+    const bikeType = {
+      _id: "172",
+      regExp: ".*",
+      type: "bike",
+      url: "bike url"
+    };
+    const bikeReplacementType: IAdvertisementType = {
+      regExp: ".*",
+      type: "car",
+      url: "bike url"
+    };
+    await saveNewTypeQuery(collectionName, carType)(db);
+    await saveNewTypeQuery(collectionName, bikeType)(db);
+
+    const replaceQuery = replaceTypeQuery(
+      collectionName,
+      bikeType._id,
+      bikeReplacementType
+    );
+    await expect(replaceQuery(db)).rejects.toEqual(expect.any(MongoError));
     done();
   });
 });
