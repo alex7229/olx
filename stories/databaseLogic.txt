@@ -27,14 +27,11 @@ Should contain advertisement id, price, type.
 
 ---------------- advertisement types -----------
 
-Should contain type (e.g., '1060 6 gigs'), olx url search page.
+Should contain type (e.g., '1060 6 gigs'), olx url search page and regExp.
 
-1) Can contain regExp (e.g., 1060 gpu are different by memory size, but are contained
+1) RegExp: (e.g., 1060 gpu are different by memory size, but are contained
    in the same search page).
-   If there is a regExp, there should be unknown type
-   (adv, which weren't parsed properly by any regExp).
-   For example: 1) 1060 3 gigs; 2) 1060 6 gigs; 3) 1060 unknown.
-2) On new type addition with regExp for new url (brand new type), unknown type
-   should be added automatically
-3) It should be impossible to add document with the name that is already in the collection.
-4) Every collection field should be updatable
+   They both have the same url, but different RegExp:
+    /1060 3 gb/ and /1060 6 gb/
+2) It should be impossible to add document with the type that is already in the collection.
+3) Every collection field should be updatable
