@@ -7,6 +7,7 @@ import {
   IAdvertisementType,
   saveNewTypeQuery
 } from "../../application/database/queries/types/saveNewTypeQuery";
+import { removeTypeQuery } from "../../application/database/queries/types/removeTypeQuery";
 
 let client: MongoClient;
 let db: Db;
@@ -152,6 +153,32 @@ describe("fetch type query", () => {
     const result = await fetchQuery(db);
     expect(result.length).toBe(1);
     expect(result[0]).toEqual(secondType);
+    done();
+  });
+});
+
+describe("remove type query", () => {
+  it("should remove one row by type", async done => {
+    const collectionName = "remove_one";
+    const firstType: IAdvertisementType = {
+      regExp: ".*",
+      type: "car",
+      url: "car url"
+    };
+    const secondType: IAdvertisementType = {
+      regExp: ".*",
+      type: "bike",
+      url: "another url"
+    };
+    await saveNewTypeQuery(collectionName, firstType)(db);
+    await saveNewTypeQuery(collectionName, secondType)(db);
+
+    const deleteQuery = removeTypeQuery(collectionName, "bike");
+    const successDeletion = await deleteQuery(db);
+    expect(successDeletion.deletedCount).toBe(1);
+
+    const sameDeletion = await deleteQuery(db);
+    expect(sameDeletion.deletedCount).toBe(0);
     done();
   });
 });
