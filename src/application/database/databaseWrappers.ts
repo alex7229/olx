@@ -1,9 +1,23 @@
 // this file is originally copypasted from https://github.com/tup1tsa/running_statistics/
 import { Db, MongoClient } from "mongodb";
 
-export type Query<T> = (db: Db) => Promise<T>;
+export interface IDbConnection {
+  clientInstance: MongoClient;
+  db: Db;
+}
 
-export const connect = async (uri: string, dbName: string) => {
+export type Connect = (uri: string, dbName: string) => Promise<IDbConnection>;
+
+type Disconnect = (client: MongoClient) => Promise<void>;
+
+export type Query<T> = (db: Db) => Promise<T>;
+export type RunQuery = <T>(
+  uri: string,
+  dbName: string,
+  query: Query<T>
+) => Promise<T>;
+
+export const connect: Connect = async (uri, dbName) => {
   const clientInstance = await MongoClient.connect(
     uri,
     {
@@ -16,20 +30,16 @@ export const connect = async (uri: string, dbName: string) => {
   };
 };
 
-export const disconnect = async (client: MongoClient) => {
+export const disconnect: Disconnect = async client => {
   await client.close();
 };
 
-export const runQuery = async <T>(
-  uri: string,
-  dbName: string,
-  query: Query<T>
-) => {
-  const { clientInstance, db } = await connect(
+export const runQuery: RunQuery = async (uri, dbName, query) => {
+  const connection = await connect(
     uri,
     dbName
   );
-  const result = await query(db);
-  await clientInstance.close();
+  const result = await query(connection.db);
+  await connection.clientInstance.close();
   return result;
 };

@@ -1,3 +1,4 @@
+import { IDbConnection } from "../../application/database/databaseWrappers";
 import { generateAdvertisementsQueryOptions } from "../../application/database/generateAdvertisementsQueryOptions";
 import {
   fetchAdvertisementsQuery,
@@ -5,10 +6,7 @@ import {
 } from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { removeAdvertisementsQuery } from "../../application/database/queries/advertisements/removeAdvertisementsQuery";
 import { saveAdvertisementsQuery } from "../../application/database/queries/advertisements/saveAdvertisementsQuery";
-import {
-  connectToTestDbFactory,
-  IDbConnection
-} from "../../factories/database/connectToTestDbFactory";
+import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
 
 let connection: IDbConnection;
 
