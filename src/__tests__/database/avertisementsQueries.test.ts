@@ -82,7 +82,7 @@ beforeEach(async done => {
 
 afterEach(async done => {
   await connection.db.dropDatabase();
-  await connection.client.close();
+  await connection.clientInstance.close();
   done();
 });
 
