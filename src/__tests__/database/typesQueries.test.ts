@@ -1,7 +1,3 @@
-import * as dotenv from "dotenv";
-import { Db, MongoClient, MongoError } from "mongodb";
-import { connect } from "../../application/database/databaseWrappers";
-import { getConnectionInfo } from "../../application/database/getConnectionInfo";
 import { fetchTypesQuery } from "../../application/database/queries/types/fetchTypesQuery";
 import { removeTypeQuery } from "../../application/database/queries/types/removeTypeQuery";
 import { replaceTypeQuery } from "../../application/database/queries/types/replaceTypeQuery";
@@ -9,26 +5,21 @@ import {
   IAdvertisementType,
   saveNewTypeQuery
 } from "../../application/database/queries/types/saveNewTypeQuery";
+import {
+  connectToTestDbFactory,
+  IDbConnection
+} from "../../factories/database/connectToTestDbFactory";
 
-let client: MongoClient;
-let db: Db;
+let connection: IDbConnection;
 
-beforeAll(() => dotenv.load());
-
-beforeEach(async done => {
-  const connectionInfo = getConnectionInfo(process.env);
-  const result = await connect(
-    connectionInfo.uri,
-    connectionInfo.dbName
-  );
-  client = result.clientInstance;
-  db = result.db;
+beforeAll(async done => {
+  connection = await connectToTestDbFactory("type_queries_test_db");
   done();
 });
 
-afterEach(async done => {
-  await db.dropDatabase();
-  await client.close();
+afterAll(async done => {
+  await connection.db.dropDatabase();
+  await connection.client.close();
   done();
 });
 
@@ -41,13 +32,13 @@ describe("save new type query", () => {
       url: "some url"
     };
     const query = saveNewTypeQuery(collectionName, type);
-    const result = await query(db);
+    const result = await query(connection.db);
     expect(result.insertedCount).toBe(1);
     expect(result.result.ok).toBe(1);
     done();
   });
 
-  it("should fail on the same type insert", async done => {
+  it("should fail on the same type insert", async () => {
     const collectionName = "fail_type";
     const firstType: IAdvertisementType = {
       regExp: ".*",
@@ -62,14 +53,20 @@ describe("save new type query", () => {
     const firstQuery = saveNewTypeQuery(collectionName, firstType);
     const secondQuery = saveNewTypeQuery(collectionName, secondType);
 
-    const firstQueryResult = await firstQuery(db);
+    const firstQueryResult = await firstQuery(connection.db);
     expect(firstQueryResult.insertedCount).toBe(1);
     expect(firstQueryResult.result.ok).toBe(1);
-    await expect(secondQuery(db)).rejects.toEqual(expect.any(MongoError));
-    done();
+
+    try {
+      await secondQuery(connection.db);
+    } catch (e) {
+      expect(e.errmsg).toMatch("duplicate key");
+      return;
+    }
+    throw new Error("second query should throw");
   });
 
-  it("should fail on adding new type with the same url with the same regExp", async done => {
+  it("should fail on adding new type with the same url with the same regExp", async () => {
     const collectionName = "same_url_same_regExp";
     const firstType: IAdvertisementType = {
       regExp: "blue",
@@ -84,11 +81,16 @@ describe("save new type query", () => {
     const firstQuery = saveNewTypeQuery(collectionName, firstType);
     const secondQuery = saveNewTypeQuery(collectionName, secondType);
 
-    const firstQueryResult = await firstQuery(db);
+    const firstQueryResult = await firstQuery(connection.db);
     expect(firstQueryResult.insertedCount).toBe(1);
 
-    await expect(secondQuery(db)).rejects.toEqual(expect.any(MongoError));
-    done();
+    try {
+      await secondQuery(connection.db);
+    } catch (e) {
+      expect(e.errmsg).toMatch("duplicate key");
+      return;
+    }
+    throw new Error("second query should throw");
   });
 
   it("should save new type with the same url but different regExp", async done => {
@@ -106,8 +108,8 @@ describe("save new type query", () => {
     const blueCarQuery = saveNewTypeQuery(collectionName, blueCarType);
     const redCarQuery = saveNewTypeQuery(collectionName, redCarType);
 
-    const blueCarResult = await blueCarQuery(db);
-    const redCarResult = await redCarQuery(db);
+    const blueCarResult = await blueCarQuery(connection.db);
+    const redCarResult = await redCarQuery(connection.db);
 
     expect(blueCarResult.insertedCount).toBe(1);
     expect(redCarResult.insertedCount).toBe(1);
@@ -128,10 +130,10 @@ describe("fetch type query", () => {
       type: "blue car",
       url: "some url"
     };
-    await saveNewTypeQuery(collectionName, firstType)(db);
-    await saveNewTypeQuery(collectionName, secondType)(db);
+    await saveNewTypeQuery(collectionName, firstType)(connection.db);
+    await saveNewTypeQuery(collectionName, secondType)(connection.db);
     const fetchQuery = fetchTypesQuery(collectionName);
-    const result = await fetchQuery(db);
+    const result = await fetchQuery(connection.db);
     expect(result).toEqual([firstType, secondType]);
     done();
   });
@@ -148,10 +150,10 @@ describe("fetch type query", () => {
       type: "bike",
       url: "another url"
     };
-    await saveNewTypeQuery(collectionName, firstType)(db);
-    await saveNewTypeQuery(collectionName, secondType)(db);
+    await saveNewTypeQuery(collectionName, firstType)(connection.db);
+    await saveNewTypeQuery(collectionName, secondType)(connection.db);
     const fetchQuery = fetchTypesQuery(collectionName, "bike");
-    const result = await fetchQuery(db);
+    const result = await fetchQuery(connection.db);
     expect(result.length).toBe(1);
     expect(result[0]).toEqual(secondType);
     done();
@@ -171,14 +173,14 @@ describe("remove type query", () => {
       type: "bike",
       url: "another url"
     };
-    await saveNewTypeQuery(collectionName, firstType)(db);
-    await saveNewTypeQuery(collectionName, secondType)(db);
+    await saveNewTypeQuery(collectionName, firstType)(connection.db);
+    await saveNewTypeQuery(collectionName, secondType)(connection.db);
 
     const deleteQuery = removeTypeQuery(collectionName, "bike");
-    const successDeletion = await deleteQuery(db);
+    const successDeletion = await deleteQuery(connection.db);
     expect(successDeletion.deletedCount).toBe(1);
 
-    const sameDeletion = await deleteQuery(db);
+    const sameDeletion = await deleteQuery(connection.db);
     expect(sameDeletion.deletedCount).toBe(0);
     done();
   });
@@ -203,18 +205,20 @@ describe("replace type query", () => {
       type: "bike new",
       url: "new bike url"
     };
-    await saveNewTypeQuery(collectionName, carType)(db);
-    await saveNewTypeQuery(collectionName, bikeType)(db);
+    await saveNewTypeQuery(collectionName, carType)(connection.db);
+    await saveNewTypeQuery(collectionName, bikeType)(connection.db);
 
     const replaceQuery = replaceTypeQuery(
       collectionName,
       bikeType._id,
       newBikeType
     );
-    const result = await replaceQuery(db);
+    const result = await replaceQuery(connection.db);
     expect(result.modifiedCount).toBe(1);
 
-    const docsAfterReplacement = await fetchTypesQuery(collectionName)(db);
+    const docsAfterReplacement = await fetchTypesQuery(collectionName)(
+      connection.db
+    );
     expect(docsAfterReplacement).toEqual([
       carType,
       { _id: bikeType._id, ...newBikeType }
@@ -222,7 +226,7 @@ describe("replace type query", () => {
     done();
   });
 
-  it("should fail if insert is impossible", async done => {
+  it("should fail if insert is impossible", async () => {
     const collectionName = "replace_fail";
     const carType: IAdvertisementType = {
       regExp: ".*",
@@ -240,15 +244,21 @@ describe("replace type query", () => {
       type: "car",
       url: "bike url"
     };
-    await saveNewTypeQuery(collectionName, carType)(db);
-    await saveNewTypeQuery(collectionName, bikeType)(db);
+    await saveNewTypeQuery(collectionName, carType)(connection.db);
+    await saveNewTypeQuery(collectionName, bikeType)(connection.db);
 
     const replaceQuery = replaceTypeQuery(
       collectionName,
       bikeType._id,
       bikeReplacementType
     );
-    await expect(replaceQuery(db)).rejects.toEqual(expect.any(MongoError));
-    done();
+
+    try {
+      await replaceQuery(connection.db);
+    } catch (e) {
+      expect(e.errmsg).toMatch("duplicate key");
+      return;
+    }
+    throw new Error("query should throw");
   });
 });

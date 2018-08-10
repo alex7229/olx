@@ -1,10 +1,17 @@
 // this file is originally copypasted from https://github.com/tup1tsa/running_statistics/
 
-interface IProcessEnv {
+export interface IProcessEnv {
   [key: string]: string | undefined;
 }
 
-export const getConnectionInfo = (processEnv: IProcessEnv) => {
+export interface IConnectionInfo {
+  uri: string;
+  dbName: string;
+}
+
+export type GetConnectionInfo = (processEnv: IProcessEnv) => IConnectionInfo;
+
+export const getConnectionInfo: GetConnectionInfo = processEnv => {
   const isProd = processEnv.NODE_ENV === "production";
   const uri = isProd ? processEnv.MONGODB_URI : processEnv.MONGODB_URI_LOCAL;
   const dbName = isProd
