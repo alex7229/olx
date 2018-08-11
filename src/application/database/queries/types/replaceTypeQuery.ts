@@ -1,5 +1,5 @@
 import { Db, ReplaceWriteOpResult } from "mongodb";
-import { Query } from "../../databaseWrappers";
+import { Query } from "../../utils/runQuery";
 import { IAdvertisementType } from "./saveNewTypeQuery";
 
 export type ReplaceTypeQuery = (

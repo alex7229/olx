@@ -1,5 +1,5 @@
 import { Db, DeleteWriteOpResultObject } from "mongodb";
-import { Query } from "../../databaseWrappers";
+import { Query } from "../../utils/runQuery";
 
 export type RemoveTypeQuery = (
   collectionName: string,
