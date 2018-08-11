@@ -9,9 +9,6 @@ let connection: IDbConnection | null = null;
 
 export const runQueryFactory: RunQueryFactory = async query => {
   const { uri, dbName } = getConnectionInfoFactory();
-  if (connection === null) {
-    connection = await dbConnectFactory(uri, dbName);
-  }
   const result = await runQuery(
     uri,
     dbName,

@@ -8,7 +8,7 @@ export type RunQuery = <T>(
   dbName: string,
   query: Query<T>,
   connectFunc: DbConnectFactory,
-  previousConnection: IDbConnection
+  previousConnection: IDbConnection | null
 ) => Promise<{ queryResult: T; connection: IDbConnection }>;
 
 export const runQuery: RunQuery = async (
@@ -19,7 +19,8 @@ export const runQuery: RunQuery = async (
   previousConnection
 ) => {
   const connection =
-    previousConnection && previousConnection.clientInstance.isConnected()
+    previousConnection !== null &&
+    previousConnection.clientInstance.isConnected()
       ? previousConnection
       : await connectFunc(uri, dbName);
   const queryResult = await query(connection.db);

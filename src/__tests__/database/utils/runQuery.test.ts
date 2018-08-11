@@ -56,6 +56,25 @@ it("should reconnect to db if connection was lost", async done => {
   done();
 });
 
+it("should connect to db if there is no connection", async done => {
+  const clientInstance = new MongoClient(uri, { useNewUrlParser: true });
+  clientInstance.isConnected = jest.fn().mockReturnValue(false);
+
+  const connection = {
+    clientInstance,
+    db
+  };
+  const connectMock = jest.fn().mockResolvedValue(connection);
+
+  const query = jest.fn().mockResolvedValue(true);
+  const result = await runQuery(uri, dbName, query, connectMock, null);
+  expect(connectMock.mock.calls.length).toBe(1);
+  expect(connectMock.mock.calls[0][0]).toBe(uri);
+  expect(connectMock.mock.calls[0][1]).toBe(dbName);
+  expect(result.connection).toEqual(connection);
+  done();
+});
+
 it("run query should return query result and current connection", async done => {
   const clientInstance = new MongoClient(uri, { useNewUrlParser: true });
   clientInstance.isConnected = jest.fn().mockReturnValue(true);
