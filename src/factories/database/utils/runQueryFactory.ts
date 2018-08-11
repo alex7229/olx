@@ -1,16 +1,14 @@
 import { IDbConnection } from "../../../application/database/utils/dbConnect";
 import { Query, runQuery } from "../../../application/database/utils/runQuery";
 import { dbConnectFactory } from "./dbConnectFactory";
+import { getConnectionInfoFactory } from "./getConnectionInfoFactory";
 
-export type RunQueryFactory = <T>(
-  uri: string,
-  dbName: string,
-  query: Query<T>
-) => Promise<T>;
+export type RunQueryFactory = <T>(query: Query<T>) => Promise<T>;
 
 let connection: IDbConnection | null = null;
 
-export const runQueryFactory: RunQueryFactory = async (uri, dbName, query) => {
+export const runQueryFactory: RunQueryFactory = async query => {
+  const { uri, dbName } = getConnectionInfoFactory();
   if (connection === null) {
     connection = await dbConnectFactory(uri, dbName);
   }
