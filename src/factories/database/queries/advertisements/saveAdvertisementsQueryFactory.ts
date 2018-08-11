@@ -1,8 +1,8 @@
 import { InsertWriteOpResult } from "mongodb";
-import { runQuery } from "../../../../application/database/databaseWrappers";
-import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
 import { IAdvertisement } from "../../../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { saveAdvertisementsQuery } from "../../../../application/database/queries/advertisements/saveAdvertisementsQuery";
+import { getConnectionInfo } from "../../../../application/database/utils/getConnectionInfo";
+import { runQueryFactory } from "../../utils/runQueryFactory";
 import { advertisementsCollectionName } from "./fetchAdvertisementQueryFactory";
 
 type SaveAdvertisementsQueryFactory = (
@@ -15,5 +15,5 @@ export const saveAdvertisementsQueryFactory: SaveAdvertisementsQueryFactory = as
     advertisementsCollectionName,
     advertisements
   );
-  return runQuery(connectionInfo.uri, connectionInfo.dbName, query);
+  return runQueryFactory(connectionInfo.uri, connectionInfo.dbName, query);
 };

@@ -1,11 +1,11 @@
 import { DeleteWriteOpResultObject } from "mongodb";
-import { runQuery } from "../../../../application/database/databaseWrappers";
 import {
   generateAdvertisementsQueryOptions,
   IAdvertisementsQueryOptions
 } from "../../../../application/database/generateAdvertisementsQueryOptions";
-import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
 import { removeAdvertisementsQuery } from "../../../../application/database/queries/advertisements/removeAdvertisementsQuery";
+import { getConnectionInfo } from "../../../../application/database/utils/getConnectionInfo";
+import { runQueryFactory } from "../../utils/runQueryFactory";
 import { advertisementsCollectionName } from "./fetchAdvertisementQueryFactory";
 
 type RemoveAdvertisementsQueryFactory = (
@@ -18,5 +18,5 @@ export const removeAdvertisementsQueryFactory: RemoveAdvertisementsQueryFactory 
     advertisementsCollectionName,
     generateAdvertisementsQueryOptions(options)
   );
-  return runQuery(connectionInfo.uri, connectionInfo.dbName, query);
+  return runQueryFactory(connectionInfo.uri, connectionInfo.dbName, query);
 };

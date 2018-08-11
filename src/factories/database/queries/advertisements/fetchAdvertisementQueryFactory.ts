@@ -1,13 +1,13 @@
-import { runQuery } from "../../../../application/database/databaseWrappers";
 import {
   generateAdvertisementsQueryOptions,
   IAdvertisementsQueryOptions
 } from "../../../../application/database/generateAdvertisementsQueryOptions";
-import { getConnectionInfo } from "../../../../application/database/getConnectionInfo";
 import {
   fetchAdvertisementsQuery,
   IAdvertisement
 } from "../../../../application/database/queries/advertisements/fetchAdvertisementsQuery";
+import { getConnectionInfo } from "../../../../application/database/utils/getConnectionInfo";
+import { runQueryFactory } from "../../utils/runQueryFactory";
 
 export const advertisementsCollectionName = "advertisements";
 
@@ -21,5 +21,5 @@ export const fetchAdvertisementsQueryFactory: FetchAdvertisementsQueryFactory = 
     advertisementsCollectionName,
     generateAdvertisementsQueryOptions(options)
   );
-  return runQuery(connectionInfo.uri, connectionInfo.dbName, query);
+  return runQueryFactory(connectionInfo.uri, connectionInfo.dbName, query);
 };

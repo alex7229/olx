@@ -1,5 +1,5 @@
 import { Collection, Db, InsertWriteOpResult } from "mongodb";
-import { Query } from "../../databaseWrappers";
+import { Query } from "../../utils/runQuery";
 import { IAdvertisement } from "./fetchAdvertisementsQuery";
 
 type SaveAdvertisementsQuery = (

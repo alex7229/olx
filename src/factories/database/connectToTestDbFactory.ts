@@ -1,18 +1,13 @@
-import * as dotenv from "dotenv";
+import { MongoClient } from "mongodb";
 import {
-  connect,
+  dbConnect,
   IDbConnection
-} from "../../application/database/databaseWrappers";
-import { getConnectionInfo } from "../../application/database/getConnectionInfo";
+} from "../../application/database/utils/dbConnect";
+import { getConnectionInfoFactory } from "./utils/getConnectionInfoFactory";
 
 type ConnectToTestDbFactory = (dbName: string) => Promise<IDbConnection>;
 
-dotenv.load();
-
 export const connectToTestDbFactory: ConnectToTestDbFactory = async dbName => {
-  const connectionInfo = getConnectionInfo(process.env);
-  return connect(
-    connectionInfo.uri,
-    dbName
-  );
+  const connectionInfo = getConnectionInfoFactory();
+  return dbConnect(connectionInfo.uri, dbName, MongoClient);
 };

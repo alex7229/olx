@@ -1,5 +1,5 @@
 import { Collection, Db, InsertOneWriteOpResult } from "mongodb";
-import { Query } from "../../databaseWrappers";
+import { Query } from "../../utils/runQuery";
 
 export interface IAdvertisementType {
   regExp: string;
@@ -17,7 +17,11 @@ export const saveNewTypeQuery: SaveNewTypeQuery = (
   advertisementType
 ) => async (db: Db) => {
   const collection: Collection = db.collection(collectionName);
-  await collection.createIndex({ type: 1 }, { unique: true });
-  await collection.createIndex({ url: 1, regExp: 1 }, { unique: true });
+  const typeIndex = collection.createIndex({ type: 1 }, { unique: true });
+  const urlRegExpIndex = collection.createIndex(
+    { url: 1, regExp: 1 },
+    { unique: true }
+  );
+  await Promise.all([typeIndex, urlRegExpIndex]);
   return collection.insertOne(advertisementType);
 };

@@ -1,6 +1,6 @@
 // this file is originally copypasted from https://github.com/tup1tsa/running_statistics/
 
-import { getConnectionInfo } from "../../application/database/getConnectionInfo";
+import { getConnectionInfo } from "../../../application/database/utils/getConnectionInfo";
 
 const defaultProcessEnv = {
   MONGODB_NAME: "prod db name",

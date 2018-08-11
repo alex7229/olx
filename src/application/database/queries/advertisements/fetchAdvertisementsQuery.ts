@@ -1,7 +1,7 @@
 import { Collection, Db, FilterQuery } from "mongodb";
 import { ILocation } from "../../../parsers/searchPageItem/parseLocation";
 import { Price } from "../../../parsers/searchPageItem/parsePrice";
-import { Query } from "../../databaseWrappers";
+import { Query } from "../../utils/runQuery";
 
 export interface IAdvertisement {
   id: number;

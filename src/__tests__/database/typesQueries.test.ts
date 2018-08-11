@@ -1,4 +1,3 @@
-import { IDbConnection } from "../../application/database/databaseWrappers";
 import { fetchTypesQuery } from "../../application/database/queries/types/fetchTypesQuery";
 import { removeTypeQuery } from "../../application/database/queries/types/removeTypeQuery";
 import { replaceTypeQuery } from "../../application/database/queries/types/replaceTypeQuery";
@@ -6,12 +5,14 @@ import {
   IAdvertisementType,
   saveNewTypeQuery
 } from "../../application/database/queries/types/saveNewTypeQuery";
+import { IDbConnection } from "../../application/database/utils/dbConnect";
 import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
 
 let connection: IDbConnection;
 
 beforeAll(async done => {
   connection = await connectToTestDbFactory("type_queries_test_db");
+  await connection.db.dropDatabase();
   done();
 });
 

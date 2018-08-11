@@ -1,4 +1,3 @@
-import { IDbConnection } from "../../application/database/databaseWrappers";
 import { generateAdvertisementsQueryOptions } from "../../application/database/generateAdvertisementsQueryOptions";
 import {
   fetchAdvertisementsQuery,
@@ -6,6 +5,7 @@ import {
 } from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { removeAdvertisementsQuery } from "../../application/database/queries/advertisements/removeAdvertisementsQuery";
 import { saveAdvertisementsQuery } from "../../application/database/queries/advertisements/saveAdvertisementsQuery";
+import { IDbConnection } from "../../application/database/utils/dbConnect";
 import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
 
 let connection: IDbConnection;
@@ -73,12 +73,13 @@ const advertisements: IAdvertisement[] = [
   }
 ];
 
-beforeEach(async done => {
+beforeAll(async done => {
   connection = await connectToTestDbFactory("advertisements_test_db");
+  await connection.db.dropDatabase();
   done();
 });
 
-afterEach(async done => {
+afterAll(async done => {
   await connection.db.dropDatabase();
   await connection.clientInstance.close();
   done();
