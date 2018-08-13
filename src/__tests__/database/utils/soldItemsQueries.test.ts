@@ -10,7 +10,7 @@ import { connectToTestDbFactory } from "../../../factories/database/connectToTes
 let connection: IDbConnection;
 
 beforeAll(async done => {
-  connection = await connectToTestDbFactory("advertisements_test_db");
+  connection = await connectToTestDbFactory("sold_items_test_db");
   await connection.db.dropDatabase();
   done();
 });
