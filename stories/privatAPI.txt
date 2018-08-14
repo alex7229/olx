@@ -1,9 +1,9 @@
-1)url => https://api.privatbank.ua/p24api/pubinfo?jsonp=success&exchange=&coursid=11
+1)url => https://api.privatbank.ua/p24api/pubinfo?json=true&exchange=&coursid=11
 
 2) response example =>
-success([
-    {"ccy":"USD","base_ccy":"UAH","buy":"27.25000","sale":"27.54821"},
-    {"ccy":"EUR","base_ccy":"UAH","buy":"30.90000","sale":"31.64557"},
-    {"ccy":"RUR","base_ccy":"UAH","buy":"0.38500","sale":"0.41501"},
-    {"ccy":"BTC","base_ccy":"USD","buy":"5933.4542","sale":"6558.0284"}
-])
+[
+    {"ccy":"USD","base_ccy":"UAH","buy":"27.30000","sale":"27.62431"},
+    {"ccy":"EUR","base_ccy":"UAH","buy":"30.95000","sale":"31.64557"},
+    {"ccy":"RUR","base_ccy":"UAH","buy":"0.39000","sale":"0.42001"},
+    {"ccy":"BTC","base_ccy":"USD","buy":"5792.5395","sale":"6402.2805"}
+]
