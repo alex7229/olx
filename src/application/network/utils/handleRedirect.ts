@@ -14,6 +14,7 @@ export const handleRedirect: HandleRedirect = (requestedUrl, response) => {
   if (
     response.request &&
     response.request.res &&
+    response.request.res.responseURL &&
     response.request.res.responseURL !== requestedUrl
   ) {
     newResponse.status = 301;
