@@ -194,7 +194,7 @@ describe("replace type query", () => {
       url: "car url"
     };
     const bikeType = {
-      _id: "172",
+      _id: "internal id",
       regExp: ".*",
       type: "bike",
       url: "bike url"
@@ -209,7 +209,7 @@ describe("replace type query", () => {
 
     const replaceQuery = replaceTypeQuery(
       collectionName,
-      bikeType._id,
+      bikeType.type,
       newBikeType
     );
     const result = await replaceQuery(connection.db);
@@ -220,7 +220,7 @@ describe("replace type query", () => {
     );
     expect(docsAfterReplacement).toEqual([
       carType,
-      { _id: bikeType._id, ...newBikeType }
+      { ...newBikeType, _id: bikeType._id }
     ]);
     done();
   });
@@ -232,8 +232,7 @@ describe("replace type query", () => {
       type: "car",
       url: "car url"
     };
-    const bikeType = {
-      _id: "172",
+    const bikeType: IAdvertisementType = {
       regExp: ".*",
       type: "bike",
       url: "bike url"
@@ -248,7 +247,7 @@ describe("replace type query", () => {
 
     const replaceQuery = replaceTypeQuery(
       collectionName,
-      bikeType._id,
+      bikeType.type,
       bikeReplacementType
     );
 

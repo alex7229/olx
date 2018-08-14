@@ -4,16 +4,16 @@ import { IAdvertisementType } from "./saveNewTypeQuery";
 
 export type ReplaceTypeQuery = (
   collectionName: string,
-  mongoId: string,
+  typeName: string,
   advertisementType: IAdvertisementType
 ) => Query<ReplaceWriteOpResult>;
 
 export const replaceTypeQuery: ReplaceTypeQuery = (
   collectionName,
-  mongoId,
+  typeName,
   advertisementType
 ) => async (db: Db) => {
   const collection = db.collection(collectionName);
-  const filterOptions = { _id: { $eq: mongoId } };
+  const filterOptions = { type: { $eq: typeName } };
   return collection.replaceOne(filterOptions, advertisementType);
 };

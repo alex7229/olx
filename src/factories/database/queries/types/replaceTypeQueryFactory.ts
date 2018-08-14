@@ -5,17 +5,17 @@ import { runQueryFactory } from "../../utils/runQueryFactory";
 import { typesCollectionName } from "./fetchTypesQueryFactory";
 
 export type ReplaceTypeQueryFactory = (
-  mongoId: string,
+  typeName: string,
   advertisementType: IAdvertisementType
 ) => Promise<ReplaceWriteOpResult>;
 
 export const replaceTypeQueryFactory: ReplaceTypeQueryFactory = async (
-  mongoId,
+  typeName,
   advertisementType
 ) => {
   const query = replaceTypeQuery(
     typesCollectionName,
-    mongoId,
+    typeName,
     advertisementType
   );
   return runQueryFactory(query);
