@@ -1,10 +1,13 @@
 import * as _ from "lodash";
-import { Db, ObjectID } from "mongodb";
+import { ObjectID } from "mongodb";
 import {
-  addCurrencyRateQuery,
+  addCurrencyRatesQuery,
   ICurrencyExchangeRate
-} from "../../application/database/queries/currencyRates/addCurrencyRateQuery";
-import { fetchRecentCurrencyRateQuery } from "../../application/database/queries/currencyRates/fetchRecentCurrencyRateQuery";
+} from "../../application/database/queries/currencyRates/addCurrencyRatesQuery";
+import {
+  fetchCurrencyRateQuery,
+  ICurrencyExchangeRateWithTime
+} from "../../application/database/queries/currencyRates/fetchCurrencyRateQuery";
 import { IDbConnection } from "../../application/database/utils/dbConnect";
 import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
 
@@ -23,132 +26,177 @@ afterAll(async done => {
 });
 
 const currentRate: ICurrencyExchangeRate = {
-  additionalCurrency: {
+  baseCurrency: {
     name: "UAH",
-    value: 25
+    values: {
+      buy: 25,
+      sell: 26
+    }
   },
-  mainCurrencyName: "USD"
+  convertedCurrency: "USD"
 };
 
 const oldRate: ICurrencyExchangeRate = {
-  additionalCurrency: {
+  baseCurrency: {
     name: "UAH",
-    value: 8
+    values: {
+      buy: 8,
+      sell: 8.2
+    }
   },
-  mainCurrencyName: "USD"
-};
-
-const objectIdMock = {
-  createFromTime: jest.fn()
+  convertedCurrency: "USD"
 };
 
 describe("add new currency exchange query", () => {
-  it("should add one completely new exchange currency", async done => {
+  const uniqWithMock = <T>(list: T[]) => list;
+
+  it("should add one completely new exchange currency rate", async done => {
     const collectionName = "simple insert";
-    const fetchQuery = async (db: Db) => null;
-    const fetchQueryMock = jest.fn().mockReturnValue(fetchQuery);
-    const rate = _.cloneDeep(currentRate);
-    const query = addCurrencyRateQuery(
+    const fetchQueryMock = jest.fn().mockResolvedValue(null);
+    const rates = [_.cloneDeep(currentRate)];
+    const query = addCurrencyRatesQuery(
       collectionName,
-      rate,
+      rates,
       fetchQueryMock,
-      objectIdMock
+      uniqWithMock
     );
     const result = await query(connection.db);
     expect(result.insertedCount).toBe(1);
-    expect(fetchQueryMock.mock.calls.length).toBe(1);
-    expect(fetchQueryMock.mock.calls[0]).toEqual([
-      collectionName,
-      rate.mainCurrencyName,
-      rate.additionalCurrency.name,
-      objectIdMock
-    ]);
     done();
   });
 
-  it("should throw if latest exchange rate is more recent than one day", async () => {
-    const collectionName = "recent fail";
-    const fetchQuery = async (db: Db) => currentRate;
-    const fetchQueryMock = jest.fn().mockReturnValue(fetchQuery);
-    const query = addCurrencyRateQuery(
+  it("should add new rates if latest rate is obsolete", async done => {
+    const collectionName = "obsolete rates";
+    const currentRateCopy = _.cloneDeep(currentRate);
+    const oldRateCopy = _.cloneDeep(oldRate);
+    const twoDaysRate: ICurrencyExchangeRateWithTime = {
+      ..._.cloneDeep(oldRate),
+      updateTime: new Date().getTime() - 2 * 24 * 60 * 60 * 1000
+    };
+    const fetchQueryMock = jest.fn().mockResolvedValue(twoDaysRate);
+    const query = addCurrencyRatesQuery(
       collectionName,
-      currentRate,
+      [oldRateCopy, currentRateCopy],
       fetchQueryMock,
-      objectIdMock
+      uniqWithMock
+    );
+    const result = await query(connection.db);
+    expect(result.insertedCount).toBe(2);
+    done();
+  });
+
+  it("should throw if the currency rate is present multiple times", async () => {
+    const collectionName = "multiple times fail";
+    const fetchQueryMock = jest.fn().mockResolvedValue(null);
+    const rates = [_.cloneDeep(currentRate), _.cloneDeep(currentRate)];
+    const query = addCurrencyRatesQuery(
+      collectionName,
+      rates,
+      fetchQueryMock,
+      _.uniqWith
     );
     try {
       await query(connection.db);
     } catch (e) {
-      expect(e.message).toBe(
-        "Cannot save new exchange rate. Non-obsolete rate is present"
-      );
+      expect(e.message).toBe("duplicate rates entries");
       return;
     }
-    throw new Error("second query should throw but it did not");
+    throw new Error("expected query to throw but it did not");
+  });
+
+  it("should throw if the rates were updated that day", async () => {
+    const collectionName = "recent fail";
+    const oneHourRate: ICurrencyExchangeRateWithTime = {
+      ..._.cloneDeep(currentRate),
+      updateTime: new Date().getTime() - 60 * 60 * 1000
+    };
+    const fetchQueryMock = jest.fn().mockResolvedValue(oneHourRate);
+    const query = addCurrencyRatesQuery(
+      collectionName,
+      [currentRate],
+      fetchQueryMock,
+      uniqWithMock
+    );
+    try {
+      await query(connection.db);
+    } catch (e) {
+      expect(e.message).toBe("rates were updated recently");
+      return;
+    }
+    throw new Error("expected query to throw but it did not");
   });
 });
 
-describe("fetch recent currency exchange rate query", () => {
-  it("should fetch only one day old rates", async done => {
-    const collectionName = "fetch recent currency";
-
-    const ONE_HOUR_MS = 60 * 60 * 1000;
-    const currentTime = new Date().getTime();
-    const fiveHoursAgo = currentTime - 5 * ONE_HOUR_MS;
-    const thirtyHoursAgo = currentTime - 30 * ONE_HOUR_MS;
-    const fiveHoursRate = _.cloneDeep(currentRate);
-    const thirtyHoursRate = _.cloneDeep(oldRate);
-
-    fiveHoursRate._id = ObjectID.createFromTime(fiveHoursAgo);
-    thirtyHoursRate._id = ObjectID.createFromTime(thirtyHoursAgo);
-
+describe("fetch currency exchange rate query", () => {
+  it("should return proper update time of the exchange rate doc", async done => {
+    const collectionName = "fetch time";
     const collection = connection.db.collection(collectionName);
-    await collection.insertMany([thirtyHoursRate, fiveHoursRate]);
+    const currentRateCopy = _.cloneDeep(currentRate);
+    await collection.insertOne(currentRateCopy);
 
-    const fetchQuery = fetchRecentCurrencyRateQuery(
-      collectionName,
-      fiveHoursRate.mainCurrencyName,
-      fiveHoursRate.additionalCurrency.name,
-      ObjectID
-    );
-    const result = await fetchQuery(connection.db);
-    expect(result).toEqual(fiveHoursRate);
+    const fetchQuery = fetchCurrencyRateQuery(collectionName, ObjectID, {
+      baseCurrency: currentRateCopy.baseCurrency.name,
+      convertedCurrency: currentRateCopy.convertedCurrency
+    });
+    const result = (await fetchQuery(
+      connection.db
+    )) as ICurrencyExchangeRateWithTime;
+
+    const currentTime = new Date().getTime();
+    const oneMinuteAgo = currentTime - 60 * 1000;
+
+    expect(result.updateTime).toBeGreaterThan(oneMinuteAgo);
+    expect(result.updateTime).toBeLessThan(currentTime);
     done();
   });
 
-  it("should return null if there is no recent rate in db", async done => {
+  it("should return null if there is no exchange rate in db", async done => {
     const collectionName = "empty fetch";
-    const fetchQuery = fetchRecentCurrencyRateQuery(
-      collectionName,
-      currentRate.mainCurrencyName,
-      currentRate.additionalCurrency.name,
-      ObjectID
-    );
+    const collection = connection.db.collection(collectionName);
+    const currentRateCopy = _.cloneDeepWith(currentRate);
+    await collection.insertOne(currentRateCopy);
+    const fetchQuery = fetchCurrencyRateQuery(collectionName, ObjectID, {
+      baseCurrency: "eur",
+      convertedCurrency: "usd"
+    });
     const result = await fetchQuery(connection.db);
     expect(result).toBe(null);
     done();
   });
 
-  it("should throw if there is more than one recent rate", async () => {
-    const collectionName = "multiple recent rates";
+  it("should return the most recent exchange rate if multiple are present", async done => {
+    const collectionName = "multiple rates";
     const collection = connection.db.collection(collectionName);
     const currentRateCopy = _.cloneDeep(currentRate);
     const oldRateCopy = _.cloneDeep(oldRate);
-    await collection.insertMany([currentRateCopy, oldRateCopy]);
+    // promise.all is not used in order to insert in proper order
+    await collection.insertOne(oldRateCopy);
+    await collection.insertOne(currentRateCopy);
 
-    const fetchQuery = fetchRecentCurrencyRateQuery(
-      collectionName,
-      currentRate.mainCurrencyName,
-      currentRate.additionalCurrency.name,
-      ObjectID
-    );
+    const fetchQuery = fetchCurrencyRateQuery(collectionName, ObjectID, {
+      baseCurrency: currentRate.baseCurrency.name,
+      convertedCurrency: currentRate.convertedCurrency
+    });
 
-    try {
-      await fetchQuery(connection.db);
-    } catch (e) {
-      expect(e.message).toMatch("Multiple recent rates are available");
-      return;
-    }
-    throw new Error("expected query to throw but it did not");
+    const result = (await fetchQuery(
+      connection.db
+    )) as ICurrencyExchangeRateWithTime;
+
+    expect(result.baseCurrency).toEqual(currentRateCopy.baseCurrency);
+    done();
+  });
+
+  it("should return any latest exchange rate if currency is not specified", async done => {
+    const collectionName = "any currency rate";
+    const collection = connection.db.collection(collectionName);
+    const oldRateCopy = _.cloneDeep(oldRate);
+    const currentRateCopy = _.cloneDeep(currentRate);
+    await collection.insertMany([oldRateCopy, currentRateCopy]);
+
+    const fetchQuery = fetchCurrencyRateQuery(collectionName, ObjectID);
+    const result = await fetchQuery(connection.db);
+
+    expect(result).not.toEqual(null);
+    done();
   });
 });

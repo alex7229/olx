@@ -1,23 +1,24 @@
-import { InsertOneWriteOpResult, ObjectID } from "mongodb";
+import * as _ from "lodash";
+import { InsertWriteOpResult } from "mongodb";
 import {
-  addCurrencyRateQuery,
+  addCurrencyRatesQuery,
   ICurrencyExchangeRate
-} from "../../../../application/database/queries/currencyRates/addCurrencyRateQuery";
-import { fetchRecentCurrencyRateQuery } from "../../../../application/database/queries/currencyRates/fetchRecentCurrencyRateQuery";
+} from "../../../../application/database/queries/currencyRates/addCurrencyRatesQuery";
 import { runQueryFactory } from "../../utils/runQueryFactory";
+import { fetchCurrencyRateQueryFactory } from "./fetchCurrencyRateQueryFactory";
 
 export const currencyRateCollection = "currency_rate";
 
 export type AddCurrencyRateQueryFactory = (
-  exchangeRate: ICurrencyExchangeRate
-) => Promise<InsertOneWriteOpResult>;
+  exchangeRates: ICurrencyExchangeRate[]
+) => Promise<InsertWriteOpResult>;
 
-export const addCurrencyRateQueryFactory: AddCurrencyRateQueryFactory = exchangeRate => {
-  const query = addCurrencyRateQuery(
+export const addCurrencyRateQueryFactory: AddCurrencyRateQueryFactory = exchangeRates => {
+  const query = addCurrencyRatesQuery(
     currencyRateCollection,
-    exchangeRate,
-    fetchRecentCurrencyRateQuery,
-    ObjectID
+    exchangeRates,
+    fetchCurrencyRateQueryFactory,
+    _.uniqWith
   );
   return runQueryFactory(query);
 };
