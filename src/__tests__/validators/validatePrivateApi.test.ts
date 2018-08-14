@@ -28,3 +28,11 @@ it("should return false if response is incorrect", () => {
   expect(validatePrivatApi(invalidSale, Ajv)).toBe(false);
   expect(validatePrivatApi(invalidBuy, Ajv)).toBe(false);
 });
+
+it("should return true if response is valid", () => {
+  const response = [
+    { ccy: "USD", base_ccy: "UAH", buy: "27.30000", sale: "27.62431" },
+    { ccy: "BTC", base_ccy: "USD", buy: "5792.5395", sale: "6402.2805" }
+  ];
+  expect(validatePrivatApi(response, Ajv)).toBe(true);
+});
