@@ -8,10 +8,14 @@ import {
   NetworkDelayer
 } from "../../../application/network/utils/NetworkDelayer";
 
-export type FetchFactory = (url: string) => Promise<IResponse>;
+export type FetchFactory = (
+  url: string,
+  immediate: boolean
+) => Promise<IResponse>;
 
 const axiosWithoutRedirect: IAxios = {
   async get(url: string) {
+    debugger;
     const response = await axios.get(url);
     return handleRedirect(url, response);
   }

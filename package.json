@@ -8,8 +8,8 @@
     "npm": "6.0.1"
   },
   "scripts": {
-    "sandbox": "node dist/sandbox/MongoObjectId.js",
-    "sandbox:debug": "nodemon --watch dist/sandbox/ --inspect-brk dist/sandbox/fetch.js",
+    "sandbox": "node dist/sandbox/privat24Api.js",
+    "sandbox:debug": "nodemon --watch dist/sandbox/ --inspect-brk dist/sandbox/privat24Api.js",
     "start": "node dist/index.js",
     "start:debug": "nodemon --watch 'dist/' --inspect-brk dist/index.js",
     "test:unit": "node scripts/test.js -c config/jest/unit.js --colors --watch",
