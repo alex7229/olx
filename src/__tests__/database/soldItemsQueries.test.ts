@@ -1,11 +1,11 @@
 import {
   addToSoldQuery,
   ISoldItem
-} from "../../../application/database/queries/soldItems/addToSoldQuery";
-import { fetchSoldItemsQuery } from "../../../application/database/queries/soldItems/fetchSoldItemsQuery";
-import { removeFromSoldQuery } from "../../../application/database/queries/soldItems/removeFromSoldQuery";
-import { IDbConnection } from "../../../application/database/utils/dbConnect";
-import { connectToTestDbFactory } from "../../../factories/database/connectToTestDbFactory";
+} from "../../application/database/queries/soldItems/addToSoldQuery";
+import { fetchSoldItemsQuery } from "../../application/database/queries/soldItems/fetchSoldItemsQuery";
+import { removeFromSoldQuery } from "../../application/database/queries/soldItems/removeFromSoldQuery";
+import { IDbConnection } from "../../application/database/utils/dbConnect";
+import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
 
 let connection: IDbConnection;
 
