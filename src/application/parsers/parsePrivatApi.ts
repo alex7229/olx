@@ -9,7 +9,9 @@ interface IPrivatApiExchangeRate {
 
 export type PrivatApiResponse = IPrivatApiExchangeRate[];
 
-type ParsePrivatApi = (response: PrivatApiResponse) => ICurrencyExchangeRate[];
+export type ParsePrivatApi = (
+  response: PrivatApiResponse
+) => ICurrencyExchangeRate[];
 
 export const parsePrivatApi: ParsePrivatApi = response =>
   response.map(exchangeRate => ({

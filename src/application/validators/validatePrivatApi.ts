@@ -3,7 +3,7 @@ import { PrivatApiResponse } from "../parsers/parsePrivatApi";
 
 interface IAjv {
   new (): {
-    validate: (schema: object, data: any) => boolean | PromiseLike<any>;
+    validate: (schema: object, data: any) => void;
     errors?: ErrorObject[];
   };
 }

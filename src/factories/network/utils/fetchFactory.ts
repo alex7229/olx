@@ -10,12 +10,11 @@ import {
 
 export type FetchFactory = (
   url: string,
-  immediate: boolean
+  immediate?: boolean
 ) => Promise<IResponse>;
 
 const axiosWithoutRedirect: IAxios = {
   async get(url: string) {
-    debugger;
     const response = await axios.get(url);
     return handleRedirect(url, response);
   }
