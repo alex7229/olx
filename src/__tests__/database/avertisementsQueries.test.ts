@@ -17,7 +17,10 @@ const advertisements: IAdvertisement[] = [
       city: "London"
     },
     olxDelivery: true,
-    price: 100,
+    price: {
+      currency: "UAH",
+      value: 100
+    },
     promoted: false,
     time: 232323,
     title: "test adv name",
@@ -37,7 +40,10 @@ const advertisements: IAdvertisement[] = [
       city: "LA"
     },
     olxDelivery: true,
-    price: 100,
+    price: {
+      currency: "USD",
+      value: 500
+    },
     promoted: false,
     time: 663434,
     title: "test adv name 2",
@@ -57,7 +63,10 @@ const advertisements: IAdvertisement[] = [
       city: "Moscow"
     },
     olxDelivery: true,
-    price: 255,
+    price: {
+      currency: "USD",
+      value: 255
+    },
     promoted: true,
     time: 50000,
     title: "test adv name 3",

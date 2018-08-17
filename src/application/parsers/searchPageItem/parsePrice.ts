@@ -1,4 +1,4 @@
-export type Price = number | null;
+export type Price = { currency: string; value: number } | null;
 export type ParsePrice = (input: string) => Price;
 
 export const parsePrice: ParsePrice = input => {
@@ -6,10 +6,18 @@ export const parsePrice: ParsePrice = input => {
   if (priceWithoutSpaces === "Обмен") {
     return null;
   }
-  const regExp = /^([\d]+)грн.$/;
+  const regExp = /^([\d]+)(грн\.|\$|€)$/;
   const match = priceWithoutSpaces.match(regExp);
   if (match === null) {
     throw new Error("price format is incorrect");
   }
-  return parseInt(match[1], 10);
+  const [, valueString, currencySymbol] = match;
+  let currency = "UAH";
+  if (currencySymbol === "$") {
+    currency = "USD";
+  } else if (currencySymbol === "€") {
+    currency = "EUR";
+  }
+  const value = parseInt(valueString, 10);
+  return { currency, value };
 };

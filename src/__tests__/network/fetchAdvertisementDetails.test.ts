@@ -7,7 +7,10 @@ const mainInfo: IAdvertisementMainInfo = {
     city: "LA"
   },
   olxDelivery: true,
-  price: 17000,
+  price: {
+    currency: "UAH",
+    value: 17000
+  },
   promoted: true,
   time: 3232323,
   title: "super cool car",
@@ -18,6 +21,7 @@ const mainInfo: IAdvertisementMainInfo = {
 };
 
 const details: IAdvertisementDetails = {
+  active: true,
   id: 222,
   user: {
     id: "sdfsd",

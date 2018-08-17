@@ -7,7 +7,7 @@ import {
 const advertisement: IAdvertisementRaw = {
   location: "city",
   olxDelivery: true,
-  price: "23",
+  price: "23 $",
   promoted: false,
   time: "23:17",
   title: "video card",
@@ -19,7 +19,11 @@ it("should convert advertisement properly", () => {
     fullUrl: "long url",
     uniqueName: "some name"
   };
-  const parsePrice = jest.fn().mockReturnValue(23);
+  const price = {
+    currency: "USD",
+    value: 23
+  };
+  const parsePrice = jest.fn().mockReturnValue(price);
   const parseUrl = jest.fn().mockReturnValue(parsedUrl);
   const parseTime = jest.fn().mockReturnValue(14231256456);
   const parseLocation = jest.fn().mockReturnValue({ city: "banga" });
@@ -28,7 +32,7 @@ it("should convert advertisement properly", () => {
       city: "banga"
     },
     olxDelivery: advertisement.olxDelivery,
-    price: 23,
+    price,
     promoted: advertisement.promoted,
     time: 14231256456,
     title: advertisement.title,
