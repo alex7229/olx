@@ -1,0 +1,43 @@
+There are two collection in db that are important for that part.
+Sold items collection and current advertisements collection.
+They don't have the same items whatsoever. If an item is sold -> it should be removed
+from the adv. collection. And if the item is in adv. collection -> it should not be
+in the sold collection at the same time.
+
+I)
+fetch and download items from web (olx) and db:
+1) current olx items from the web
+2) items from the adv. collection with the same id as web adv.
+3) items form the sold collection
+Adv. collection items are subset of web items. Sold items are subset of web items.
+They are both fetched from the db using advertisements' id from the web.
+Sold items and adv. items do not have the same items.
+
+II)
+Comparison of given items.
+There are two categories of web items:
+active and inactive (set as inactive by olx user or deleted).
+Active are treated like current items and inactive as sold.
+
+Web items (the biggest set) contain new items as well as old ones.
+
+New items (they are not present in sold or adv. collections) are simply added to adv. collection.
+But if they are marked as inactive or deleted -> ignore them. Most likely an advertisement
+owner made a mistake in the adv and didn't sold an item.
+
+Old items should be treated differently.
+Given two types of web items and two collections we have 4 different intersections of old items:
+1)  Item is present in adv. collection and is not marked as sold.
+    If it's not changed, ignore it.
+2)  Item is present in adv. collection and marked as sold.
+    Doesn't matter if it was changed or not. Remove it from the adv. collection
+    and add to the sold items collection.
+3)  Item is present in sold collection and is not marked as sold.
+    Owner didn't sell an item.
+    Remove item from the sold collection and add to the adv. collection.
+4)  Item is present in sold collection and is marked as sold.
+    There is slight probability that it was changed.
+    In order to change sold items on olx it should be set as active, changed ans then set as inactive.
+    And it should not be spotted by this application.
+    Even though -> just ignore it. The important part that it was sold anyways.
+
