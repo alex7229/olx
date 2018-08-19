@@ -23,19 +23,28 @@ afterAll(async done => {
 
 const soldCar: ISoldItem = {
   advertisementId: 323,
-  price: 10000,
+  price: {
+    currency: "USD",
+    value: 10000
+  },
   type: "mercedes"
 };
 
 const soldHouse: ISoldItem = {
   advertisementId: 5522,
-  price: 25000,
+  price: {
+    currency: "USD",
+    value: 25000
+  },
   type: "apartment"
 };
 
 const soldMouse: ISoldItem = {
   advertisementId: 6633,
-  price: 5,
+  price: {
+    currency: "UAH",
+    value: 50
+  },
   type: "computer mouse"
 };
 

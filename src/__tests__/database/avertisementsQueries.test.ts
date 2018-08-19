@@ -1,86 +1,14 @@
 import { generateAdvertisementsQueryOptions } from "../../application/database/generateAdvertisementsQueryOptions";
-import {
-  fetchAdvertisementsQuery,
-  IAdvertisement
-} from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
+import { fetchAdvertisementsQuery } from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { removeAdvertisementsQuery } from "../../application/database/queries/advertisements/removeAdvertisementsQuery";
 import { saveAdvertisementsQuery } from "../../application/database/queries/advertisements/saveAdvertisementsQuery";
 import { IDbConnection } from "../../application/database/utils/dbConnect";
 import { connectToTestDbFactory } from "../../factories/database/connectToTestDbFactory";
+import { getTestAdvertisements } from "../../testData/getTestAdvertisements";
 
 let connection: IDbConnection;
 
-const advertisements: IAdvertisement[] = [
-  {
-    id: 12,
-    location: {
-      city: "London"
-    },
-    olxDelivery: true,
-    price: {
-      currency: "UAH",
-      value: 100
-    },
-    promoted: false,
-    time: 232323,
-    title: "test adv name",
-    type: "car",
-    url: {
-      fullUrl: "https://some.html",
-      uniqueName: "bar"
-    },
-    user: {
-      id: "sff",
-      name: "alex"
-    }
-  },
-  {
-    id: 636,
-    location: {
-      city: "LA"
-    },
-    olxDelivery: true,
-    price: {
-      currency: "USD",
-      value: 500
-    },
-    promoted: false,
-    time: 663434,
-    title: "test adv name 2",
-    type: "real estate",
-    url: {
-      fullUrl: "https://some.html",
-      uniqueName: "foo"
-    },
-    user: {
-      id: "gs",
-      name: "sasha"
-    }
-  },
-  {
-    id: 775,
-    location: {
-      city: "Moscow"
-    },
-    olxDelivery: true,
-    price: {
-      currency: "USD",
-      value: 255
-    },
-    promoted: true,
-    time: 50000,
-    title: "test adv name 3",
-    type: "bicycle",
-    url: {
-      fullUrl: "https://some.html",
-      uniqueName: "foo"
-    },
-    user: {
-      id: "gs",
-      name: "sasha"
-    }
-  }
-];
+const advertisements = getTestAdvertisements();
 
 beforeAll(async done => {
   connection = await connectToTestDbFactory("advertisements_test_db");

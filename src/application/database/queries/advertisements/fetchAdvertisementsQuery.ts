@@ -1,9 +1,11 @@
-import { Collection, Db, FilterQuery } from "mongodb";
+import { Collection, Db, FilterQuery, ObjectID } from "mongodb";
 import { ILocation } from "../../../parsers/searchPageItem/parseLocation";
 import { Price } from "../../../parsers/searchPageItem/parsePrice";
 import { Query } from "../../utils/runQuery";
 
 export interface IAdvertisement {
+  _id?: ObjectID;
+  active: boolean;
   id: number;
   location: ILocation;
   olxDelivery: boolean;
@@ -16,7 +18,7 @@ export interface IAdvertisement {
     fullUrl: string;
     uniqueName: string;
   };
-  user: {
+  user?: {
     id?: string;
     name: string;
   };

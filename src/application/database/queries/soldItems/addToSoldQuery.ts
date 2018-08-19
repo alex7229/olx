@@ -3,7 +3,10 @@ import { Query } from "../../utils/runQuery";
 
 export interface ISoldItem {
   advertisementId: number;
-  price: number;
+  price: {
+    currency: string;
+    value: number;
+  };
   type: string;
 }
 
