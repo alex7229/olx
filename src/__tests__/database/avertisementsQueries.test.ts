@@ -1,4 +1,3 @@
-import { generateAdvertisementsQueryOptions } from "../../application/database/generateAdvertisementsQueryOptions";
 import { fetchAdvertisementsQuery } from "../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { removeAdvertisementsQuery } from "../../application/database/queries/advertisements/removeAdvertisementsQuery";
 import { saveAdvertisementsQuery } from "../../application/database/queries/advertisements/saveAdvertisementsQuery";
@@ -33,18 +32,59 @@ describe("fetch advertisements query", () => {
     done();
   });
 
-  it("should fetch advertisements with options object", async done => {
-    const collectionName = "fetchSome";
-    await saveAdvertisementsQuery(collectionName, advertisements)(
-      connection.db
-    );
-    const options = generateAdvertisementsQueryOptions({
-      fromTime: 500000,
-      type: "real estate"
+  it("should fetch advertisements by type", async done => {
+    const collectionName = "fetch by type";
+    const query = saveAdvertisementsQuery(collectionName, advertisements);
+    await query(connection.db);
+    const fetchQuery = fetchAdvertisementsQuery(collectionName, {
+      type: "car"
     });
-    const fetchQuery = fetchAdvertisementsQuery(collectionName, options);
     const result = await fetchQuery(connection.db);
-    expect(result).toEqual([advertisements[1]]);
+    expect(result).toEqual([advertisements[0], advertisements[3]]);
+    done();
+  });
+
+  it("should fetch advertisements by ids", async done => {
+    const collectionName = "fetch by ids";
+    const query = saveAdvertisementsQuery(collectionName, advertisements);
+    await query(connection.db);
+    const fetchQuery = fetchAdvertisementsQuery(collectionName, {
+      ids: [advertisements[0].id, advertisements[2].id]
+    });
+    const result = await fetchQuery(connection.db);
+    expect(result).toEqual([advertisements[0], advertisements[2]]);
+    done();
+  });
+
+  it("should fetch advertisements by time limit", async done => {
+    const collectionName = "fetch by time limit";
+    const query = saveAdvertisementsQuery(collectionName, advertisements);
+    await query(connection.db);
+    const fetchQuery = fetchAdvertisementsQuery(collectionName, {
+      timeLimit: {
+        fromTime: 25,
+        toTime: 55
+      }
+    });
+    const result = await fetchQuery(connection.db);
+    expect(result).toEqual([advertisements[0], advertisements[2]]);
+    done();
+  });
+
+  it("should fetch advertisements using all options", async done => {
+    const collectionName = "fetch using everything";
+    const query = saveAdvertisementsQuery(collectionName, advertisements);
+    await query(connection.db);
+    const fetchQuery = fetchAdvertisementsQuery(collectionName, {
+      ids: [advertisements[0].id, advertisements[2].id],
+      timeLimit: {
+        fromTime: 25,
+        toTime: 55
+      },
+      type: advertisements[2].type
+    });
+    const result = await fetchQuery(connection.db);
+    expect(result).toEqual([advertisements[2]]);
     done();
   });
 });
@@ -72,18 +112,55 @@ describe("remove advertisements query", () => {
     done();
   });
 
-  it("should remove advertisements properly", async done => {
-    const collectionName = "remove";
+  it("should remove advertisements by time limit", async done => {
+    const collectionName = "remove by time";
     await saveAdvertisementsQuery(collectionName, advertisements)(
       connection.db
     );
-    const options = generateAdvertisementsQueryOptions({ toTime: 500000 });
+    const options = { timeLimit: { fromTime: 25, toTime: 55 } };
     const deleteQuery = removeAdvertisementsQuery(collectionName, options);
     await deleteQuery(connection.db);
     const cursor = await connection.db.collection(collectionName).find();
     const docs = await cursor.toArray();
-    expect(docs.length).toBe(1);
-    expect(docs).toEqual([advertisements[1]]);
+    expect(docs.length).toBe(2);
+    expect(docs).toEqual([advertisements[1], advertisements[3]]);
+    done();
+  });
+
+  it("should remove advertisements by ids", async done => {
+    const collectionName = "remove by ids";
+    await saveAdvertisementsQuery(collectionName, advertisements)(
+      connection.db
+    );
+    const options = { ids: [advertisements[0].id, advertisements[1].id] };
+    const deleteQuery = removeAdvertisementsQuery(collectionName, options);
+    await deleteQuery(connection.db);
+    const cursor = await connection.db.collection(collectionName).find();
+    const docs = await cursor.toArray();
+    expect(docs.length).toBe(2);
+    expect(docs).toEqual([advertisements[2], advertisements[3]]);
+    done();
+  });
+
+  it("should remove advertisements using all options", async done => {
+    const collectionName = "remove using every option";
+    await saveAdvertisementsQuery(collectionName, advertisements)(
+      connection.db
+    );
+    const options = {
+      ids: [636],
+      timeLimit: { fromTime: 15, toTime: 55 }
+    };
+    const deleteQuery = removeAdvertisementsQuery(collectionName, options);
+    await deleteQuery(connection.db);
+    const cursor = await connection.db.collection(collectionName).find();
+    const docs = await cursor.toArray();
+    expect(docs.length).toBe(3);
+    expect(docs).toEqual([
+      advertisements[0],
+      advertisements[2],
+      advertisements[3]
+    ]);
     done();
   });
 });

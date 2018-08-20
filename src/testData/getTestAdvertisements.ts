@@ -14,7 +14,7 @@ const advertisements: IAdvertisement[] = [
       value: 100
     },
     promoted: false,
-    time: 232323,
+    time: 30,
     title: "test adv name",
     type: "car",
     url: {
@@ -38,7 +38,7 @@ const advertisements: IAdvertisement[] = [
       value: 500
     },
     promoted: false,
-    time: 663434,
+    time: 20,
     title: "test adv name 2",
     type: "real estate",
     url: {
@@ -61,7 +61,7 @@ const advertisements: IAdvertisement[] = [
       value: 255
     },
     promoted: true,
-    time: 50000,
+    time: 50,
     title: "test adv name 3",
     type: "bicycle",
     url: {
@@ -84,7 +84,7 @@ const advertisements: IAdvertisement[] = [
       value: 152
     },
     promoted: false,
-    time: 232323,
+    time: 10,
     title: "cool car",
     type: "car",
     url: {

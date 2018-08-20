@@ -1,23 +1,17 @@
 import {
-  generateAdvertisementsQueryOptions,
-  IAdvertisementsQueryOptions
-} from "../../../../application/database/generateAdvertisementsQueryOptions";
-import {
   fetchAdvertisementsQuery,
-  IAdvertisement
+  IAdvertisement,
+  IFetchAdvertisementsOptions
 } from "../../../../application/database/queries/advertisements/fetchAdvertisementsQuery";
 import { runQueryFactory } from "../../utils/runQueryFactory";
 
 export const advertisementsCollectionName = "advertisements";
 
 type FetchAdvertisementsQueryFactory = (
-  options: IAdvertisementsQueryOptions
+  options: IFetchAdvertisementsOptions
 ) => Promise<IAdvertisement[]>;
 
 export const fetchAdvertisementsQueryFactory: FetchAdvertisementsQueryFactory = async options => {
-  const query = fetchAdvertisementsQuery(
-    advertisementsCollectionName,
-    generateAdvertisementsQueryOptions(options)
-  );
+  const query = fetchAdvertisementsQuery(advertisementsCollectionName, options);
   return runQueryFactory(query);
 };

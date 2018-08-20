@@ -24,9 +24,18 @@ export interface IAdvertisement {
   };
 }
 
+export interface IFetchAdvertisementsOptions {
+  ids?: number[];
+  timeLimit?: {
+    fromTime: number;
+    toTime: number;
+  };
+  type?: string;
+}
+
 type FetchAdvertisementsQuery = (
   collectionName: string,
-  options: FilterQuery<any>
+  options: IFetchAdvertisementsOptions
 ) => Query<IAdvertisement[]>;
 
 export const fetchAdvertisementsQuery: FetchAdvertisementsQuery = (
@@ -34,6 +43,19 @@ export const fetchAdvertisementsQuery: FetchAdvertisementsQuery = (
   options
 ) => async (db: Db) => {
   const collection: Collection = db.collection(collectionName);
-  const cursor = await collection.find(options);
+  const queryOptions: FilterQuery<any> = {};
+  if (options.type) {
+    queryOptions.type = { $eq: options.type };
+  }
+  if (options.ids) {
+    queryOptions.id = { $in: options.ids };
+  }
+  if (options.timeLimit) {
+    queryOptions.time = {
+      $gte: options.timeLimit.fromTime,
+      $lte: options.timeLimit.toTime
+    };
+  }
+  const cursor = await collection.find(queryOptions);
   return cursor.toArray();
 };
