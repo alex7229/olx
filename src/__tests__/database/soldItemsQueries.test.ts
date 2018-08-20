@@ -72,14 +72,10 @@ describe("add to sold query", () => {
 });
 
 describe("fetch sold items query", () => {
-  it("should fetch all items if type is not specified", async done => {
+  it("should fetch all items if options are not specified", async done => {
     const collectionName = "fetch all";
-    const saveQuery = addToSoldQuery(collectionName, [
-      soldCar,
-      soldHouse,
-      soldMouse
-    ]);
-    await saveQuery(connection.db);
+    const collection = connection.db.collection(collectionName);
+    await collection.insertMany([soldCar, soldHouse, soldMouse]);
     const fetchQuery = fetchSoldItemsQuery(collectionName);
     const result = await fetchQuery(connection.db);
     expect(result).toEqual([soldCar, soldHouse, soldMouse]);
@@ -88,15 +84,41 @@ describe("fetch sold items query", () => {
 
   it("should fetch items by type", async done => {
     const collectionName = "fetch by type";
-    const saveQuery = addToSoldQuery(collectionName, [
-      soldCar,
-      soldHouse,
-      soldMouse
-    ]);
-    await saveQuery(connection.db);
-    const fetchQuery = fetchSoldItemsQuery(collectionName, soldCar.type);
+    const collection = connection.db.collection(collectionName);
+    await collection.insertMany([soldCar, soldHouse, soldMouse]);
+    const fetchQuery = fetchSoldItemsQuery(collectionName, {
+      type: soldCar.type
+    });
     const result = await fetchQuery(connection.db);
     expect(result).toEqual([soldCar]);
+    done();
+  });
+
+  it("should fetch items by ids", async done => {
+    const collectionName = "fetch by ids";
+    const collection = connection.db.collection(collectionName);
+    await collection.insertMany([soldCar, soldHouse, soldMouse]);
+    const options = {
+      ids: [soldCar.advertisementId, soldMouse.advertisementId]
+    };
+    const result = await fetchSoldItemsQuery(collectionName, options)(
+      connection.db
+    );
+    expect(result).toEqual([soldCar, soldMouse]);
+    done();
+  });
+
+  it("should fetch using every option", async done => {
+    const collectionName = "fetch by every option";
+    const collection = connection.db.collection(collectionName);
+    await collection.insertMany([soldCar, soldHouse, soldMouse]);
+    const options = {
+      ids: [soldHouse.advertisementId, soldMouse.advertisementId],
+      type: soldMouse.type
+    };
+    const query = fetchSoldItemsQuery(collectionName, options);
+    const result = await query(connection.db);
+    expect(result).toEqual([soldMouse]);
     done();
   });
 });
@@ -104,12 +126,8 @@ describe("fetch sold items query", () => {
 describe("remove from sold items query", () => {
   it("should remove one item by it`s id", async done => {
     const collectionName = "remove by id";
-    const saveQuery = addToSoldQuery(collectionName, [
-      soldCar,
-      soldMouse,
-      soldHouse
-    ]);
-    await saveQuery(connection.db);
+    const collection = connection.db.collection(collectionName);
+    await collection.insertMany([soldCar, soldMouse, soldHouse]);
     const id = soldHouse.advertisementId;
     const deleteQuery = removeFromSoldQuery(collectionName, id);
     const result = await deleteQuery(connection.db);

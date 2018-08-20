@@ -1,17 +1,26 @@
-import { Db } from "mongodb";
+import { Db, FilterQuery } from "mongodb";
 import { Query } from "../../utils/runQuery";
 import { ISoldItem } from "./addToSoldQuery";
 
 export type FetchSoldItemsQuery = (
   collectionName: string,
-  type?: string
+  options?: {
+    ids?: number[];
+    type?: string;
+  }
 ) => Query<ISoldItem[]>;
 
 export const fetchSoldItemsQuery: FetchSoldItemsQuery = (
   collectionName,
-  type
+  options
 ) => async (db: Db) => {
   const collection = db.collection(collectionName);
-  const options = type ? { type: { $eq: type } } : {};
-  return collection.find(options).toArray();
+  const queryOptions: FilterQuery<any> = {};
+  if (options && options.type) {
+    queryOptions.type = { $eq: options.type };
+  }
+  if (options && options.ids) {
+    queryOptions.advertisementId = { $in: options.ids };
+  }
+  return collection.find(queryOptions).toArray();
 };
