@@ -1,5 +1,5 @@
 export interface IResponse {
-  data: any;
+  data: unknown;
   status: number;
   request?: any;
 }

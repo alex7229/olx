@@ -1,4 +1,4 @@
-export type IsValidJson = (json: any) => boolean;
+export type IsValidJson = (json: unknown) => boolean;
 
 export const isValidJson: IsValidJson = json => {
   if (typeof json !== "string") {

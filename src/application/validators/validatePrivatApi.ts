@@ -3,15 +3,18 @@ import { PrivatApiResponse } from "../parsers/parsePrivatApi";
 
 interface IAjv {
   new (): {
-    validate: (schema: object, data: any) => void;
+    validate: (schema: object, data: unknown) => void;
     errors?: ErrorObject[];
   };
 }
 
-export type ValidatePrivatApi = (response: any, Ajv: IAjv) => boolean;
+export type ValidatePrivatApi = (
+  response: unknown,
+  Ajv: IAjv
+) => response is PrivatApiResponse;
 
 export const validatePrivatApi: ValidatePrivatApi = (
-  response: any,
+  response: unknown,
   Ajv: IAjv
 ): response is PrivatApiResponse => {
   const ajv = new Ajv();

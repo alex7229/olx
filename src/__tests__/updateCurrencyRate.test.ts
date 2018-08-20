@@ -14,6 +14,7 @@ it("should call all the methods with correct props", async done => {
     "https://api.privatbank.ua/p24api/pubinfo?json=true&exchange=&coursid=11";
   await updateCurrencyRate(
     fetchMock,
+    // @ts-ignore
     validateMock,
     parseApiMock,
     addCurrencyQueryMock
@@ -39,6 +40,7 @@ it("should throw if response is not valid", async () => {
   const fetchMock = jest.fn().mockResolvedValue(response);
   const validateMock = jest.fn().mockReturnValue(false);
   try {
+    // @ts-ignore
     await updateCurrencyRate(fetchMock, validateMock, jest.fn(), jest.fn());
   } catch (e) {
     expect(e.message).toBe("privat api response is not valid");
